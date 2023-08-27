@@ -1,5 +1,4 @@
 import { extendTheme, theme as defaultTheme } from "@chakra-ui/react";
-import useTranslation from "next-translate/useTranslation";
 import { Montserrat } from "next/font/google";
 
 const font = Montserrat({
@@ -11,9 +10,11 @@ const tokens = {
   colors: {
     light: {
       mainBackground: "gray.100",
+      containerBackground: "gray.200",
     },
     dark: {
       mainBackground: "gray.700",
+      containerBackground: "gray.800",
     },
   },
   font: {
@@ -26,6 +27,10 @@ const semanticTokens = {
     "main-background": {
       default: tokens.colors.light.mainBackground,
       _dark: tokens.colors.dark.mainBackground,
+    },
+    "container-background": {
+      default: tokens.colors.light.containerBackground,
+      _dark: tokens.colors.dark.containerBackground,
     },
   },
   shadows: {},

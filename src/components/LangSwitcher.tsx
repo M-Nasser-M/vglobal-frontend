@@ -7,12 +7,21 @@ import {
   MenuList,
   MenuOptionGroup,
 } from "@chakra-ui/react";
+import { usePathname, useRouter } from "next/navigation";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import React from "react";
+import { locales } from "../../i18n";
 
-type Props = { lang: string };
+type Props = { params: { locale: string } };
 
-const LangSwitcher = ({ lang }: Props) => {
+const LangSwitcher = ({ params }: Props) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const lang = params.locale;
+  const changeLanguage = (lang: string) => {
+    const newPathname = pathname.replace(`/${params.locale}`, `/${lang}`);
+    router.push(`/${lang}${newPathname}`);
+  };
+
   return (
     <Menu>
       <MenuButton
@@ -26,8 +35,15 @@ const LangSwitcher = ({ lang }: Props) => {
       </MenuButton>
       <MenuList>
         <MenuOptionGroup defaultValue={lang} type="radio">
-          <MenuItemOption value="en">en</MenuItemOption>
-          <MenuItemOption value="ar">ar</MenuItemOption>
+          {locales.map((locale) => (
+            <MenuItemOption
+              key={locale}
+              onClick={() => changeLanguage(locale)}
+              value={locale}
+            >
+              {locale}
+            </MenuItemOption>
+          ))}
         </MenuOptionGroup>
       </MenuList>
     </Menu>
