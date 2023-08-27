@@ -12,9 +12,12 @@ type Props = {
   params: { id: string; locale: string };
   searchParams: { [key: string]: string | string[] | undefined };
 };
+type StaticProps = {
+  params: { id: string; locale: string };
+};
 
 export async function generateMetadata(
-  { params, searchParams }: Props,
+  { params }: StaticProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const response = await getBlogWithID(params.id);
@@ -29,7 +32,7 @@ export async function generateMetadata(
   };
 }
 
-export async function generateStaticParams(props: Props) {
+export async function generateStaticParams(props: StaticProps) {
   const blogs = await getBlogsWithAllLocales(1, 100);
   const ids = blogs?.data.map((blog: BlogWithoutData) => {
     return { id: String(blog.id) };

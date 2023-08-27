@@ -11,12 +11,16 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-export async function generateStaticParams(props: Props) {
+type StaticProps = {
+  params: { locale: string };
+};
+
+export async function generateStaticParams(props: StaticProps) {
   return locales.map((locale) => ({ locale }));
 }
 
 export async function generateMetadata(
-  { params, searchParams }: Props,
+  { params }: StaticProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const lang = params.locale;
