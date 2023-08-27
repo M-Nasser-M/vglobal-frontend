@@ -18,7 +18,7 @@ export const getBlogMainSEO = async (locale: string) => {
 
     return response.data;
   } catch (error: AxiosError | any) {
-    console.error(error);
+    console.error(error.message);
   }
 };
 
@@ -43,7 +43,7 @@ export const getBlogPage = async (
 
     return response.data;
   } catch (error: AxiosError | any) {
-    console.error(error);
+    console.error(error.message);
   }
 };
 
@@ -59,7 +59,7 @@ export const getBlogWithID = async (id: string) => {
 
     return response.data;
   } catch (error: AxiosError | any) {
-    console.error(error);
+    console.error(error.message);
   }
 };
 
@@ -86,6 +86,6 @@ export const getBlogsWithAllLocales = async (
 
     return response.data;
   } catch (error: AxiosError | any) {
-    console.error(error);
+    console.error(error.message);
   }
 };

@@ -19,6 +19,6 @@ export const getBookConsultArticleAndSEO = async (locale: string) => {
 
     return response.data;
   } catch (error: AxiosError | any) {
-    console.error(error);
+    console.error(error.message);
   }
 };

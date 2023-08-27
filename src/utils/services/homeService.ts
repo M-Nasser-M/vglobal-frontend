@@ -16,6 +16,6 @@ export const getHomeArticleAndSEO = async (locale: string) => {
 
     return response.data;
   } catch (error: AxiosError | any) {
-    console.error(error);
+    console.error(error.message);
   }
 };
