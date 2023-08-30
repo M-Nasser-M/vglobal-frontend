@@ -42,7 +42,7 @@ const page = async ({ params }: Props) => {
 
   return (
     <>
-      {jsonLd && (
+      {jsonLd && typeof window !== "undefined" && (
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       )}
       <CalendlyWrapper />

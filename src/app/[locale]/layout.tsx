@@ -1,9 +1,7 @@
 import ContainerWrapper from "@/components/ContainerWrapper";
 import { AppWrappers } from "@/components/AppWrappers";
 import { NextIntlClientProvider } from "next-intl";
-import { Navlinks } from "@/utils/types/common";
 import { Navbar } from "@/components/Navbar";
-import { useLocale, useTranslations } from "next-intl";
 import { ReactNode } from "react";
 
 type Props = {

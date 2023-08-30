@@ -1,13 +1,13 @@
 "use client";
-import { Container } from "@chakra-ui/react";
-import React from "react";
+import { Container, Spinner } from "@chakra-ui/react";
+import React, { Suspense } from "react";
 
 type Props = { children: React.ReactNode };
 
 const ContainerWrapper = ({ children }: Props) => {
   return (
     <Container maxW="container.xl" mt={10}>
-      {children}
+      <Suspense fallback={<Spinner size="xl" />}>{children}</Suspense>
     </Container>
   );
 };

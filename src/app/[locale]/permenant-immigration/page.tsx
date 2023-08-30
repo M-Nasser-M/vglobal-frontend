@@ -45,7 +45,7 @@ const Page = async ({ params }: Props) => {
   if (validateData.success && response) {
     return (
       <>
-        {jsonLd && (
+        {jsonLd && typeof window !== "undefined" && (
           <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
         )}
         <HtmlContentWrapper html={response.data.article!} />

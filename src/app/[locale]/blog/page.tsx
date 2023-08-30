@@ -50,7 +50,7 @@ const Page = async ({ params, searchParams }: Props) => {
   if (validateData.success && response) {
     return (
       <>
-        {jsonLd && (
+        {jsonLd && typeof window !== "undefined" && (
           <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
         )}
         <BlogMainPage params={params} currentPage={pageNo} blogs={response} />

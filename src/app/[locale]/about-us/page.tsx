@@ -1,10 +1,10 @@
 import { getAboutUsArticleAndSEO } from "@/utils/services/aboutUsService";
 import HtmlContentWrapper from "@/components/HtmlConntentWrapper";
 import { ArticleAndSeoSchema } from "@/utils/types/articleAndSeo";
-import React from "react";
-import NoContent from "@/components/NoContent";
 import { Metadata, ResolvingMetadata } from "next";
+import NoContent from "@/components/NoContent";
 import { locales } from "../../../../i18n";
+import React from "react";
 
 type Props = {
   params: { locale: string };
@@ -44,7 +44,7 @@ const Page = async ({ params }: Props) => {
   if (validateData.success && response) {
     return (
       <>
-        {jsonLd && (
+        {jsonLd && typeof window !== "undefined" && (
           <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
         )}
         <HtmlContentWrapper html={response.data.article!} />

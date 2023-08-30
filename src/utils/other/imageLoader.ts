@@ -5,5 +5,5 @@ export const strapiImageLoader = ({
   width,
   quality,
 }: ImageLoaderProps) => {
-  return `http://127.0.0.1:1337${src}?format=webp&width=${width}`;
+  return `${process.env.NEXT_PUBLIC_STRAPI_URL}${src}?format=webp&width=${width}`;
 };
