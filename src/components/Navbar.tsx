@@ -38,6 +38,7 @@ export function Navbar({ params }: Props) {
     "blog",
     "about-us",
     "book-consult",
+    "assessment",
   ] as const;
 
   const navlinks = keys.map((key) => {
