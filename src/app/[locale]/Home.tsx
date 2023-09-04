@@ -22,7 +22,7 @@ const Home = ({ article }: Props) => {
           <br />
         </Text>
       </Heading>
-      <Text fontSize={{ base: "md", sm: "lg", md: "xl" }}>
+      <Text as={"span"} fontSize={{ base: "md", sm: "lg", md: "xl" }}>
         <HtmlContentWrapper html={article} />
       </Text>
     </Stack>

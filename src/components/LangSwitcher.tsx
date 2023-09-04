@@ -17,9 +17,11 @@ const LangSwitcher = ({ params }: Props) => {
   const router = useRouter();
   const pathname = usePathname();
   const lang = params.locale;
-  const changeLanguage = (lang: string) => {
-    const newPathname = pathname.replace(`/${params.locale}`, `/${lang}`);
-    router.push(`/${lang}${newPathname}`);
+  const changeLanguage = (newLang: string) => {
+    const newPathname = pathname.replace(`/${lang}`, `/${newLang}`);
+    console.log(newPathname);
+
+    router.push(`/${newPathname}`);
   };
 
   return (
