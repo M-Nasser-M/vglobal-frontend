@@ -1,12 +1,6 @@
-import { DOMPurifyI } from "dompurify";
-
-let DOMPurify: DOMPurifyI;
-if (typeof window !== "undefined") {
-  DOMPurify = require("dompurify");
-}
-
+import xss from "xss";
 export const sanitizeData = (data: string) => {
   return {
-    __html: DOMPurify ? DOMPurify.sanitize(data) : data,
+    __html: xss(data),
   };
 };

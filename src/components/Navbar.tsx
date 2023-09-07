@@ -1,10 +1,12 @@
 "use client";
+
 import { BsMoonFill, BsSunFill } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
-import { Navlinks } from "@/utils/types/common";
 import Logo from "../../public/brandLogo.svg";
+import { useTranslations } from "next-intl";
 import LangSwitcher from "./LangSwitcher";
+import { Link } from "@chakra-ui/next-js";
 import {
   Box,
   Flex,
@@ -17,8 +19,6 @@ import {
   useColorModeValue,
   Icon,
 } from "@chakra-ui/react";
-import { Link } from "@chakra-ui/next-js";
-import { useTranslations } from "next-intl";
 
 interface Props {
   params: {
@@ -29,8 +29,9 @@ interface Props {
 export function Navbar({ params }: Props) {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const lang = params.locale;
   const t = useTranslations("navlinks");
+  const lang = params.locale;
+
   const keys = [
     "/",
     "permenant-immigration",
@@ -87,13 +88,13 @@ export function Navbar({ params }: Props) {
             </Stack>
           </Flex>
         </Flex>
-        {isOpen ? (
+        {isOpen && (
           <Box pb={4} textAlign={"center"} display={{ lg: "none" }}>
             <Stack as={"nav"} spacing={4}>
               {navlinks}
             </Stack>
           </Box>
-        ) : null}
+        )}
       </Box>
     </>
   );

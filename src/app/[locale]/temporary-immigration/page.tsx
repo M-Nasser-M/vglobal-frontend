@@ -3,8 +3,8 @@ import HtmlContentWrapper from "@/components/HtmlConntentWrapper";
 import { ArticleAndSeoSchema } from "@/utils/types/articleAndSeo";
 import { Metadata, ResolvingMetadata } from "next";
 import NoContent from "@/components/NoContent";
-import React from "react";
 import { locales } from "../../../../i18n";
+import React from "react";
 
 type Props = {
   params: { locale: string };

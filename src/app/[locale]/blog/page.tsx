@@ -1,8 +1,7 @@
 import { getBlogMainSEO, getBlogPage } from "@/utils/services/blogService";
-import { BlogsSchema } from "@/utils/types/blog";
 import { Metadata, ResolvingMetadata } from "next";
+import { BlogsSchema } from "@/utils/types/blog";
 import NoContent from "@/components/NoContent";
-import { locales } from "../../../../i18n";
 import BlogMainPage from "./BlogMainPage";
 import React from "react";
 
@@ -13,10 +12,6 @@ type Props = {
 type StaticProps = {
   params: { locale: string };
 };
-
-export async function generateStaticParams(props: StaticProps) {
-  return locales.map((locale) => ({ locale }));
-}
 
 export async function generateMetadata(
   { params }: StaticProps,

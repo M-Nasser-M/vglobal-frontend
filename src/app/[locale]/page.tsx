@@ -2,7 +2,6 @@ import { getHomeArticleAndSEO } from "@/utils/services/homeService";
 import { ArticleAndSeoSchema } from "@/utils/types/articleAndSeo";
 import { Metadata, ResolvingMetadata } from "next";
 import NoContent from "@/components/NoContent";
-import { locales } from "../../../i18n";
 import Home from "./Home";
 
 type Props = {
@@ -13,10 +12,6 @@ type Props = {
 type StaticProps = {
   params: { locale: string };
 };
-
-export async function generateStaticParams(props: StaticProps) {
-  return locales.map((locale) => ({ locale }));
-}
 
 export async function generateMetadata(
   { params }: StaticProps,
