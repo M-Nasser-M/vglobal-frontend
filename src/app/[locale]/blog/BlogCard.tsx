@@ -31,7 +31,7 @@ const BlogCard = ({ blog, params }: Props) => {
             blurDataURL={blog.cover?.placeholder}
             loading="lazy"
             loader={strapiImageLoader}
-            src={blog.cover?.formats.medium.url!}
+            src={blog.cover?.formats.medium.url || ""}
             alt={blog.cover?.alternativeText || "blog cover image"}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"

@@ -17,7 +17,7 @@ const BlogPage = ({ blog }: Props) => {
           blurDataURL={blog.data.cover?.placeholder}
           loading="lazy"
           loader={strapiImageLoader}
-          src={blog.data.cover?.url!}
+          src={blog.data.cover?.url || ""}
           alt={blog.data.cover?.alternativeText || "blog cover image"}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 70vw"

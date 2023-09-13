@@ -1,5 +1,5 @@
 import { getBookConsultArticleAndSEO } from "@/utils/services/bookConsultService";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import CalendlyWrapper from "./CalendlyWrapper";
 import { locales } from "../../../../i18n";
 import React from "react";
@@ -13,14 +13,13 @@ type StaticProps = {
   params: { locale: string };
 };
 
-export async function generateStaticParams(props: StaticProps) {
+export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata(
-  { params }: StaticProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: StaticProps): Promise<Metadata> {
   const lang = params.locale;
   const locale = lang ? String(lang) : "en";
   const response = await getBookConsultArticleAndSEO(locale);

@@ -1,9 +1,7 @@
 import React from "react";
 import "./loading.css";
 
-type Props = {};
-
-const LoadingSpinner = (props: Props) => {
+const LoadingSpinner = () => {
   return (
     <div className="lds-ring">
       <div></div>

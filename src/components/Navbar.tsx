@@ -60,6 +60,7 @@ export function Navbar({ params }: Props) {
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <HStack spacing={4} alignItems={"center"}>
             <IconButton
+              name="theme switcher"
               size={"sm"}
               p={2}
               icon={isOpen ? <AiOutlineClose /> : <GiHamburgerMenu />}

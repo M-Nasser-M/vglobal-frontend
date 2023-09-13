@@ -1,4 +1,3 @@
-import { AxiosError } from "axios";
 import { ArticleAndSeo } from "../types/articleAndSeo";
 import api from "./client";
 import qs from "qs";
@@ -18,7 +17,7 @@ export const getTemporaryImmigrationArticleAndSEO = async (locale: string) => {
     );
 
     return response.data;
-  } catch (error: AxiosError | any) {
-    console.error(error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) console.error(error.message);
   }
 };

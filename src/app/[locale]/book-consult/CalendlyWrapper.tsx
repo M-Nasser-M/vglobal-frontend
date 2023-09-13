@@ -1,11 +1,9 @@
 "use client";
 import { InlineWidget } from "react-calendly";
 import React from "react";
-import { AspectRatio, Box } from "@chakra-ui/react";
+import { AspectRatio } from "@chakra-ui/react";
 
-type Props = {};
-
-const CalendlyWrapper = (props: Props) => {
+const CalendlyWrapper = () => {
   return (
     <AspectRatio ratio={16 / 9} maxW="100%" maxH="100%">
       <InlineWidget

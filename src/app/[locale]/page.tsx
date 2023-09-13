@@ -1,6 +1,6 @@
 import { getHomeArticleAndSEO } from "@/utils/services/homeService";
 import { ArticleAndSeoSchema } from "@/utils/types/articleAndSeo";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import NoContent from "@/components/NoContent";
 import Home from "./Home";
 
@@ -13,10 +13,9 @@ type StaticProps = {
   params: { locale: string };
 };
 
-export async function generateMetadata(
-  { params }: StaticProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: StaticProps): Promise<Metadata> {
   const lang = params.locale;
   const locale = lang ? String(lang) : "en";
   const response = await getHomeArticleAndSEO(locale);

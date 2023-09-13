@@ -1,8 +1,6 @@
 import React from "react";
 
-type Props = {};
-
-const NoContent = (props: Props) => {
+const NoContent = () => {
   return (
     <div
       style={{

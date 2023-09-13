@@ -6,7 +6,7 @@ import { BlogSchema, BlogWithoutData } from "@/utils/types/blog";
 import NoContent from "@/components/NoContent";
 import BlogPage from "./BlogPage";
 import React from "react";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 
 type Props = {
   params: { id: string; locale: string };
@@ -16,10 +16,9 @@ type StaticProps = {
   params: { id: string; locale: string };
 };
 
-export async function generateMetadata(
-  { params }: StaticProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: StaticProps): Promise<Metadata> {
   const response = await getBlogWithID(params.id);
   const seo = response?.data.seo;
   return {
@@ -32,7 +31,7 @@ export async function generateMetadata(
   };
 }
 
-export async function generateStaticParams(props: StaticProps) {
+export async function generateStaticParams() {
   const blogs = await getBlogsWithAllLocales(1, 100);
   const ids = blogs?.data.map((blog: BlogWithoutData) => {
     return { id: String(blog.id) };

@@ -1,5 +1,5 @@
 import { getBlogMainSEO, getBlogPage } from "@/utils/services/blogService";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 import { BlogsSchema } from "@/utils/types/blog";
 import NoContent from "@/components/NoContent";
 import BlogMainPage from "./BlogMainPage";
@@ -13,10 +13,9 @@ type StaticProps = {
   params: { locale: string };
 };
 
-export async function generateMetadata(
-  { params }: StaticProps,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: StaticProps): Promise<Metadata> {
   const lang = params.locale;
   const locale = lang ? String(lang) : "en";
   const response = await getBlogMainSEO(locale);

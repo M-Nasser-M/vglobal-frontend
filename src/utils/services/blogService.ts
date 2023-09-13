@@ -1,6 +1,5 @@
 import { SingleAndSeo } from "../types/seoSingle";
 import { Blog, Blogs } from "../types/blog";
-import { AxiosError } from "axios";
 import api from "./client";
 import qs from "qs";
 import { locales } from "../../../i18n";
@@ -17,8 +16,8 @@ export const getBlogMainSEO = async (locale: string) => {
     });
 
     return response.data;
-  } catch (error: AxiosError | any) {
-    console.error(error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) console.error(error.message);
   }
 };
 
@@ -42,8 +41,8 @@ export const getBlogPage = async (
     });
 
     return response.data;
-  } catch (error: AxiosError | any) {
-    console.error(error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) console.error(error.message);
   }
 };
 
@@ -58,8 +57,8 @@ export const getBlogWithID = async (id: string) => {
     });
 
     return response.data;
-  } catch (error: AxiosError | any) {
-    console.error(error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) console.error(error.message);
   }
 };
 
@@ -85,7 +84,7 @@ export const getBlogsWithAllLocales = async (
     });
 
     return response.data;
-  } catch (error: AxiosError | any) {
-    console.error(error.message);
+  } catch (error: unknown) {
+    if (error instanceof Error) console.error(error.message);
   }
 };
