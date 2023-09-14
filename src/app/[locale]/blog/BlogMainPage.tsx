@@ -5,7 +5,7 @@ import BlogCard from "./BlogCard";
 import { Blogs } from "@/utils/types/blog";
 import { PaginationButton } from "@/components/pagination";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { createQueryString } from "@/utils/other/utils";
+import { createQueryString } from "@/utils/hooks/utils";
 
 type Props = { blogs: Blogs; currentPage: number; params: { locale: string } };
 

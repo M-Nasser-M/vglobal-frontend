@@ -1,7 +1,7 @@
 import * as z from "zod";
-import { MetaSchema } from "./meta";
-import { ImageSchema } from "./imageComponet";
-import { SeoSchema } from "./seo";
+import { MetaSchema } from "./metaTypes";
+import { ImageSchema } from "./imageComponetTypes";
+import { SeoSchema } from "./seoTypes";
 
 export const DatumSchema = z.object({
   id: z.number(),

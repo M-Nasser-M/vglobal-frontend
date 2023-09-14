@@ -1,4 +1,4 @@
-import { ArticleAndSeo } from "../types/articleAndSeo";
+import { ArticleAndSeo } from "../types/articleAndSeoTypes";
 import api from "./client";
 import qs from "qs";
 

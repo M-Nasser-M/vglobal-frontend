@@ -1,5 +1,5 @@
 "use client";
-import { strapiImageLoader } from "@/utils/other/imageLoader";
+import { strapiImageLoader } from "@/utils/hooks/imageLoader";
 import { BlogWithoutData } from "@/utils/types/blog";
 import Image from "next/image";
 import React from "react";

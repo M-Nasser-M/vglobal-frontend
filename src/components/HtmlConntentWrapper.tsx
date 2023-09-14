@@ -1,6 +1,6 @@
 "use client";
 
-import { sanitizeData } from "@/utils/other/sanitizeData";
+import { sanitizeData } from "@/utils/hooks/sanitizeData";
 import { Box } from "@chakra-ui/react";
 import React from "react";
 

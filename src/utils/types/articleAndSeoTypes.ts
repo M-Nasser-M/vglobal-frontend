@@ -1,6 +1,6 @@
 import * as z from "zod";
-import { SeoSchema } from "./seo";
-import { MetaSchema } from "./meta";
+import { SeoSchema } from "./seoTypes";
+import { MetaSchema } from "./metaTypes";
 
 export const DataSchema = z.object({
   id: z.number(),

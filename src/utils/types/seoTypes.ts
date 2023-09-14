@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { ImageSchema } from "./imageComponet";
+import { ImageSchema } from "./imageComponetTypes";
 
 export const SeoSchema = z.object({
   id: z.number(),

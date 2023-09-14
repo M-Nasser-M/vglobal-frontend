@@ -1,5 +1,5 @@
 import { getHomeArticleAndSEO } from "@/utils/services/homeService";
-import { ArticleAndSeoSchema } from "@/utils/types/articleAndSeo";
+import { ArticleAndSeoSchema } from "@/utils/types/articleAndSeoTypes";
 import { Metadata } from "next";
 import NoContent from "@/components/NoContent";
 import Home from "./Home";

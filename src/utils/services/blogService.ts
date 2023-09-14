@@ -1,5 +1,5 @@
-import { SingleAndSeo } from "../types/seoSingle";
-import { Blog, Blogs } from "../types/blog";
+import { SingleAndSeo } from "../types/seoSingleTypes";
+import { Blog, Blogs } from "../types/blogTypes";
 import api from "./client";
 import qs from "qs";
 import { locales } from "../../../i18n";

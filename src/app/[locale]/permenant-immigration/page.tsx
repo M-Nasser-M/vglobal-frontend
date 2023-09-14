@@ -1,6 +1,6 @@
 import { getPermenantImmigrationArticleAndSEO } from "@/utils/services/permenantImmigrationService";
 import HtmlContentWrapper from "@/components/HtmlConntentWrapper";
-import { ArticleAndSeoSchema } from "@/utils/types/articleAndSeo";
+import { ArticleAndSeoSchema } from "@/utils/types/articleAndSeoTypes";
 import { Metadata } from "next";
 import NoContent from "@/components/NoContent";
 import { locales } from "../../../../i18n";
