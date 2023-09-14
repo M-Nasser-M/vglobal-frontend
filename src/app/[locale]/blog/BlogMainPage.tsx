@@ -2,10 +2,10 @@
 import { Box, SimpleGrid, Stack } from "@chakra-ui/react";
 import React from "react";
 import BlogCard from "./BlogCard";
-import { Blogs } from "@/utils/types/blog";
+import { Blogs } from "@/utils/types/blogTypes";
 import { PaginationButton } from "@/components/pagination";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { createQueryString } from "@/utils/hooks/utils";
+import { createQueryString } from "@/utils/other/utils";
 
 type Props = { blogs: Blogs; currentPage: number; params: { locale: string } };
 
