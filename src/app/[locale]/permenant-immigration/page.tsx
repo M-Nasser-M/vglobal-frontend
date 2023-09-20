@@ -1,9 +1,9 @@
 import { getPermenantImmigrationArticleAndSEO } from "@/utils/services/permenantImmigrationService";
-import HtmlContentWrapper from "@/components/HtmlConntentWrapper";
 import { ArticleAndSeoSchema } from "@/utils/types/articleAndSeoTypes";
-import { Metadata } from "next";
+import HtmlContentWrapper from "@/components/HtmlConntentWrapper";
 import NoContent from "@/components/NoContent";
 import { locales } from "../../../../i18n";
+import { Metadata } from "next";
 import React from "react";
 
 type Props = {

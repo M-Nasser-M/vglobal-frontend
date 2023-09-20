@@ -1,5 +1,5 @@
 import { ArticleAndSeo } from "../types/articleAndSeoTypes";
-import api from "./client";
+import { authApi } from "./client";
 import qs from "qs";
 
 export const getTemporaryImmigrationArticleAndSEO = async (locale: string) => {
@@ -9,11 +9,8 @@ export const getTemporaryImmigrationArticleAndSEO = async (locale: string) => {
       locale,
     });
 
-    const response = await api.get<ArticleAndSeo>(
-      `/temporary-immigration?${queryString}`,
-      {
-        headers: { Authorization: `bearer ${process.env.STRAPI_API_TOKEN}` },
-      }
+    const response = await authApi.get<ArticleAndSeo>(
+      `/temporary-immigration?${queryString}`
     );
 
     return response.data;

@@ -1,5 +1,5 @@
 import { ArticleAndSeo } from "../types/articleAndSeoTypes";
-import api from "./client";
+import { authApi } from "./client";
 import qs from "qs";
 
 export const getHomeArticleAndSEO = async (locale: string) => {
@@ -9,7 +9,7 @@ export const getHomeArticleAndSEO = async (locale: string) => {
       locale,
     });
 
-    const response = await api.get<ArticleAndSeo>(`/home?${queryString}`, {
+    const response = await authApi.get<ArticleAndSeo>(`/home?${queryString}`, {
       headers: { Authorization: `bearer ${process.env.STRAPI_API_TOKEN}` },
     });
 

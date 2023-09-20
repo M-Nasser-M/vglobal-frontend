@@ -1,6 +1,6 @@
 import { SingleAndSeo } from "../types/seoSingleTypes";
 import { Blog, Blogs } from "../types/blogTypes";
-import api from "./client";
+import { authApi } from "./client";
 import qs from "qs";
 import { locales } from "../../../i18n";
 
@@ -11,9 +11,9 @@ export const getBlogMainSEO = async (locale: string) => {
       locale,
     });
 
-    const response = await api.get<SingleAndSeo>(`/blog-main?${queryString}`, {
-      headers: { Authorization: `bearer ${process.env.STRAPI_API_TOKEN}` },
-    });
+    const response = await authApi.get<SingleAndSeo>(
+      `/blog-main?${queryString}`
+    );
 
     return response.data;
   } catch (error: unknown) {
@@ -36,9 +36,7 @@ export const getBlogPage = async (
       },
     });
 
-    const response = await api.get<Blogs>(`/blogs?${queryString}`, {
-      headers: { Authorization: `bearer ${process.env.STRAPI_API_TOKEN}` },
-    });
+    const response = await authApi.get<Blogs>(`/blogs?${queryString}`);
 
     return response.data;
   } catch (error: unknown) {
@@ -52,9 +50,7 @@ export const getBlogWithID = async (id: string) => {
       populate: { seo: { populate: "metaImage" }, cover: true },
     });
 
-    const response = await api.get<Blog>(`/blogs/${id}?${queryString}`, {
-      headers: { Authorization: `bearer ${process.env.STRAPI_API_TOKEN}` },
-    });
+    const response = await authApi.get<Blog>(`/blogs/${id}?${queryString}`);
 
     return response.data;
   } catch (error: unknown) {
@@ -79,9 +75,7 @@ export const getBlogsWithAllLocales = async (
       },
     });
 
-    const response = await api.get<Blogs>(`/blogs?${queryString}`, {
-      headers: { Authorization: `bearer ${process.env.STRAPI_API_TOKEN}` },
-    });
+    const response = await authApi.get<Blogs>(`/blogs?${queryString}`);
 
     return response.data;
   } catch (error: unknown) {

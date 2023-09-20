@@ -2,10 +2,24 @@
     "navlinks": {
         "/": "Home",
         "permenant-immigration": "Permenant Immigration",
-        "temporary-immigration": "Temporary Immigration",
+        "visit": "Visit",
+        "study": "Study",
         "blog": "Blog",
         "about-us": "About Us",
         "book-consult": "Book Consult",
         "assessment": "Assessment"
+    },
+    "signin": {
+        "email": "Email",
+        "password": "Password",
+        "forgotPassword": "Forgot Password"
+    },
+    "signup": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "dateOfBirth": "Date Of Birth",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password"
     }
 }

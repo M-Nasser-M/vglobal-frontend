@@ -1,6 +1,8 @@
 "use client";
 
+import { navlinksKeys } from "../../messages/messagesKeys";
 import { BsMoonFill, BsSunFill } from "react-icons/bs";
+import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose } from "react-icons/ai";
 import Logo from "../../public/brandLogo.svg";
@@ -32,20 +34,19 @@ export function Navbar({ params }: Props) {
   const t = useTranslations("navlinks");
   const lang = params.locale;
 
-  const keys = [
-    "/",
-    "permenant-immigration",
-    "temporary-immigration",
-    "blog",
-    "about-us",
-    "book-consult",
-    "assessment",
-  ] as const;
-
-  const navlinks = keys.map((key) => {
+  const navlinks = navlinksKeys.map((key) => {
     return (
       <Link textAlign={"center"} key={key} href={`/${lang}/${key}`}>
         {t(key)}
+        <IconButton
+          name="theme switcher"
+          size={"sm"}
+          p={2}
+          icon={<ChevronLeftIcon />}
+          aria-label={"Open Menu"}
+          display={{ lg: "none" }}
+          onClick={isOpen ? onClose : onOpen}
+        />
       </Link>
     );
   });
@@ -76,7 +77,6 @@ export function Navbar({ params }: Props) {
               <Box position={"relative"} w={"50px"} h={"50px"}>
                 <Icon fill={"rgb(239,64,35)"} as={Logo} w={"100%"} h={"100%"} />
               </Box>
-
               {navlinks}
             </HStack>
           </HStack>

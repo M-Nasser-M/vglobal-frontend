@@ -1,9 +1,9 @@
-import createAccountUsingEmail from "../services/authService";
 import Credentials from "next-auth/providers/credentials";
+import { authUsingEmail } from "../services/authService";
 import GoogleProvider from "next-auth/providers/google";
+import { publicApi } from "@/utils/services/client";
 import { AdapterUser } from "next-auth/adapters";
 import { AuthOptions, User } from "next-auth";
-import api from "@/utils/services/client";
 import { JWT } from "next-auth/jwt";
 
 export const options: AuthOptions = {
@@ -20,9 +20,13 @@ export const options: AuthOptions = {
       },
       async authorize(credentials) {
         try {
-          const data = await createAccountUsingEmail(credentials);
+          const data = await authUsingEmail(credentials);
           if (data) {
-            return { ...data.user, jwt: data.jwt };
+            return {
+              ...data.user,
+              jwt: data.jwt,
+              id: String(data.user.id),
+            };
           } else {
             return null;
           }
@@ -46,24 +50,30 @@ export const options: AuthOptions = {
     },
     jwt: async ({ token, user, account }) => {
       const isSignIn = user ? true : false;
+      const extendedUser = { jwt: "", ...user };
+      console.log("user", user);
+      if (isSignIn && account?.provider == "credentials") {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        token.jwt = extendedUser.jwt;
+        token.id = user.id;
+        return token;
+      }
       if (isSignIn) {
-        const response = await api.get<{
-          jwt: JWT;
-          user: User | AdapterUser;
-        }>(
-          `/auth/${account?.provider}/callback?access_token=${account?.access_token}`
-        );
+        try {
+          const response = await publicApi.get<{
+            jwt: JWT;
+            user: User | AdapterUser;
+          }>(
+            `/auth/${account?.provider}/callback?access_token=${account?.access_token}`
+          );
 
-        token.jwt = response.data.jwt;
-        token.id = response.data.user.id;
+          token.jwt = response.data.jwt;
+          token.id = response.data.user.id;
+        } catch (error) {
+          console.error("Error in jwt callback:");
+        }
       }
       return token;
-    },
-
-    redirect: ({ url, baseUrl }) => {
-      if (url.startsWith("/")) return `${baseUrl}${url}`;
-      else if (new URL(url).origin === baseUrl) return url;
-      return baseUrl;
     },
   },
 };

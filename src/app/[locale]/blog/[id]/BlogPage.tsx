@@ -4,7 +4,7 @@ import { AspectRatio, Box, Heading } from "@chakra-ui/react";
 import { Blog } from "@/utils/types/blog";
 import NextImage from "next/image";
 import React from "react";
-import { strapiImageLoader } from "@/utils/hooks/imageLoader";
+import { strapiImageLoader } from "@/utils/other/imageLoader";
 
 type Props = { blog: Blog };
 

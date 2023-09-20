@@ -1,6 +1,9 @@
 "use client";
+import { registerUsingEmail } from "@/utils/services/authService";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form";
+import React from "react";
 import {
   Button,
   Container,
@@ -9,7 +12,6 @@ import {
   FormLabel,
   Input,
 } from "@chakra-ui/react";
-import React from "react";
 import {
   SignupFormType,
   signupFormSchema,
@@ -22,9 +24,11 @@ const SignupForm = () => {
     formState: { errors, isSubmitting },
   } = useForm<SignupFormType>({ resolver: zodResolver(signupFormSchema) });
 
-  const onSubmit = (data: SignupFormType) => {
-    console.log(data);
+  const onSubmit = async (data: SignupFormType) => {
+    const res = await registerUsingEmail(data);
+    if (res?.user && res.jwt) redirect("/signin");
   };
+
   return (
     <Container maxW="container.sm">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -33,11 +37,7 @@ const SignupForm = () => {
           <Input
             id="firstName"
             placeholder="firstName"
-            {...register("firstName", {
-              required: "This is required",
-              minLength: { value: 2, message: "Minimum length should be 2" },
-              maxLength: { value: 50, message: "Maximum length should be 50" },
-            })}
+            {...register("firstName")}
           />
           <FormErrorMessage>
             {errors.firstName && errors.firstName.message}
@@ -50,8 +50,6 @@ const SignupForm = () => {
             placeholder="lastName"
             {...register("lastName", {
               required: "This is required",
-              minLength: { value: 2, message: "Minimum length should be 2" },
-              maxLength: { value: 50, message: "Maximum length should be 50" },
             })}
           />
           <FormErrorMessage>
@@ -116,7 +114,7 @@ const SignupForm = () => {
           </FormErrorMessage>
         </FormControl>
         <Button
-          colorScheme="teal"
+          colorScheme="green"
           mt={4}
           isLoading={isSubmitting}
           type="submit"

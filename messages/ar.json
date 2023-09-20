@@ -2,10 +2,24 @@
     "navlinks": {
         "/": "الرئيسية",
         "permenant-immigration": "هجرة دائمة",
-        "temporary-immigration": "هجرة مؤقتة",
+        "visit": "زيارة",
+        "study": "دراسة",
         "blog": "مدونة",
         "about-us": "معلومات عنا",
         "book-consult": "حجز استشارة",
-        "assessment": "اختبار تقديري"
+        "assessment": "تقييم"
+    },
+    "signin": {
+        "email": "ايميل",
+        "password": "كلمة السر",
+        "forgotPassword": "نسيت كلمة السر"
+    },
+    "signup": {
+        "firstName": "الاسم",
+        "lastName": "اسم العائلة",
+        "dateOfBirth": "تاريخ الميلاد",
+        "email": "ايميل",
+        "password": "كلمة السر",
+        "confirmPassword": "تاكيد كلمة السر"
     }
 }

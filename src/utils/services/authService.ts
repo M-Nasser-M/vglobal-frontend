@@ -1,24 +1,49 @@
-import api from "./client";
+import {
+  AuthApiResponseType,
+  CredentialsType,
+  RegisterApiResponseType,
+} from "../types/userType";
+import { SignupFormType } from "../types/signupFormTypes";
+import { publicApi } from "./client";
 
-type credentials =
-  | {
-      email: string;
-      password: string;
-    }
-  | undefined;
-
-const createAccountUsingEmail = async (credentials: credentials) => {
+const authUsingEmail = async (credentials: CredentialsType) => {
   if (!credentials?.email || !credentials?.password) return null;
-  const { data } = await api.post(
-    "/auth/local",
-    {
+
+  try {
+    const { data } = await publicApi.post<AuthApiResponseType>("/auth/local", {
       identifier: credentials.email,
       password: credentials.password,
-    },
-    { headers: { Authorization: `bearer ${process.env.STRAPI_API_TOKEN}` } }
-  );
+    });
+    console.log(data);
 
-  return data;
+    return data;
+  } catch (error: unknown) {
+    if (error instanceof Error) console.error(error.message);
+  }
 };
 
-export default createAccountUsingEmail;
+const registerUsingEmail = async (user: SignupFormType) => {
+  if (!user?.email || !user?.password) return null;
+
+  try {
+    const { data } = await publicApi.post<RegisterApiResponseType>(
+      "auth/local/register",
+      {
+        username: `${user.firstName} ${user.lastName}`,
+        email: user.email,
+        password: user.password,
+        dateOfBirth: user.dateOfBirth,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`,
+        },
+      }
+    );
+    return data;
+  } catch (error: unknown) {
+    if (error instanceof Error) console.error(error.message);
+  }
+};
+
+export { authUsingEmail, registerUsingEmail };

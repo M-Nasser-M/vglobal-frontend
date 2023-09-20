@@ -2,11 +2,11 @@ import {
   getBlogWithID,
   getBlogsWithAllLocales,
 } from "@/utils/services/blogService";
-import { BlogSchema, BlogWithoutData } from "@/utils/types/blog";
 import NoContent from "@/components/NoContent";
 import BlogPage from "./BlogPage";
 import React from "react";
 import { Metadata } from "next";
+import { BlogSchema, BlogWithoutData } from "@/utils/types/blogTypes";
 
 type Props = {
   params: { id: string; locale: string };

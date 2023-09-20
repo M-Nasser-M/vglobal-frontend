@@ -3,6 +3,7 @@ import { AppWrappers } from "@/components/AppWrappers";
 import { NextIntlClientProvider } from "next-intl";
 import { Navbar } from "@/components/Navbar";
 import { ReactNode } from "react";
+import { locales } from "../../../i18n";
 
 type Props = {
   children: ReactNode;
@@ -10,7 +11,7 @@ type Props = {
 };
 
 export function generateStaticParams() {
-  return [{ locale: "en" }, { locale: "ar" }];
+  return locales.map((locale) => ({ locale }));
 }
 
 export default async function RootLayout({ children, params }: Props) {

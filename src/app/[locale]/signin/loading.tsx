@@ -1,11 +1,11 @@
-import React from "react";
+import LoadingSpinner from "@/components/loadingServer/LoadingSpinner";
 
-const NoContent = () => {
+export default function Loading() {
   return (
     <div
       style={{
         width: "100%",
-        height: "100%",
+        height: "70vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -13,9 +13,7 @@ const NoContent = () => {
         color: "Red",
       }}
     >
-      No Content available
+      <LoadingSpinner />
     </div>
   );
-};
-
-export default NoContent;
+}

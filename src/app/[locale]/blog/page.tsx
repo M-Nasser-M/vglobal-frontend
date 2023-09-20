@@ -1,9 +1,9 @@
 import { getBlogMainSEO, getBlogPage } from "@/utils/services/blogService";
 import { Metadata } from "next";
-import { BlogsSchema } from "@/utils/types/blog";
 import NoContent from "@/components/NoContent";
 import BlogMainPage from "./BlogMainPage";
 import React from "react";
+import { BlogsSchema } from "@/utils/types/blogTypes";
 
 type Props = {
   params: { locale: string };

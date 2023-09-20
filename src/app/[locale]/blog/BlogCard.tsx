@@ -1,6 +1,4 @@
 "use client";
-import { strapiImageLoader } from "@/utils/hooks/imageLoader";
-import { BlogWithoutData } from "@/utils/types/blog";
 import Image from "next/image";
 import React from "react";
 import {
@@ -11,6 +9,8 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Link } from "@chakra-ui/next-js";
+import { strapiImageLoader } from "@/utils/other/imageLoader";
+import { BlogWithoutData } from "@/utils/types/blogTypes";
 
 type Props = { blog: BlogWithoutData; params: { locale: string } };
 

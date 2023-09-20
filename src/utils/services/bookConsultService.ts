@@ -1,5 +1,5 @@
 import { ArticleAndSeo } from "../types/articleAndSeoTypes";
-import api from "./client";
+import { authApi } from "./client";
 import qs from "qs";
 
 export const getBookConsultArticleAndSEO = async (locale: string) => {
@@ -9,11 +9,8 @@ export const getBookConsultArticleAndSEO = async (locale: string) => {
       locale,
     });
 
-    const response = await api.get<ArticleAndSeo>(
-      `/book-consult?${queryString}`,
-      {
-        headers: { Authorization: `bearer ${process.env.STRAPI_API_TOKEN}` },
-      }
+    const response = await authApi.get<ArticleAndSeo>(
+      `/book-consult?${queryString}`
     );
 
     return response.data;
