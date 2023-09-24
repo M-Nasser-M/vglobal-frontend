@@ -1,10 +1,10 @@
 "use client";
 import HtmlContentWrapper from "@/components/HtmlConntentWrapper";
+import { strapiImageLoader } from "@/utils/other/imageLoader";
 import { AspectRatio, Box, Heading } from "@chakra-ui/react";
-import { Blog } from "@/utils/types/blog";
+import { Blog } from "@/utils/types/blogTypes";
 import NextImage from "next/image";
 import React from "react";
-import { strapiImageLoader } from "@/utils/other/imageLoader";
 
 type Props = { blog: Blog };
 

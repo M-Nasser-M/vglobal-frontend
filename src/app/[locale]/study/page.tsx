@@ -1,24 +1,30 @@
-import { getBlogMainSEO, getBlogPage } from "@/utils/services/blogService";
-import { Metadata } from "next";
+import { ArticleAndSeoSchema } from "@/utils/types/articleAndSeoTypes";
+import { getStudyArticleAndSEO } from "@/utils/services/studyService";
+import HtmlContentWrapper from "@/components/HtmlConntentWrapper";
 import NoContent from "@/components/NoContent";
-import BlogMainPage from "./BlogMainPage";
+import { locales } from "../../../../i18n";
+import { Metadata } from "next";
 import React from "react";
-import { BlogsSchema } from "@/utils/types/blogTypes";
 
 type Props = {
   params: { locale: string };
   searchParams: { [key: string]: string | string[] | undefined };
 };
+
 type StaticProps = {
   params: { locale: string };
 };
+
+export async function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
 
 export async function generateMetadata({
   params,
 }: StaticProps): Promise<Metadata> {
   const lang = params.locale;
   const locale = lang ? String(lang) : "en";
-  const response = await getBlogMainSEO(locale);
+  const response = await getStudyArticleAndSEO(locale);
   const seo = response?.data.seo;
   return {
     title: seo?.metaTitle,
@@ -30,24 +36,18 @@ export async function generateMetadata({
   };
 }
 
-const Page = async ({ params, searchParams }: Props) => {
+const Page = async ({ params }: Props) => {
   const lang = params.locale;
-  const { page } = searchParams;
-
-  const pageNo = page && !Number.isNaN(page) ? Number(page) : 1;
-
-  const response = await getBlogPage(lang ? lang : "en", pageNo);
-  const validateData = BlogsSchema.safeParse(response);
-  const seoResponse = await getBlogMainSEO(lang);
-  const jsonLd = seoResponse?.data.seo?.structuredData;
-
+  const response = await getStudyArticleAndSEO(lang);
+  const validateData = ArticleAndSeoSchema.safeParse(response);
+  const jsonLd = response?.data.seo?.structuredData;
   if (validateData.success && response) {
     return (
       <>
         {jsonLd && (
           <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
         )}
-        <BlogMainPage params={params} currentPage={pageNo} blogs={response} />
+        <HtmlContentWrapper html={response.data.article!} />
       </>
     );
   }

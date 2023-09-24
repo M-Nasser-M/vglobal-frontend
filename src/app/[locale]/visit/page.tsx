@@ -1,9 +1,9 @@
-import { getTemporaryImmigrationArticleAndSEO } from "@/utils/services/temporaryImmigrationServcie";
-import HtmlContentWrapper from "@/components/HtmlConntentWrapper";
 import { ArticleAndSeoSchema } from "@/utils/types/articleAndSeoTypes";
-import { Metadata } from "next";
+import { getVisitArticleAndSEO } from "@/utils/services/visitService";
+import HtmlContentWrapper from "@/components/HtmlConntentWrapper";
 import NoContent from "@/components/NoContent";
 import { locales } from "../../../../i18n";
+import { Metadata } from "next";
 import React from "react";
 
 type Props = {
@@ -24,7 +24,7 @@ export async function generateMetadata({
 }: StaticProps): Promise<Metadata> {
   const lang = params.locale;
   const locale = lang ? String(lang) : "en";
-  const response = await getTemporaryImmigrationArticleAndSEO(locale);
+  const response = await getVisitArticleAndSEO(locale);
   const seo = response?.data.seo;
   return {
     title: seo?.metaTitle,
@@ -38,13 +38,13 @@ export async function generateMetadata({
 
 const Page = async ({ params }: Props) => {
   const lang = params.locale;
-  const response = await getTemporaryImmigrationArticleAndSEO(lang);
+  const response = await getVisitArticleAndSEO(lang);
   const validateData = ArticleAndSeoSchema.safeParse(response);
   const jsonLd = response?.data.seo?.structuredData;
   if (validateData.success && response) {
     return (
       <>
-        {jsonLd && typeof window !== "undefined" && (
+        {jsonLd && (
           <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
         )}
         <HtmlContentWrapper html={response.data.article!} />

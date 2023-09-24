@@ -10,15 +10,14 @@ const tokens = {
   colors: {
     light: {
       mainBackground: "gray.100",
-      containerBackground: "gray.200",
+      navbarBackground: "gray.100",
+      linkHover: "cayan.400",
     },
     dark: {
       mainBackground: "gray.700",
-      containerBackground: "gray.800",
+      navbarBackground: "gray.900",
+      linkHover: "cayan.400",
     },
-  },
-  font: {
-    fontSizes: { heading: 31.5, subheading: 18, body: 12 },
   },
 };
 
@@ -28,17 +27,13 @@ const semanticTokens = {
       default: tokens.colors.light.mainBackground,
       _dark: tokens.colors.dark.mainBackground,
     },
-    "container-background": {
-      default: tokens.colors.light.containerBackground,
-      _dark: tokens.colors.dark.containerBackground,
+    "navbar-background": {
+      default: tokens.colors.light.navbarBackground,
+      _dark: tokens.colors.dark.navbarBackground,
     },
-  },
-  shadows: {},
-  font: {
-    fontSizes: {
-      "heading-size": tokens.font.fontSizes.heading,
-      "subheading-size": tokens.font.fontSizes.subheading,
-      "body-size": tokens.font.fontSizes.body,
+    "link-hover": {
+      default: tokens.colors.light.linkHover,
+      _dark: tokens.colors.dark.linkHover,
     },
   },
 };
@@ -52,6 +47,12 @@ const styles = {
       display: "flex",
       flexDirection: "column",
     },
+    h1: { fontSize: "6rem" },
+    h2: { fontSize: "3.75rem" },
+    h3: { fontSize: "3rem" },
+    h4: { fontSize: "2.125rem" },
+    h5: { fontSize: "1.5rem" },
+    h6: { fontSize: "1.25rem" },
   },
 };
 

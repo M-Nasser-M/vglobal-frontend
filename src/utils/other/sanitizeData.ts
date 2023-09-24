@@ -1,6 +1,6 @@
-import xss from "xss";
+import DOMPurify from "isomorphic-dompurify";
 export const sanitizeData = (data: string) => {
   return {
-    __html: xss(data),
+    __html: DOMPurify.sanitize(data),
   };
 };

@@ -1,21 +1,22 @@
 "use client";
 
 import {
+  Icon,
   Menu,
   MenuButton,
   MenuItemOption,
   MenuList,
   MenuOptionGroup,
 } from "@chakra-ui/react";
+import { MdOutlineLanguage } from "react-icons/md";
 import { usePathname, useRouter } from "next/navigation";
-import { ChevronDownIcon } from "@chakra-ui/icons";
 import { locales } from "../../i18n";
 
 type Props = { params: { locale: string } };
 
 const LangSwitcher = ({ params }: Props) => {
-  const router = useRouter();
   const pathname = usePathname();
+  const router = useRouter();
   const lang = params.locale;
 
   const changeLanguage = (newLang: string) => {
@@ -25,14 +26,8 @@ const LangSwitcher = ({ params }: Props) => {
 
   return (
     <Menu>
-      <MenuButton
-        px={4}
-        py={2}
-        transition="all 0.2s"
-        borderRadius="md"
-        borderWidth="1px"
-      >
-        {lang} <ChevronDownIcon />
+      <MenuButton px={4} py={2}>
+        <Icon boxSize={5} as={MdOutlineLanguage} />
       </MenuButton>
       <MenuList>
         <MenuOptionGroup defaultValue={lang} type="radio">

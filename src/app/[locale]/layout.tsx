@@ -1,9 +1,9 @@
 import ContainerWrapper from "@/components/ContainerWrapper";
 import { AppWrappers } from "@/components/AppWrappers";
 import { NextIntlClientProvider } from "next-intl";
-import { Navbar } from "@/components/Navbar";
-import { ReactNode } from "react";
+import { Navbar } from "@/components/navbar/Navbar";
 import { locales } from "../../../i18n";
+import { ReactNode } from "react";
 
 type Props = {
   children: ReactNode;

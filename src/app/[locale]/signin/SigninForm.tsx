@@ -1,20 +1,21 @@
 "use client";
+import { SigninFormSchema, SigninFormType } from "@/utils/types/authTypes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { Link } from "@chakra-ui/next-js";
 import { signIn } from "next-auth/react";
+import React from "react";
 import {
-  SigninFormSchema,
-  SigninFormType,
-} from "@/utils/types/signinFormTypes";
-import {
+  Box,
   Button,
   Container,
   FormControl,
   FormErrorMessage,
   FormLabel,
   Input,
+  Stack,
+  Text,
 } from "@chakra-ui/react";
-import React from "react";
 
 const SigninForm = () => {
   const {
@@ -35,8 +36,15 @@ const SigninForm = () => {
     }
   };
   return (
-    <Container maxW="container.sm">
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <Container
+      display="flex"
+      minH="70vh"
+      pb={4}
+      justifyContent="center"
+      alignItems="center"
+      maxW="container.sm"
+    >
+      <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
           <FormLabel htmlFor="email">Email</FormLabel>
           <Input
@@ -73,7 +81,26 @@ const SigninForm = () => {
         >
           Sign in
         </Button>
-      </form>
+        <Stack
+          mt={4}
+          direction={{ base: "column", sm: "row" }}
+          align={"start"}
+          justify={"space-between"}
+        >
+          <Text>
+            Don&apos;t have an account?
+            <Link color="green.400" href="/signup">
+              {" "}
+              Sign up
+            </Link>
+          </Text>
+          <Text>
+            <Link color="green.400" href="/forgot-password">
+              Forgot Password
+            </Link>
+          </Text>
+        </Stack>
+      </Box>
     </Container>
   );
 };

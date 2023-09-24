@@ -39,7 +39,7 @@ export default async function RootPage({ params }: Props) {
   if (validateData.success && response) {
     return (
       <>
-        {jsonLd && typeof window !== "undefined" && (
+        {jsonLd && (
           <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
         )}
         <Home article={response.data.article!} />
