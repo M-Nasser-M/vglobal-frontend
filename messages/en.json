@@ -9,17 +9,28 @@
         "book-consult": "Book Consult",
         "assessment": "Assessment"
     },
-    "signin": {
+    "signinForm": {
         "email": "Email",
         "password": "Password",
-        "forgotPassword": "Forgot Password"
+        "forgotPassword": "Forgot Password",
+        "signin": "SignIn",
+        "signup": "SignUp",
+        "don'tHaveAnAccount": "Don't have an account? "
     },
-    "signup": {
+    "signupForm": {
         "firstName": "First Name",
         "lastName": "Last Name",
         "dateOfBirth": "Date Of Birth",
         "email": "Email",
         "password": "Password",
-        "confirmPassword": "Confirm Password"
+        "confirmPassword": "Confirm Password",
+        "signin": "SignIn",
+        "signup": "SignUp",
+        "alreadyAMember": "Already a member"
+    },
+    "common": {
+        "signin": "SignIn",
+        "signup": "SignUp",
+        "signout": "SignOut"
     }
 }

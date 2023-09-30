@@ -12,11 +12,13 @@ const tokens = {
       mainBackground: "gray.100",
       navbarBackground: "gray.100",
       linkHover: "cayan.400",
+      defaultText: "gray.800",
     },
     dark: {
-      mainBackground: "gray.700",
+      mainBackground: "gray.800",
       navbarBackground: "gray.900",
       linkHover: "cayan.400",
+      defaultText: "whiteAlpha.900",
     },
   },
 };
@@ -34,6 +36,10 @@ const semanticTokens = {
     "link-hover": {
       default: tokens.colors.light.linkHover,
       _dark: tokens.colors.dark.linkHover,
+    },
+    "default-text": {
+      default: tokens.colors.light.defaultText,
+      _dark: tokens.colors.dark.defaultText,
     },
   },
 };
@@ -53,6 +59,8 @@ const styles = {
     h4: { fontSize: "2.125rem" },
     h5: { fontSize: "1.5rem" },
     h6: { fontSize: "1.25rem" },
+    p: { color: "default-text" },
+    span: { color: "default-text" },
   },
 };
 

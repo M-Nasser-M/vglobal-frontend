@@ -1,3 +1,4 @@
 export const navlinksKeys = ["/","permenant-immigration","visit","study","blog","about-us","book-consult","assessment"];
-export const signinKeys = ["email","password","forgotPassword"];
-export const signupKeys = ["firstName","lastName","dateOfBirth","email","password","confirmPassword"];
+export const signinFormKeys = ["email","password","forgotPassword","signin"];
+export const signupFormKeys = ["firstName","lastName","dateOfBirth","email","password","confirmPassword","signup"];
+export const commonKeys = ["signin","signup"];

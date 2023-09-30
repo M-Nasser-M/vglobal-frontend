@@ -2,6 +2,7 @@
 
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { CacheProvider } from "@chakra-ui/next-js";
+import { Provider as JotaiProvider } from "jotai";
 import React, { ReactNode } from "react";
 import { theme } from "@/styles/theme";
 
@@ -12,8 +13,10 @@ export const AppWrappers = ({ children, params }: Props) => {
   const direction = lang === "ar" ? "rtl" : "ltr";
   const themeWithDirection = extendTheme({ ...theme, direction });
   return (
-    <CacheProvider>
-      <ChakraProvider theme={themeWithDirection}>{children}</ChakraProvider>
-    </CacheProvider>
+    <JotaiProvider>
+      <CacheProvider>
+        <ChakraProvider theme={themeWithDirection}>{children}</ChakraProvider>
+      </CacheProvider>
+    </JotaiProvider>
   );
 };

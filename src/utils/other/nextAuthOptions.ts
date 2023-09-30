@@ -1,6 +1,5 @@
 import Credentials from "next-auth/providers/credentials";
 import { authUsingEmail } from "../services/authService";
-import GoogleProvider from "next-auth/providers/google";
 import { publicApi } from "@/utils/services/client";
 import { AdapterUser } from "next-auth/adapters";
 import { AuthOptions, User } from "next-auth";
@@ -8,10 +7,6 @@ import { JWT } from "next-auth/jwt";
 
 export const options: AuthOptions = {
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    }),
     Credentials({
       name: "email",
       credentials: {
@@ -45,13 +40,11 @@ export const options: AuthOptions = {
         user: { ...session.user, id: token.id },
         jwt: token.jwt,
       };
-
       return extendedSession;
     },
     jwt: async ({ token, user, account }) => {
       const isSignIn = user ? true : false;
       const extendedUser = { jwt: "", ...user };
-      console.log("user", user);
       if (isSignIn && account?.provider == "credentials") {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         token.jwt = extendedUser.jwt;

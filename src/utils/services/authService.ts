@@ -18,6 +18,7 @@ const authUsingEmail = async (credentials: CredentialsType) => {
     return data;
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
+    return null;
   }
 };
 

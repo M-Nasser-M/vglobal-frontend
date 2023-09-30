@@ -34,7 +34,7 @@ export const signupFormSchema = z
 export type SignupFormType = z.infer<typeof signupFormSchema>;
 
 export const SigninFormSchema = z.object({
-  email: z.string().email().nonempty("email is required"),
+  email: z.string().email("not an email format").nonempty("email is required"),
   password: z.string().nonempty("password is required"),
 });
 

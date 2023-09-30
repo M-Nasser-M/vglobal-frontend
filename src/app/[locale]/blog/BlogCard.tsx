@@ -1,16 +1,17 @@
 "use client";
+import { strapiImageLoader } from "@/utils/other/imageLoader";
+import { BlogWithoutData } from "@/utils/types/blogTypes";
+import NextLink from "next/link";
 import Image from "next/image";
 import React from "react";
 import {
   Box,
   Heading,
+  Link,
   Text,
   Tooltip,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { Link } from "@chakra-ui/next-js";
-import { strapiImageLoader } from "@/utils/other/imageLoader";
-import { BlogWithoutData } from "@/utils/types/blogTypes";
 
 type Props = { blog: BlogWithoutData; params: { locale: string } };
 
@@ -31,7 +32,7 @@ const BlogCard = ({ blog, params }: Props) => {
             blurDataURL={blog.cover?.placeholder}
             loading="lazy"
             loader={strapiImageLoader}
-            src={blog.cover?.formats.medium.url || ""}
+            src={blog.cover?.formats?.medium?.url || ""}
             alt={blog.cover?.alternativeText || "blog cover image"}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -39,7 +40,7 @@ const BlogCard = ({ blog, params }: Props) => {
         </Box>
         <Box p={{ base: 3, sm: 5 }}>
           <Box mb={6}>
-            <Link href={`/${lang}/blog/${blog.id}`}>
+            <Link as={NextLink} href={`/${lang}/blog/${blog.id}`}>
               <Heading
                 fontSize={{ base: "lg", sm: "2xl" }}
                 fontWeight="bold"

@@ -1,7 +1,7 @@
-import { getHomeArticleAndSEO } from "@/utils/services/homeService";
-import { ArticleAndSeoSchema } from "@/utils/types/articleAndSeoTypes";
-import { Metadata } from "next";
 import NoContent from "@/components/NoContent";
+import { getHomeArticleAndSEO } from "@/utils/services/homeService";
+import { HomeAndSeoSchema } from "@/utils/types/homeTypes";
+import { Metadata } from "next";
 import Home from "./Home";
 
 type Props = {
@@ -32,9 +32,8 @@ export async function generateMetadata({
 
 export default async function RootPage({ params }: Props) {
   const locale = params.locale;
-
   const response = await getHomeArticleAndSEO(locale);
-  const validateData = ArticleAndSeoSchema.safeParse(response);
+  const validateData = HomeAndSeoSchema.safeParse(response);
   const jsonLd = response?.data.seo?.structuredData;
   if (validateData.success && response) {
     return (
@@ -42,7 +41,7 @@ export default async function RootPage({ params }: Props) {
         {jsonLd && (
           <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
         )}
-        <Home article={response.data.article!} />
+        <Home HomeAndSeo={response} />
       </>
     );
   }

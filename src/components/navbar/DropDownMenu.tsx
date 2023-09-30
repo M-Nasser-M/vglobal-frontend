@@ -1,16 +1,16 @@
-import { Link } from "@chakra-ui/next-js";
 import {
-  Stack,
-  Box,
   Popover,
-  Text,
-  Icon,
-  HStack,
   PopoverTrigger,
   PopoverContent,
+  Portal,
+  PopoverArrow,
+  PopoverBody,
+  IconButton,
+  Stack,
   useDisclosure,
-  useColorModeValue,
+  Link,
 } from "@chakra-ui/react";
+import NextLink from "next/link";
 import { FaChevronDown } from "react-icons/fa";
 
 interface MenuData {
@@ -20,77 +20,41 @@ interface MenuData {
 
 interface MenuDataProps {
   menuData: MenuData[];
-  title: string;
-  href: string;
 }
 
-const DropDownMenu = ({ menuData, title, href }: MenuDataProps) => {
+const DropDownMenu = ({ menuData }: MenuDataProps) => {
   const { onOpen, onClose, isOpen } = useDisclosure();
-
   return (
-    <Stack direction="row" spacing={4} display={{ base: "none", sm: "flex" }}>
-      <Popover
-        trigger="click"
-        placement="bottom-start"
-        onOpen={onOpen}
-        onClose={onClose}
-      >
-          <HStack alignItems="center" cursor="pointer" role="group">
-            <Link
-              href={href}
-              p={2}
-              color={useColorModeValue("gray.600", "gray.200")}
-              _groupHover={{
-                color: "link-hover",
-              }}
-              >
-              {title}
-            </Link>
-            <PopoverTrigger>
-            <Icon
-              as={FaChevronDown}
-              h={4}
-              w={4}
-              _groupHover={{
-                color: "link-hover",
-              }}
-              transition="all .25s ease-in-out"
-              transform={isOpen ? "rotate(180deg)" : ""}
-            />
-        </PopoverTrigger>
-          </HStack>
-
-        <PopoverContent
-          border={0}
-          boxShadow={useColorModeValue(
-            "2px 4px 6px rgba(160, 174, 192, 0.6)",
-            "0 4px 6px rgba(9, 17, 28, 0.9)"
-          )}
-          bg={useColorModeValue("white", "gray.800")}
-          p={4}
-          rounded="lg"
-          minW="xs"
-        >
-          <Stack>
-            {menuData.map((data, index) => (
-              <DropDownItem key={index} {...data} />
-            ))}
-          </Stack>
+    <Popover isOpen={isOpen} onOpen={onOpen} onClose={onClose} trigger="click">
+      <PopoverTrigger>
+        <IconButton
+          bg="navbar-background"
+          aria-label="Trigger"
+          aria-haspopup="true"
+          ml={1}
+          size="md"
+          icon={<FaChevronDown />}
+          transition="all .25s ease-in-out"
+          transform={isOpen ? "rotate(180deg)" : ""}
+          _hover={{}}
+          _active={{}}
+        />
+      </PopoverTrigger>
+      <Portal>
+        <PopoverContent bg="navbar-background" px={4} width="fit-content">
+          <PopoverArrow />
+          <PopoverBody>
+            <Stack onClick={onClose}>
+              {menuData.map((item) => (
+                <Link as={NextLink} key={item.label} href={item.href}>
+                  <h6>{item.label}</h6>
+                </Link>
+              ))}
+            </Stack>
+          </PopoverBody>
         </PopoverContent>
-      </Popover>
-    </Stack>
-  );
-};
-
-const DropDownItem = ({ label, href }: MenuData) => {
-  return (
-    <Link href={href!} display="block" p={2} rounded="md">
-      <Stack direction="row" align="center">
-        <Box>
-          <Text fontWeight={500}>{label}</Text>
-        </Box>
-      </Stack>
-    </Link>
+      </Portal>
+    </Popover>
   );
 };
 

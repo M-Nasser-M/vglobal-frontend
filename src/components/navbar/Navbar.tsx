@@ -1,39 +1,59 @@
 "use client";
 
+import { ExtendedSession } from "@/utils/types/extendedSession";
+import { CalThemeAtom, SessionAtom } from "@/atoms/atoms";
+import { BsMoonFill, BsSunFill } from "react-icons/bs";
+import { AiOutlineClose } from "react-icons/ai";
+import { GiHamburgerMenu } from "react-icons/gi";
+import Logo from "../../../public/brandLogo.webp";
+import LangSwitcher from "../LangSwitcher";
+import { signOut } from "next-auth/react";
+import Navlinks from "./Navlinks";
+import { useSetAtom } from "jotai";
+import NextLink from "next/link";
+import Image from "next/image";
+import { PermenantImmigrationPages } from "@/utils/types/permenantImmigrationPageTypes";
 import {
   Box,
-  Flex,
   Button,
+  Flex,
+  HStack,
+  IconButton,
+  Link,
   Stack,
   useColorMode,
-  IconButton,
-  HStack,
   useDisclosure,
-  Icon,
 } from "@chakra-ui/react";
-import { BsMoonFill, BsSunFill } from "react-icons/bs";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { AiOutlineClose } from "react-icons/ai";
-import Logo from "../../../public/brandLogo.svg";
-import LangSwitcher from "../LangSwitcher";
-import { Link } from "@chakra-ui/next-js";
-import Navlinks from "./Navlinks";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface Props {
   params: {
     locale: string;
   };
+  permenantImmigrationPrograms: PermenantImmigrationPages | undefined;
+  session: ExtendedSession | null;
 }
 
-export function Navbar({ params }: Props) {
+export function Navbar({
+  params,
+  permenantImmigrationPrograms,
+  session,
+}: Props) {
   const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const setSessionAtom = useSetAtom(SessionAtom);
+  const setCalTheme = useSetAtom(CalThemeAtom);
+  const router = useRouter();
+  const t = useTranslations("common");
   const lang = params.locale;
 
+  setCalTheme(colorMode);
+  setSessionAtom(session);
   return (
     <>
-      <Box boxShadow={"md"} bg="navbar-background" px={4}>
-        <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
+      <Box boxShadow="md" bg="navbar-background" px={4}>
+        <Flex h={16} alignItems="center" justifyContent="space-between">
           <HStack spacing={4} alignItems={"center"}>
             <IconButton
               name="mobile menu button"
@@ -51,19 +71,41 @@ export function Navbar({ params }: Props) {
               display={{ base: "none", lg: "flex" }}
             >
               <Box mr={2} position={"relative"} w={"50px"} h={"50px"}>
-                <Icon fill={"rgb(239,64,35)"} as={Logo} w={"100%"} h={"100%"} />
+                <Image src={Logo} alt="logo" />
               </Box>
-              <Navlinks lang={lang} />
+              <Navlinks
+                permenantImmigrationPrograms={permenantImmigrationPrograms}
+                lang={lang}
+              />
             </HStack>
           </HStack>
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>
-              <Button bg="navbar-background" onClick={toggleColorMode}>
+              <Button
+                bg="navbar-background"
+                onClick={() => {
+                  toggleColorMode();
+                  setCalTheme(colorMode);
+                }}
+              >
                 {colorMode === "light" ? <BsMoonFill /> : <BsSunFill />}
               </Button>
-              <Link href={`/${lang}/signin`}>
-                <Button colorScheme="green">Sign In</Button>
-              </Link>
+              {session && session.user ? (
+                <Button
+                  onClick={async () => {
+                    await signOut();
+                    setSessionAtom(null);
+                    router.refresh();
+                  }}
+                  colorScheme="red"
+                >
+                  {t("signout")}
+                </Button>
+              ) : (
+                <Link as={NextLink} href={`/${lang}/signin`}>
+                  <Button colorScheme="red">{t("signin")}</Button>
+                </Link>
+              )}
               <LangSwitcher params={params} />
             </Stack>
           </Flex>
@@ -71,7 +113,10 @@ export function Navbar({ params }: Props) {
         {isOpen && (
           <Box pb={4} textAlign={"center"} display={{ lg: "none" }}>
             <Stack as={"nav"} spacing={4}>
-              <Navlinks lang={lang} />
+              <Navlinks
+                permenantImmigrationPrograms={permenantImmigrationPrograms}
+                lang={lang}
+              />
             </Stack>
           </Box>
         )}

@@ -1,8 +1,7 @@
 import { getBookConsultArticleAndSEO } from "@/utils/services/bookConsultService";
-import { Metadata } from "next";
-import CalendlyWrapper from "./CalendlyWrapper";
 import { locales } from "../../../../i18n";
-import React from "react";
+import { Metadata } from "next";
+import CalInlineEmbed from "./CalInlineEmbed";
 
 type Props = {
   params: { locale: string };
@@ -44,7 +43,7 @@ const page = async ({ params }: Props) => {
       {jsonLd && (
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       )}
-      <CalendlyWrapper />
+      <CalInlineEmbed />
     </>
   );
 };

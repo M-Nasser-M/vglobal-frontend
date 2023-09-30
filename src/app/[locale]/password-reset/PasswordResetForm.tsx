@@ -94,7 +94,7 @@ const PasswordResetForm = () => {
           {errors.root && errors.root.message}
         </FormErrorMessage>
         <Button
-          colorScheme="green"
+          colorScheme="red"
           mt={4}
           isLoading={isSubmitting}
           type="submit"

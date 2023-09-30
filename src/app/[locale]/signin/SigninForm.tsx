@@ -1,10 +1,11 @@
 "use client";
 import { SigninFormSchema, SigninFormType } from "@/utils/types/authTypes";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { Link } from "@chakra-ui/next-js";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
-import React from "react";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import NextLink from "next/link";
 import {
   Box,
   Button,
@@ -13,25 +14,39 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  Link,
   Stack,
   Text,
 } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 
 const SigninForm = () => {
+  const searchParams = useSearchParams();
+  const redirectPath = searchParams.get("callbackUrl") || "/";
+  const router = useRouter();
+  const t = useTranslations("signinForm");
+
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
   } = useForm<SigninFormType>({ resolver: zodResolver(SigninFormSchema) });
 
+  const [credentialsError, setCredentialsError] = useState<boolean>(false);
   const onSubmit = async (data: SigninFormType) => {
     try {
-      signIn("credentials", {
-        redirect: false,
+      const res = await signIn("credentials", {
         email: data.email,
         password: data.password,
+        redirect: false,
       });
+      router.push(redirectPath);
+      if (res?.error) {
+        setCredentialsError(true);
+      }
     } catch (error) {
+      console.log(error);
+
       if (error instanceof Error) console.error(error.message);
     }
   };
@@ -45,8 +60,8 @@ const SigninForm = () => {
       maxW="container.sm"
     >
       <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
-        <FormControl>
-          <FormLabel htmlFor="email">Email</FormLabel>
+        <FormControl isInvalid={Boolean(errors.email)}>
+          <FormLabel htmlFor="email">{t("email")}</FormLabel>
           <Input
             id="email"
             type="email"
@@ -57,8 +72,8 @@ const SigninForm = () => {
             {errors.email && errors.email.message}
           </FormErrorMessage>
         </FormControl>
-        <FormControl>
-          <FormLabel htmlFor="password">Password</FormLabel>
+        <FormControl isInvalid={Boolean(errors.password)}>
+          <FormLabel htmlFor="password">{t("password")}</FormLabel>
           <Input
             id="password"
             type="password"
@@ -69,17 +84,20 @@ const SigninForm = () => {
             {errors.password && errors.password.message}
           </FormErrorMessage>
         </FormControl>
-        <FormErrorMessage>
-          {errors.root && errors.root.message}
-        </FormErrorMessage>
+        <FormControl isInvalid={Boolean(errors.root || credentialsError)}>
+          <FormErrorMessage>
+            {errors.root && errors.root.message}
+            {credentialsError && "Invalid credentials"}
+          </FormErrorMessage>
+        </FormControl>
         <Button
-          colorScheme="green"
+          colorScheme="red"
           mt={4}
           isLoading={isSubmitting}
           type="submit"
           width="100%"
         >
-          Sign in
+          {t("signin")}
         </Button>
         <Stack
           mt={4}
@@ -88,15 +106,15 @@ const SigninForm = () => {
           justify={"space-between"}
         >
           <Text>
-            Don&apos;t have an account?
-            <Link color="green.400" href="/signup">
+            {t("don'tHaveAnAccount")}
+            <Link as={NextLink} color="red.400" href="/signup">
               {" "}
-              Sign up
+              {t("signup")}
             </Link>
           </Text>
           <Text>
-            <Link color="green.400" href="/forgot-password">
-              Forgot Password
+            <Link as={NextLink} color="red.400" href="/forgot-password">
+              {t("forgotPassword")}
             </Link>
           </Text>
         </Stack>

@@ -58,7 +58,7 @@ const ForgotPasswordForm = () => {
         </FormControl>
 
         <Button
-          colorScheme="green"
+          colorScheme="red"
           mt={4}
           isLoading={isSubmitting}
           type="submit"

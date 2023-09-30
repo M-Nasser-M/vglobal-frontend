@@ -7,19 +7,30 @@
         "blog": "مدونة",
         "about-us": "معلومات عنا",
         "book-consult": "حجز استشارة",
-        "assessment": "تقييم"
+        "assessment": "تقييم مبدئي"
     },
-    "signin": {
-        "email": "ايميل",
+    "signinForm": {
+        "email": "البريد الالكتروني",
         "password": "كلمة السر",
-        "forgotPassword": "نسيت كلمة السر"
+        "forgotPassword": "نسيت كلمة السر",
+        "signin": "تسجيل الدخول",
+        "signup": "التسجيل",
+        "don'tHaveAnAccount": "ليس لديك حساب؟ "
     },
-    "signup": {
+    "signupForm": {
         "firstName": "الاسم",
         "lastName": "اسم العائلة",
         "dateOfBirth": "تاريخ الميلاد",
-        "email": "ايميل",
+        "email": "البريد الالكتروني",
         "password": "كلمة السر",
-        "confirmPassword": "تاكيد كلمة السر"
+        "confirmPassword": "تاكيد كلمة السر",
+        "signup": "التسجيل",
+        "signin": "تسجيل الدخول",
+        "alreadyAMember": "لديك حساب"
+    },
+    "common": {
+        "signin": "تسجيل الدخول",
+        "signup": "التسجيل",
+        "signout": "تسجيل الخروج"
     }
 }

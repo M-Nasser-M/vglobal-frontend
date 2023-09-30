@@ -67,3 +67,19 @@ export const getPermenantImmigrationPageWithIdAndSEO = async (id: string) => {
     if (error instanceof Error) console.error(error.message);
   }
 };
+
+export const getPermenantImmigrationPagesLocalised = async (locale: string) => {
+  try {
+    const queryString = qs.stringify({
+      locale,
+    });
+
+    const response = await authApi.get<PermenantImmigrationPages>(
+      `/permenant-immigration-pages?${queryString}`
+    );
+
+    return response.data;
+  } catch (error: unknown) {
+    if (error instanceof Error) console.error(error.message);
+  }
+};
