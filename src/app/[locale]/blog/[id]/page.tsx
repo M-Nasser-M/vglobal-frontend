@@ -7,6 +7,7 @@ import BlogPage from "./BlogPage";
 import React from "react";
 import { Metadata } from "next";
 import { BlogSchema, BlogWithoutData } from "@/utils/types/blogTypes";
+import { getOpenGraph, getTwitter } from "@/utils/other/utils";
 
 type Props = {
   params: { id: string; locale: string };
@@ -21,6 +22,8 @@ export async function generateMetadata({
 }: StaticProps): Promise<Metadata> {
   const response = await getBlogWithID(params.id);
   const seo = response?.data.seo;
+  const twitter = seo?.metaSocial && getTwitter(seo?.metaSocial);
+  const openGraph = seo?.metaSocial && getOpenGraph(seo?.metaSocial);
   return {
     title: seo?.metaTitle,
     description: seo?.metaDescription,
@@ -28,6 +31,8 @@ export async function generateMetadata({
     robots: seo?.metaRobots,
     keywords: seo?.keywords,
     viewport: seo?.metaViewport,
+    twitter: twitter,
+    openGraph: openGraph,
   };
 }
 

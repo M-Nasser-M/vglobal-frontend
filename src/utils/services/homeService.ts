@@ -5,7 +5,12 @@ import qs from "qs";
 export const getHomeArticleAndSEO = async (locale: string) => {
   try {
     const queryString = qs.stringify({
-      populate: { seo: { populate: "metaImage" }, labelandtooltip: true },
+      populate: {
+        seo: {
+          populate: { metaImage: true, metaSocial: { populate: "image" } },
+        },
+        labelandtooltip: true,
+      },
       locale,
     });
 

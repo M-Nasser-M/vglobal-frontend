@@ -10,7 +10,11 @@ import qs from "qs";
 export const getPermenantImmigrationArticleAndSEO = async (locale: string) => {
   try {
     const queryString = qs.stringify({
-      populate: { seo: { populate: "metaImage" } },
+      populate: {
+        seo: {
+          populate: { metaImage: true, metaSocial: { populate: "image" } },
+        },
+      },
       locale,
     });
 
@@ -34,7 +38,11 @@ export const getPermenantImmigrationPagesWithAllLocales = async (
   });
   try {
     const queryString = qs.stringify({
-      populate: { seo: { populate: "metaImage" } },
+      populate: {
+        seo: {
+          populate: { metaImage: true, metaSocial: { populate: "image" } },
+        },
+      },
       ...locale,
       pagination: {
         page,
@@ -55,7 +63,11 @@ export const getPermenantImmigrationPagesWithAllLocales = async (
 export const getPermenantImmigrationPageWithIdAndSEO = async (id: string) => {
   try {
     const queryString = qs.stringify({
-      populate: { seo: { populate: "metaImage" } },
+      populate: {
+        seo: {
+          populate: { metaImage: true, metaSocial: { populate: "image" } },
+        },
+      },
     });
 
     const response = await authApi.get<PermenantImmigrationPage>(

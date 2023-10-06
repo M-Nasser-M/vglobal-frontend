@@ -1,4 +1,7 @@
 import { ReadonlyURLSearchParams } from "next/navigation";
+import { MetaSocial } from "../types/seoTypes";
+import { Twitter } from "next/dist/lib/metadata/types/twitter-types";
+import { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
 
 export const createQueryString = (
   name: string,
@@ -11,10 +14,28 @@ export const createQueryString = (
   return params.toString();
 };
 
-export const isEven = (num: number) => num % 2 === 0;
+export const getTwitter = (metasocial: MetaSocial[]): Twitter | null => {
+  for (const network of metasocial) {
+    if (network.socialNetwork === "Twitter") {
+      return {
+        title: network.title,
+        description: network.description,
+        images: network.image?.url,
+      };
+    }
+  }
+  return null;
+};
 
-export const random = (min: number, max: number) =>
-  Math.floor(Math.random() * (max - min + 1) + min);
-
-export const capitalize = (str: string) =>
-  str.charAt(0).toUpperCase() + str.slice(1);
+export const getOpenGraph = (metasocial: MetaSocial[]): OpenGraph | null => {
+  for (const network of metasocial) {
+    if (network.socialNetwork !== "Twitter") {
+      return {
+        title: network.title,
+        description: network.description,
+        images: network.image?.url,
+      };
+    }
+  }
+  return null;
+};

@@ -10,6 +10,7 @@ import {
   getPermenantImmigrationPageWithIdAndSEO,
   getPermenantImmigrationPagesWithAllLocales,
 } from "@/utils/services/permenantImmigrationService";
+import { getOpenGraph, getTwitter } from "@/utils/other/utils";
 
 type Props = {
   params: { id: string; locale: string };
@@ -24,6 +25,8 @@ export async function generateMetadata({
 }: StaticProps): Promise<Metadata> {
   const response = await getPermenantImmigrationPageWithIdAndSEO(params.id);
   const seo = response?.data.seo;
+  const twitter = seo?.metaSocial && getTwitter(seo?.metaSocial);
+  const openGraph = seo?.metaSocial && getOpenGraph(seo?.metaSocial);
   return {
     title: seo?.metaTitle,
     description: seo?.metaDescription,
@@ -31,6 +34,8 @@ export async function generateMetadata({
     robots: seo?.metaRobots,
     keywords: seo?.keywords,
     viewport: seo?.metaViewport,
+    twitter: twitter,
+    openGraph: openGraph,
   };
 }
 

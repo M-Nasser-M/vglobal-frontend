@@ -7,7 +7,11 @@ import { locales } from "../../../i18n";
 export const getBlogMainSEO = async (locale: string) => {
   try {
     const queryString = qs.stringify({
-      populate: { seo: { populate: "metaImage" } },
+      populate: {
+        seo: {
+          populate: { metaImage: true, metaSocial: { populate: "image" } },
+        },
+      },
       locale,
     });
 
@@ -47,7 +51,12 @@ export const getBlogPage = async (
 export const getBlogWithID = async (id: string) => {
   try {
     const queryString = qs.stringify({
-      populate: { seo: { populate: "metaImage" }, cover: true },
+      populate: {
+        seo: {
+          populate: { metaImage: true, metaSocial: { populate: "image" } },
+        },
+        cover: true,
+      },
     });
 
     const response = await authApi.get<Blog>(`/blogs/${id}?${queryString}`);

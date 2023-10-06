@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import NoContent from "@/components/NoContent";
 import { locales } from "../../../../i18n";
 import React from "react";
+import { getOpenGraph, getTwitter } from "@/utils/other/utils";
 
 type Props = {
   params: { locale: string };
@@ -25,6 +26,8 @@ export async function generateMetadata({
   const locale = lang ? String(lang) : "en";
   const response = await getAboutUsArticleAndSEO(locale);
   const seo = response?.data.seo;
+  const twitter = seo?.metaSocial && getTwitter(seo?.metaSocial);
+  const openGraph = seo?.metaSocial && getOpenGraph(seo?.metaSocial);
   return {
     title: seo?.metaTitle,
     description: seo?.metaDescription,
@@ -32,6 +35,8 @@ export async function generateMetadata({
     robots: seo?.metaRobots,
     keywords: seo?.keywords,
     viewport: seo?.metaViewport,
+    twitter: twitter,
+    openGraph: openGraph,
   };
 }
 

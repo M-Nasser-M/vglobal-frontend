@@ -52,7 +52,14 @@ export function Navbar({
   setSessionAtom(session);
   return (
     <>
-      <Box boxShadow="md" bg="navbar-background" px={4}>
+      <Box
+        position="fixed"
+        zIndex="sticky"
+        width="full"
+        boxShadow="md"
+        bg="navbar-background"
+        px={4}
+      >
         <Flex h={16} alignItems="center" justifyContent="space-between">
           <HStack spacing={4} alignItems={"center"}>
             <IconButton
