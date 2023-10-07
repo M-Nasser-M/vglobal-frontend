@@ -9,6 +9,8 @@ import {
   Stack,
   useDisclosure,
   Link,
+  useBreakpointValue,
+  Box,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { FaChevronDown } from "react-icons/fa";
@@ -20,12 +22,40 @@ interface MenuData {
 
 interface MenuDataProps {
   menuData: MenuData[];
+  mobile?: boolean;
 }
+type Trigger = "click" | "hover";
 
 const DropDownMenu = ({ menuData }: MenuDataProps) => {
   const { onOpen, onClose, isOpen } = useDisclosure();
+  const trigger = useBreakpointValue(
+    {
+      base: "click",
+      lg: "hover",
+    },
+    {
+      fallback: "click",
+    }
+  );
+  return popOver(isOpen, onOpen, onClose, trigger, menuData);
+};
+
+export default DropDownMenu;
+
+function popOver(
+  isOpen: boolean,
+  onOpen: () => void,
+  onClose: () => void,
+  trigger: string | undefined,
+  menuData: MenuData[]
+) {
   return (
-    <Popover isOpen={isOpen} onOpen={onOpen} onClose={onClose} trigger="click">
+    <Popover
+      isOpen={isOpen}
+      onOpen={onOpen}
+      onClose={onClose}
+      trigger={trigger as Trigger}
+    >
       <PopoverTrigger>
         <IconButton
           bg="navbar-background"
@@ -47,7 +77,7 @@ const DropDownMenu = ({ menuData }: MenuDataProps) => {
             <Stack onClick={onClose}>
               {menuData.map((item) => (
                 <Link as={NextLink} key={item.label} href={item.href}>
-                  <h6>{item.label}</h6>
+                  <Box as="h6">{item.label}</Box>
                 </Link>
               ))}
             </Stack>
@@ -56,6 +86,4 @@ const DropDownMenu = ({ menuData }: MenuDataProps) => {
       </Portal>
     </Popover>
   );
-};
-
-export default DropDownMenu;
+}

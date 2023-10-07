@@ -69,18 +69,19 @@ export function Navbar({
               p={2}
               icon={isOpen ? <AiOutlineClose /> : <GiHamburgerMenu />}
               aria-label={"Open Menu"}
-              display={{ lg: "none" }}
+              display={{ xl: "none" }}
               onClick={isOpen ? onClose : onOpen}
             />
             <HStack
               as={"nav"}
               spacing={4}
-              display={{ base: "none", lg: "flex" }}
+              display={{ base: "none", xl: "flex" }}
             >
               <Box mr={2} position={"relative"} w={"50px"} h={"50px"}>
                 <Image src={Logo} alt="logo" />
               </Box>
               <Navlinks
+                mobile={true}
                 permenantImmigrationPrograms={permenantImmigrationPrograms}
                 lang={lang}
               />
@@ -118,7 +119,7 @@ export function Navbar({
           </Flex>
         </Flex>
         {isOpen && (
-          <Box pb={4} textAlign={"center"} display={{ lg: "none" }}>
+          <Box pb={4} textAlign={"center"} display={{ xl: "none" }}>
             <Stack as={"nav"} spacing={4}>
               <Navlinks
                 permenantImmigrationPrograms={permenantImmigrationPrograms}

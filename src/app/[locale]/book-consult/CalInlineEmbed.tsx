@@ -1,6 +1,6 @@
 "use client";
-import { CalThemeAtom } from "@/atoms/atoms";
 import Cal, { getCalApi } from "@calcom/embed-react";
+import { CalThemeAtom } from "@/atoms/atoms";
 import { useAtomValue } from "jotai";
 import { useEffect } from "react";
 
