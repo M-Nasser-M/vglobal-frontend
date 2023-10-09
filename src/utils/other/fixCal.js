@@ -1,5 +1,6 @@
 // fix-type.ts
-import * as fs from "fs";
+/* eslint-disable @typescript-eslint/no-var-requires */
+const fs = require("fs");
 
 function fixType() {
   const packageJsonRaw = fs.readFileSync(
