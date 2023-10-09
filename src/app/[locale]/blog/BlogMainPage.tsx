@@ -23,7 +23,7 @@ const BlogMainPage = ({ blogs, currentPage, params }: Props) => {
 
   return (
     <>
-      <SimpleGrid columns={{ lg: 3, sm: 1, md: 2 }} spacing={4}>
+      <SimpleGrid mt="28" columns={{ lg: 3, sm: 1, md: 2 }} spacing={4}>
         {blogs.data.map((blog) => (
           <BlogCard params={params} key={blog.id} blog={blog} />
         ))}

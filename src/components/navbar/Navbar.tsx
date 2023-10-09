@@ -1,31 +1,36 @@
 "use client";
 
-import { ExtendedSession } from "@/utils/types/extendedSession";
 import { CalThemeAtom, SessionAtom } from "@/atoms/atoms";
-import { BsMoonFill, BsSunFill } from "react-icons/bs";
-import { AiOutlineClose } from "react-icons/ai";
-import { GiHamburgerMenu } from "react-icons/gi";
-import Logo from "../../../public/brandLogo.webp";
-import LangSwitcher from "../LangSwitcher";
-import { signOut } from "next-auth/react";
-import Navlinks from "./Navlinks";
-import { useSetAtom } from "jotai";
-import NextLink from "next/link";
-import Image from "next/image";
+import { ExtendedSession } from "@/utils/types/extendedSession";
 import { PermenantImmigrationPages } from "@/utils/types/permenantImmigrationPageTypes";
 import {
+  Avatar,
   Box,
   Button,
   Flex,
   HStack,
   IconButton,
   Link,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Stack,
   useColorMode,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
+import { useSetAtom } from "jotai";
+import { signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
+import NextLink from "next/link";
+import { useRouter } from "next/navigation";
+import { AiOutlineClose } from "react-icons/ai";
+import { BsMoonFill, BsSunFill } from "react-icons/bs";
+import { GiHamburgerMenu } from "react-icons/gi";
+import Logo from "../../../public/brandLogo.webp";
+import LangSwitcher from "../LangSwitcher";
+import Navlinks from "./Navlinks";
 
 interface Props {
   params: {
@@ -50,6 +55,7 @@ export function Navbar({
 
   setCalTheme(colorMode);
   setSessionAtom(session);
+
   return (
     <>
       <Box
@@ -99,16 +105,29 @@ export function Navbar({
                 {colorMode === "light" ? <BsMoonFill /> : <BsSunFill />}
               </Button>
               {session && session.user ? (
-                <Button
-                  onClick={async () => {
-                    await signOut();
-                    setSessionAtom(null);
-                    router.refresh();
-                  }}
-                  colorScheme="red"
-                >
-                  {t("signout")}
-                </Button>
+                <Menu>
+                  <MenuButton>
+                    <Avatar
+                      src={session.user.image || ""}
+                      name={session.user.name}
+                    />
+                  </MenuButton>
+                  <MenuList>
+                    <MenuItem>
+                      <Button
+                        width="full"
+                        onClick={async () => {
+                          await signOut();
+                          setSessionAtom(null);
+                          router.refresh();
+                        }}
+                        colorScheme="red"
+                      >
+                        {t("signout")}
+                      </Button>
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
               ) : (
                 <Link as={NextLink} href={`/${lang}/signin`}>
                   <Button colorScheme="red">{t("signin")}</Button>

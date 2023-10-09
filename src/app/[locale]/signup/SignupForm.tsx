@@ -2,9 +2,9 @@
 import { SignupFormType, signupFormSchema } from "@/utils/types/authTypes";
 import { registerUsingEmail } from "@/utils/services/authService";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { redirect } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import React from "react";
 import {
   Box,
   Button,
@@ -14,7 +14,6 @@ import {
   FormLabel,
   Input,
 } from "@chakra-ui/react";
-import { useTranslations } from "next-intl";
 
 const SignupForm = () => {
   const {
@@ -22,18 +21,18 @@ const SignupForm = () => {
     register,
     formState: { errors, isSubmitting },
   } = useForm<SignupFormType>({ resolver: zodResolver(signupFormSchema) });
-
+  const router = useRouter();
   const t = useTranslations("signupForm");
 
   const onSubmit = async (data: SignupFormType) => {
     const res = await registerUsingEmail(data);
-    if (res?.user) redirect("/signin");
+    if (res?.user) router.push("/signin");
   };
 
   return (
     <Container
       display="flex"
-      minH="70vh"
+      minH="100vh"
       pb={4}
       justifyContent="center"
       alignItems="center"

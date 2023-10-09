@@ -3,6 +3,7 @@ import { locales } from "../../../../i18n";
 import { Metadata } from "next";
 import CalInlineEmbed from "./CalInlineEmbed";
 import { getOpenGraph, getTwitter } from "@/utils/other/utils";
+import { Flex } from "@chakra-ui/react";
 
 type Props = {
   params: { locale: string };
@@ -48,7 +49,9 @@ const page = async ({ params }: Props) => {
       {jsonLd && (
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       )}
-      <CalInlineEmbed />
+      <Flex h="100vh">
+        <CalInlineEmbed />
+      </Flex>
     </>
   );
 };

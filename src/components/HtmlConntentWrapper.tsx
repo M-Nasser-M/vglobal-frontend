@@ -8,7 +8,9 @@ type Props = { html: string };
 
 const HtmlContentWrapper = ({ html }: Props) => {
   const sanitizedHTML = sanitizeData(html);
-  return <Box as="article" dangerouslySetInnerHTML={sanitizedHTML}></Box>;
+  return (
+    <Box as="article" mt={40} dangerouslySetInnerHTML={sanitizedHTML}></Box>
+  );
 };
 
 export default HtmlContentWrapper;

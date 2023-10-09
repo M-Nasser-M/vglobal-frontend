@@ -17,11 +17,13 @@ export const options: AuthOptions = {
         try {
           const data = await authUsingEmail(credentials);
           if (data) {
-            return {
-              ...data.user,
+            const userToken = {
+              ...data,
+              user: { ...data.user, name: data.user.username },
               jwt: data.jwt,
               id: String(data.user.id),
             };
+            return userToken;
           } else {
             return null;
           }
@@ -35,14 +37,22 @@ export const options: AuthOptions = {
   session: { strategy: "jwt" },
   callbacks: {
     session: async ({ session, token }) => {
+      //edit here to get more info in get session callback token has alot more info
+      const extendedToken = { user: { username: "" }, ...token };
       const extendedSession = {
         ...session,
-        user: { ...session.user, id: token.id },
+        user: {
+          ...session.user,
+          id: token.id,
+          name: extendedToken.user.username,
+        },
         jwt: token.jwt,
       };
       return extendedSession;
     },
     jwt: async ({ token, user, account }) => {
+      console.log(token, user, account);
+
       const isSignIn = user ? true : false;
       const extendedUser = { jwt: "", ...user };
       if (isSignIn && account?.provider == "credentials") {

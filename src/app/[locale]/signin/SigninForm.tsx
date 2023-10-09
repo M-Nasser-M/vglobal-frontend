@@ -13,6 +13,7 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
+  Heading,
   Input,
   Link,
   Stack,
@@ -41,11 +42,12 @@ const SigninForm = () => {
         redirect: false,
       });
       router.push(redirectPath);
+      router.refresh();
       if (res?.error) {
         setCredentialsError(true);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
 
       if (error instanceof Error) console.error(error.message);
     }
@@ -53,12 +55,18 @@ const SigninForm = () => {
   return (
     <Container
       display="flex"
-      minH="70vh"
+      minH="100vh"
+      flexDirection="column"
       pb={4}
       justifyContent="center"
       alignItems="center"
       maxW="container.sm"
     >
+      {redirectPath !== "/" && (
+        <Heading color="red.500" mb="12">
+          Pls SignIn First
+        </Heading>
+      )}
       <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={Boolean(errors.email)}>
           <FormLabel htmlFor="email">{t("email")}</FormLabel>

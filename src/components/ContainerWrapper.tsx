@@ -6,7 +6,7 @@ type Props = { children: React.ReactNode };
 
 const ContainerWrapper = ({ children }: Props) => {
   return (
-    <Container minHeight={"full"} maxW="container.xl" mt={10}>
+    <Container minHeight="100vh" maxW="container.xl">
       <Suspense fallback={<Spinner size="xl" />}>{children}</Suspense>
     </Container>
   );

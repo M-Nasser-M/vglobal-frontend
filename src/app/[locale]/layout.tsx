@@ -21,6 +21,7 @@ export function generateStaticParams() {
 export default async function RootLayout({ children, params }: Props) {
   const locale = params.locale;
   const session = await getServerSession(options);
+
   const messages = (await import(`../../../messages/${locale}.json`)).default;
   const permenantImmigrationPrograms =
     await getPermenantImmigrationPagesLocalised(locale);

@@ -37,7 +37,7 @@ const ForgotPasswordForm = () => {
   return (
     <Container
       display="flex"
-      minH="70vh"
+      minH="100vh"
       pb={4}
       justifyContent="center"
       alignItems="center"

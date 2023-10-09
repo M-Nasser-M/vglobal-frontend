@@ -16,12 +16,12 @@ export default function CalInlineEmbed() {
         theme: calThemeVal,
       });
     })();
-  }, []);
+  }, [calThemeVal]);
   return (
     <Cal
       calLink="ehabmagdy-vglobal/canada-immigration"
-      style={{ width: "100%", height: "100%", overflow: "scroll" }}
-      config={{ layout: "month_view" }}
+      config={{ layout: "week_view" }}
+      style={{ width: "100%", alignSelf: "center", justifySelf: "center" }}
     />
   );
 }

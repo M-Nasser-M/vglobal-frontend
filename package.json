@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "genIntlKeys": "ts-node ./src/utils/other/generateKeysFile.ts",
-    "postinstall": "ts-node ./src/utils/other/fixCal.ts"
+    "postinstall": "ts-node ./src/utils/other/fixCal.ts && ts-node ./src/utils/other/generateKeysFile.ts"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.3.0",
