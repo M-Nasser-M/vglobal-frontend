@@ -10,7 +10,7 @@ export const PermenantImmigrationPageDataSchema = z.object({
   createdAt: z.coerce.date(),
   updatedAt: z.coerce.date(),
   publishedAt: z.coerce.date(),
-  vuid: z.union([z.null(), z.number()]),
+  vuid: z.union([z.string(), z.number(), z.null()]),
   versionNumber: z.number(),
   versionComment: z.union([z.null(), z.string()]),
   isVisibleInListView: z.boolean(),

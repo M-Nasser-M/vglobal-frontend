@@ -51,8 +51,6 @@ export const options: AuthOptions = {
       return extendedSession;
     },
     jwt: async ({ token, user, account }) => {
-      console.log(token, user, account);
-
       const isSignIn = user ? true : false;
       const extendedUser = { jwt: "", ...user };
       if (isSignIn && account?.provider == "credentials") {
