@@ -26,7 +26,7 @@ const LangSwitcher = ({ params }: Props) => {
 
   return (
     <Menu>
-      <MenuButton px={4} py={2}>
+      <MenuButton name="switch language button" px={4} py={2}>
         <Icon boxSize={5} as={MdOutlineLanguage} />
       </MenuButton>
       <MenuList>

@@ -18,8 +18,7 @@ export const options: AuthOptions = {
           const data = await authUsingEmail(credentials);
           if (data) {
             const userToken = {
-              ...data,
-              user: { ...data.user, name: data.user.username },
+              ...data.user,
               jwt: data.jwt,
               id: String(data.user.id),
             };
@@ -52,10 +51,10 @@ export const options: AuthOptions = {
     },
     jwt: async ({ token, user, account }) => {
       const isSignIn = user ? true : false;
-      const extendedUser = { jwt: "", ...user };
+
       if (isSignIn && account?.provider == "credentials") {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        token.jwt = extendedUser.jwt;
+        token.user = user;
         token.id = user.id;
         return token;
       }
@@ -67,7 +66,6 @@ export const options: AuthOptions = {
           }>(
             `/auth/${account?.provider}/callback?access_token=${account?.access_token}`
           );
-
           token.jwt = response.data.jwt;
           token.id = response.data.user.id;
         } catch (error) {

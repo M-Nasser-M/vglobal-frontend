@@ -106,7 +106,7 @@ export function Navbar({
               </Button>
               {session && session.user ? (
                 <Menu>
-                  <MenuButton>
+                  <MenuButton name="user button">
                     <Avatar
                       src={session.user.image || ""}
                       name={session.user.name}
