@@ -1,16 +1,7 @@
-"use client";
-
-import { sanitizeData } from "@/utils/other/sanitizeData";
-import { Box } from "@chakra-ui/react";
-import React from "react";
-
 type Props = { html: string };
 
 const HtmlContentWrapper = ({ html }: Props) => {
-  const sanitizedHTML = sanitizeData(html);
-  return (
-    <Box as="article" mt={40} dangerouslySetInnerHTML={sanitizedHTML}></Box>
-  );
+  return <article dangerouslySetInnerHTML={{ __html: html }}></article>;
 };
 
 export default HtmlContentWrapper;

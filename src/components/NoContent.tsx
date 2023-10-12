@@ -13,7 +13,7 @@ const NoContent = () => {
         color: "Red",
       }}
     >
-      No Content available
+      <span>No Content available</span>
     </div>
   );
 };

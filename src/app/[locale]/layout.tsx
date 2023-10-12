@@ -9,6 +9,8 @@ import { getServerSession } from "next-auth";
 import { locales } from "../../../i18n";
 import { ReactNode } from "react";
 
+import "./global.css";
+
 type Props = {
   children: ReactNode;
   params: { locale: string };

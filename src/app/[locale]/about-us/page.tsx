@@ -1,11 +1,11 @@
 import { getAboutUsArticleAndSEO } from "@/utils/services/aboutUsService";
-import HtmlContentWrapper from "@/components/HtmlConntentWrapper";
 import { ArticleAndSeoSchema } from "@/utils/types/articleAndSeoTypes";
-import { Metadata } from "next";
+import HtmlContentWrapper from "@/components/HtmlConntentWrapper";
+import { getOpenGraph, getTwitter } from "@/utils/other/utils";
 import NoContent from "@/components/NoContent";
 import { locales } from "../../../../i18n";
+import { Metadata } from "next";
 import React from "react";
-import { getOpenGraph, getTwitter } from "@/utils/other/utils";
 
 type Props = {
   params: { locale: string };
