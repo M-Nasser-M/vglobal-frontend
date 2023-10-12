@@ -11,10 +11,9 @@ import React from "react";
 type Props = {
   lang: string;
   permenantImmigrationPrograms: PermenantImmigrationPages | undefined;
-  mobile?: boolean;
 };
 
-const Navlinks = ({ lang, permenantImmigrationPrograms, mobile }: Props) => {
+const Navlinks = ({ lang, permenantImmigrationPrograms }: Props) => {
   const t = useTranslations("navlinks");
   const menuData = permenantImmigrationPrograms?.data.map((item) => ({
     label: item.title,
@@ -22,13 +21,15 @@ const Navlinks = ({ lang, permenantImmigrationPrograms, mobile }: Props) => {
   }));
   return navlinksKeys.map((navLink, index) => (
     <Box as={"nav"} key={index}>
-      <Link as={NextLink} textAlign={"center"} href={`/${lang}/${navLink}`}>
-        {t(navLink)}
-      </Link>
+      {navLink !== "permenant-immigration" && (
+        <Link as={NextLink} textAlign={"center"} href={`/${lang}/${navLink}`}>
+          {t(navLink)}
+        </Link>
+      )}
       {navLink === "permenant-immigration" &&
         permenantImmigrationPrograms &&
         permenantImmigrationPrograms.data.length > 0 && (
-          <DropDownMenu mobile={mobile} menuData={menuData!} />
+          <DropDownMenu triggerTitle={t(navLink)} menuData={menuData!} />
         )}
     </Box>
   ));

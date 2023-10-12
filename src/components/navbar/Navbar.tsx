@@ -31,6 +31,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import Logo from "../../../public/brandLogo.webp";
 import LangSwitcher from "../LangSwitcher";
 import Navlinks from "./Navlinks";
+import MobileNavlinks from "./MobileNavlinks";
 
 interface Props {
   params: {
@@ -87,7 +88,6 @@ export function Navbar({
                 <Image src={Logo} alt="logo" />
               </Box>
               <Navlinks
-                mobile={true}
                 permenantImmigrationPrograms={permenantImmigrationPrograms}
                 lang={lang}
               />
@@ -140,7 +140,7 @@ export function Navbar({
         {isOpen && (
           <Box pb={4} textAlign={"center"} display={{ xl: "none" }}>
             <Stack as={"nav"} spacing={4}>
-              <Navlinks
+              <MobileNavlinks
                 permenantImmigrationPrograms={permenantImmigrationPrograms}
                 lang={lang}
               />

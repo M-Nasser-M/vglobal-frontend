@@ -22,11 +22,11 @@ interface MenuData {
 
 interface MenuDataProps {
   menuData: MenuData[];
-  mobile?: boolean;
+  triggerTitle: string;
 }
 type Trigger = "click" | "hover";
 
-const DropDownMenu = ({ menuData }: MenuDataProps) => {
+const DropDownMenu = ({ menuData, triggerTitle }: MenuDataProps) => {
   const { onOpen, onClose, isOpen } = useDisclosure();
   const trigger = useBreakpointValue(
     {
@@ -37,18 +37,6 @@ const DropDownMenu = ({ menuData }: MenuDataProps) => {
       fallback: "click",
     }
   );
-  return popOver(isOpen, onOpen, onClose, trigger, menuData);
-};
-
-export default DropDownMenu;
-
-function popOver(
-  isOpen: boolean,
-  onOpen: () => void,
-  onClose: () => void,
-  trigger: string | undefined,
-  menuData: MenuData[]
-) {
   return (
     <Popover
       isOpen={isOpen}
@@ -57,21 +45,29 @@ function popOver(
       trigger={trigger as Trigger}
     >
       <PopoverTrigger>
-        <IconButton
-          bg="navbar-background"
-          aria-label="Trigger"
-          aria-haspopup="true"
-          ml={1}
-          size="md"
-          icon={<FaChevronDown />}
-          transition="all .25s ease-in-out"
-          transform={isOpen ? "rotate(180deg)" : ""}
-          _hover={{}}
-          _active={{}}
-        />
+        <Box cursor="pointer" as="div">
+          {triggerTitle}
+          <IconButton
+            bg="navbar-background"
+            aria-label="Trigger"
+            aria-haspopup="true"
+            ml={1}
+            size="md"
+            icon={<FaChevronDown />}
+            transition="all .25s ease-in-out"
+            transform={isOpen ? "rotate(180deg)" : ""}
+            _hover={{}}
+            _active={{}}
+          />
+        </Box>
       </PopoverTrigger>
       <Portal>
-        <PopoverContent bg="navbar-background" px={4} width="fit-content">
+        <PopoverContent
+          mt="2"
+          bg="navbar-background"
+          px="4"
+          width="fit-content"
+        >
           <PopoverArrow />
           <PopoverBody>
             <Stack onClick={onClose}>
@@ -86,4 +82,6 @@ function popOver(
       </Portal>
     </Popover>
   );
-}
+};
+
+export default DropDownMenu;
