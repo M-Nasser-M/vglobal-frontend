@@ -5,7 +5,7 @@ const NoContent = () => {
     <div
       style={{
         width: "100%",
-        height: "100%",
+        height: "100vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -13,7 +13,7 @@ const NoContent = () => {
         color: "Red",
       }}
     >
-      <span>No Content available</span>
+      <div>No Content available</div>
     </div>
   );
 };

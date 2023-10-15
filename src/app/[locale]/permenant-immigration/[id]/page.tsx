@@ -73,6 +73,7 @@ const Page = async ({ params }: Props) => {
   const response = await getPermenantImmigrationPageWithIdAndSEO(params.id);
   const validateData = PermenantImmigrationPageSchema.safeParse(response);
   const jsonLd = response?.data.seo?.structuredData;
+
   if (validateData.success && response) {
     return (
       <>
