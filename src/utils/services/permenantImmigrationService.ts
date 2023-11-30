@@ -1,11 +1,11 @@
+import type { ArticleAndSeo } from "../types/articleAndSeoTypes";
+import { FetchApiAuthGet } from "./fetchDefaults";
+import { locales } from "../../i18n";
+import qs from "qs";
 import type {
   PermenantImmigrationPage,
   PermenantImmigrationPages,
 } from "../types/permenantImmigrationPageTypes";
-import type { ArticleAndSeo } from "../types/articleAndSeoTypes";
-import { locales } from "../../i18n";
-import qs from "qs";
-import { FetchApiAuthGet } from "./fetchDefaults";
 
 export const getPermenantImmigrationArticleAndSEO = async (locale: string) => {
   try {
@@ -25,6 +25,7 @@ export const getPermenantImmigrationArticleAndSEO = async (locale: string) => {
     return response;
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
+    return null;
   }
 };
 
@@ -57,6 +58,7 @@ export const getPermenantImmigrationPagesWithAllLocales = async (
     return response;
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
+    return null;
   }
 };
 
@@ -77,6 +79,7 @@ export const getPermenantImmigrationPageWithIdAndSEO = async (id: string) => {
     return response;
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
+    return null;
   }
 };
 
@@ -93,5 +96,6 @@ export const getPermenantImmigrationPagesLocalised = async (locale: string) => {
     return response;
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
+    return null;
   }
 };

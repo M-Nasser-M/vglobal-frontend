@@ -2,10 +2,11 @@
 
 import { PermenantImmigrationPages } from "@/utils/types/permenantImmigrationPageTypes";
 import { navlinksKeys } from "../../../messages/messagesKeys";
-import { Box, Link } from "@chakra-ui/react";
+import Link from "@/components/Link";
+import { Box } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
 import DropDownMenu from "./DropDownMenu";
-import NextLink from "next/link";
+
 import React from "react";
 
 type Props = {
@@ -13,7 +14,7 @@ type Props = {
   permenantImmigrationPrograms: PermenantImmigrationPages | undefined;
 };
 
-const Navlinks = ({ lang, permenantImmigrationPrograms }: Props) => {
+const Navlinks = ({ permenantImmigrationPrograms }: Props) => {
   const t = useTranslations("navlinks");
   const menuData = permenantImmigrationPrograms?.data.map((item) => ({
     label: item.title,
@@ -22,9 +23,7 @@ const Navlinks = ({ lang, permenantImmigrationPrograms }: Props) => {
   return navlinksKeys.map((navLink, index) => (
     <Box as={"nav"} key={index}>
       {navLink !== "permenant-immigration" && (
-        <Link as={NextLink} textAlign={"center"} href={`/${lang}/${navLink}`}>
-          {t(navLink)}
-        </Link>
+        <Link href={navLink}>{t(navLink)}</Link>
       )}
       {navLink === "permenant-immigration" &&
         permenantImmigrationPrograms &&

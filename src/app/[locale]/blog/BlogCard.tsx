@@ -1,13 +1,12 @@
 "use client";
 import { strapiImageLoader } from "@/utils/other/imageLoader";
 import { BlogWithoutData } from "@/utils/types/blogTypes";
-import NextLink from "next/link";
+import Link from "@/components/Link";
 import Image from "next/image";
 import React from "react";
 import {
   Box,
   Heading,
-  Link,
   Text,
   Tooltip,
   useColorModeValue,
@@ -15,8 +14,7 @@ import {
 
 type Props = { blog: BlogWithoutData; params: { locale: string } };
 
-const BlogCard = ({ blog, params }: Props) => {
-  const lang = params.locale;
+const BlogCard = ({ blog }: Props) => {
   return (
     <>
       <Box
@@ -40,7 +38,7 @@ const BlogCard = ({ blog, params }: Props) => {
         </Box>
         <Box p={{ base: 3, sm: 5 }}>
           <Box mb={6}>
-            <Link as={NextLink} href={`/${lang}/blog/${blog.id}`}>
+            <Link href={`/blog/${blog.id}`}>
               <Heading
                 fontSize={{ base: "lg", sm: "2xl" }}
                 fontWeight="bold"

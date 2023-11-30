@@ -1,11 +1,11 @@
 "use client";
 import { SigninFormSchema, SigninFormType } from "@/utils/types/authTypes";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "@/components/Link";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import NextLink from "next/link";
 import {
   Box,
   Button,
@@ -15,7 +15,6 @@ import {
   FormLabel,
   Heading,
   Input,
-  Link,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -115,13 +114,13 @@ const SigninForm = () => {
         >
           <Text>
             {t("don'tHaveAnAccount")}
-            <Link as={NextLink} color="red.400" href="/signup">
+            <Link color="red.400" href="/signup">
               {" "}
               {t("signup")}
             </Link>
           </Text>
           <Text>
-            <Link as={NextLink} color="red.400" href="/forgot-password">
+            <Link color="red.400" href="/forgot-password">
               {t("forgotPassword")}
             </Link>
           </Text>

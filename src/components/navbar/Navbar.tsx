@@ -1,6 +1,8 @@
 "use client";
 
-import { CalThemeAtom, SessionAtom } from "@/atoms/atoms";
+import { CalThemeAtom, LocaleAtom, SessionAtom } from "@/atoms/atoms";
+import Link from "@/components/Link";
+import { Locale } from "@/i18n";
 import { ExtendedSession } from "@/utils/types/extendedSession";
 import type { PermenantImmigrationPages } from "@/utils/types/permenantImmigrationPageTypes";
 import {
@@ -10,7 +12,6 @@ import {
   Flex,
   HStack,
   IconButton,
-  Link,
   Menu,
   MenuButton,
   MenuItem,
@@ -24,7 +25,6 @@ import { useHydrateAtoms } from "jotai/utils";
 import { signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import NextLink from "next/link";
 import { useRouter } from "next/navigation";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsMoonFill, BsSunFill } from "react-icons/bs";
@@ -36,7 +36,7 @@ import Navlinks from "./Navlinks";
 
 interface Props {
   params: {
-    locale: string;
+    locale: Locale;
   };
   permenantImmigrationPrograms: PermenantImmigrationPages | undefined;
   session: ExtendedSession | null;
@@ -51,6 +51,7 @@ export function Navbar({
   useHydrateAtoms([
     [SessionAtom, session],
     [CalThemeAtom, colorMode],
+    [LocaleAtom, params.locale],
   ]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const setSessionAtom = useSetAtom(SessionAtom);
@@ -130,7 +131,7 @@ export function Navbar({
                   </MenuList>
                 </Menu>
               ) : (
-                <Link as={NextLink} href={`/${lang}/signin`}>
+                <Link href={`/signin`}>
                   <Button colorScheme="red">{t("signin")}</Button>
                 </Link>
               )}

@@ -8,11 +8,10 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
-  Link,
   VStack,
 } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
-import NextLink from "next/link";
+import Link from "@/components/Link";
 import { navlinksKeys } from "../../../messages/messagesKeys";
 
 type Props = {
@@ -20,15 +19,13 @@ type Props = {
   permenantImmigrationPrograms: PermenantImmigrationPages | undefined;
 };
 
-const MobileNavlinks = ({ lang, permenantImmigrationPrograms }: Props) => {
+const MobileNavlinks = ({ permenantImmigrationPrograms }: Props) => {
   const t = useTranslations("navlinks");
 
   return navlinksKeys.map((navLink, index) => (
     <Box as={"nav"} key={index}>
       {navLink !== "permenant-immigration" && (
-        <Link as={NextLink} textAlign={"center"} href={`/${lang}/${navLink}`}>
-          {t(navLink)}
-        </Link>
+        <Link href={`/${navLink}`}>{t(navLink)}</Link>
       )}
 
       {navLink === "permenant-immigration" &&
@@ -48,9 +45,7 @@ const MobileNavlinks = ({ lang, permenantImmigrationPrograms }: Props) => {
                   {permenantImmigrationPrograms?.data.map((item) => (
                     <Link
                       key={item.id}
-                      as={NextLink}
                       pl="2"
-                      textAlign={"center"}
                       href={`/permenant-immigration/${item.id}`}
                     >
                       {item.title}

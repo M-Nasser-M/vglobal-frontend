@@ -8,12 +8,11 @@ import {
   IconButton,
   Stack,
   useDisclosure,
-  Link,
   useBreakpointValue,
   Box,
 } from "@chakra-ui/react";
-import NextLink from "next/link";
 import { FaChevronDown } from "react-icons/fa";
+import Link from "@/components/Link";
 
 interface MenuData {
   label: string;
@@ -72,7 +71,7 @@ const DropDownMenu = ({ menuData, triggerTitle }: MenuDataProps) => {
           <PopoverBody>
             <Stack onClick={onClose}>
               {menuData.map((item) => (
-                <Link as={NextLink} key={item.label} href={item.href}>
+                <Link key={item.label} href={item.href}>
                   <Box as="h4">{item.label}</Box>
                 </Link>
               ))}

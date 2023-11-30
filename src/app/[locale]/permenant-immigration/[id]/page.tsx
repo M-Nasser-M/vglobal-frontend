@@ -72,15 +72,15 @@ export async function generateStaticParams() {
 const Page = async ({ params }: Props) => {
   const response = await getPermenantImmigrationPageWithIdAndSEO(params.id);
   const validateData = PermenantImmigrationPageSchema.safeParse(response);
-  const jsonLd = response?.data.seo?.structuredData;
 
-  if (validateData.success && response) {
+  if (validateData.success) {
+    const jsonLd = validateData.data.data.seo?.structuredData;
     return (
       <>
         {jsonLd && (
           <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
         )}
-        <HtmlContentWrapper html={response?.data.article} />
+        <HtmlContentWrapper html={validateData.data.data.article} />
       </>
     );
   }
