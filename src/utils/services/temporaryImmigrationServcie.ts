@@ -1,5 +1,5 @@
-import { ArticleAndSeo } from "../types/articleAndSeoTypes";
-import { authApi } from "./client";
+import type { ArticleAndSeo } from "../types/articleAndSeoTypes";
+import { FetchApiAuthGet } from "./fetchDefaults";
 import qs from "qs";
 
 export const getTemporaryImmigrationArticleAndSEO = async (locale: string) => {
@@ -13,12 +13,13 @@ export const getTemporaryImmigrationArticleAndSEO = async (locale: string) => {
       locale,
     });
 
-    const response = await authApi.get<ArticleAndSeo>(
+    const response = await FetchApiAuthGet<ArticleAndSeo>(
       `/temporary-immigration?${queryString}`
     );
 
-    return response.data;
+    return response;
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
+    return null;
   }
 };

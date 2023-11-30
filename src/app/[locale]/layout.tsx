@@ -6,7 +6,7 @@ import { AppWrappers } from "@/components/AppWrappers";
 import { Navbar } from "@/components/navbar/Navbar";
 import { NextIntlClientProvider } from "next-intl";
 import { getServerSession } from "next-auth";
-import { locales } from "../../../i18n";
+import { locales } from "../../i18n";
 import { ReactNode } from "react";
 
 import "./global.css";
@@ -30,7 +30,11 @@ export default async function RootLayout({ children, params }: Props) {
   return (
     <html lang={locale} dir={locale == "ar" ? "rtl" : "ltr"}>
       <body>
-        <NextIntlClientProvider locale={locale} messages={messages}>
+        <NextIntlClientProvider
+          timeZone="Africa/Cairo"
+          locale={locale}
+          messages={messages}
+        >
           <AppWrappers params={params}>
             <Navbar
               session={session as ExtendedSession}

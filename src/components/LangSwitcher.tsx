@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { MdOutlineLanguage } from "react-icons/md";
 import { usePathname, useRouter } from "next/navigation";
-import { locales } from "../../i18n";
+import { locales } from "../i18n";
 
 type Props = { params: { locale: string } };
 

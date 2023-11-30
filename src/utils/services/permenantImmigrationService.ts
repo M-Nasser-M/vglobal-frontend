@@ -1,11 +1,11 @@
-import {
+import type {
   PermenantImmigrationPage,
   PermenantImmigrationPages,
 } from "../types/permenantImmigrationPageTypes";
-import { ArticleAndSeo } from "../types/articleAndSeoTypes";
-import { locales } from "../../../i18n";
-import { authApi } from "./client";
+import type { ArticleAndSeo } from "../types/articleAndSeoTypes";
+import { locales } from "../../i18n";
 import qs from "qs";
+import { FetchApiAuthGet } from "./fetchDefaults";
 
 export const getPermenantImmigrationArticleAndSEO = async (locale: string) => {
   try {
@@ -18,11 +18,11 @@ export const getPermenantImmigrationArticleAndSEO = async (locale: string) => {
       locale,
     });
 
-    const response = await authApi.get<ArticleAndSeo>(
+    const response = await FetchApiAuthGet<ArticleAndSeo>(
       `/permenant-immigration?${queryString}`
     );
 
-    return response.data;
+    return response;
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
   }
@@ -50,11 +50,11 @@ export const getPermenantImmigrationPagesWithAllLocales = async (
       },
     });
 
-    const response = await authApi.get<PermenantImmigrationPages>(
+    const response = await FetchApiAuthGet<PermenantImmigrationPages>(
       `/permenant-immigration-pages?${queryString}`
     );
 
-    return response.data;
+    return response;
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
   }
@@ -70,11 +70,11 @@ export const getPermenantImmigrationPageWithIdAndSEO = async (id: string) => {
       },
     });
 
-    const response = await authApi.get<PermenantImmigrationPage>(
+    const response = await FetchApiAuthGet<PermenantImmigrationPage>(
       `/permenant-immigration-pages/${id}?${queryString}`
     );
 
-    return response.data;
+    return response;
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
   }
@@ -86,11 +86,11 @@ export const getPermenantImmigrationPagesLocalised = async (locale: string) => {
       locale,
     });
 
-    const response = await authApi.get<PermenantImmigrationPages>(
+    const response = await FetchApiAuthGet<PermenantImmigrationPages>(
       `/permenant-immigration-pages?${queryString}`
     );
 
-    return response.data;
+    return response;
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
   }

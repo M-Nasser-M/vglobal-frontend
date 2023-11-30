@@ -1,5 +1,5 @@
-import { HomeAndSeoType } from "../types/homeTypes";
-import { authApi } from "./client";
+import type { HomeAndSeoType } from "../types/homeTypes";
+import { FetchApiAuthGet } from "./fetchDefaults";
 import qs from "qs";
 
 export const getHomeArticleAndSEO = async (locale: string) => {
@@ -14,12 +14,13 @@ export const getHomeArticleAndSEO = async (locale: string) => {
       locale,
     });
 
-    const response = await authApi.get<HomeAndSeoType>(`/home?${queryString}`, {
-      headers: { Authorization: `bearer ${process.env.STRAPI_API_TOKEN}` },
-    });
+    const response = await FetchApiAuthGet<HomeAndSeoType>(
+      `/home?${queryString}`
+    );
 
-    return response.data;
+    return response;
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
+    return null;
   }
 };

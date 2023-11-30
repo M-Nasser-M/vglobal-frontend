@@ -1,9 +1,9 @@
+import { FetchApiPublicGet } from "../services/fetchDefaults";
 import Credentials from "next-auth/providers/credentials";
 import { authUsingEmail } from "../services/authService";
-import { publicApi } from "@/utils/services/client";
-import { AdapterUser } from "next-auth/adapters";
-import { AuthOptions, User } from "next-auth";
-import { JWT } from "next-auth/jwt";
+import type { AdapterUser } from "next-auth/adapters";
+import type { AuthOptions, User } from "next-auth";
+import type { JWT } from "next-auth/jwt";
 
 export const options: AuthOptions = {
   providers: [
@@ -60,14 +60,14 @@ export const options: AuthOptions = {
       }
       if (isSignIn) {
         try {
-          const response = await publicApi.get<{
+          const response = await FetchApiPublicGet<{
             jwt: JWT;
             user: User | AdapterUser;
           }>(
             `/auth/${account?.provider}/callback?access_token=${account?.access_token}`
           );
-          token.jwt = response.data.jwt;
-          token.id = response.data.user.id;
+          token.jwt = response.jwt;
+          token.id = response.user.id;
         } catch (error) {
           console.error("Error in jwt callback:");
         }

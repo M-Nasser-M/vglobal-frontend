@@ -1,6 +1,6 @@
 import { SignupFormType } from "../types/authTypes";
-import { publicApi } from "./client";
-import {
+import { FetchApiPublicPost } from "./fetchDefaults";
+import type {
   AuthApiResponseType,
   CredentialsType,
   RegisterApiResponseType,
@@ -10,7 +10,7 @@ const authUsingEmail = async (credentials: CredentialsType) => {
   if (!credentials?.email || !credentials?.password) return null;
 
   try {
-    const { data } = await publicApi.post<AuthApiResponseType>("/auth/local", {
+    const data = await FetchApiPublicPost<AuthApiResponseType>("/auth/local", {
       identifier: credentials.email,
       password: credentials.password,
     });
@@ -26,7 +26,7 @@ const registerUsingEmail = async (user: SignupFormType) => {
   if (!user?.email || !user?.password) return null;
 
   try {
-    const { data } = await publicApi.post<RegisterApiResponseType>(
+    const data = await FetchApiPublicPost<RegisterApiResponseType>(
       "/auth/local/register",
       {
         username: `${user.firstName} ${user.lastName}`,
@@ -45,7 +45,7 @@ const forgotPassword = async (email: string) => {
   if (!email) return null;
 
   try {
-    const { data } = await publicApi.post("/auth/forgot-password", {
+    const data = await FetchApiPublicPost("/auth/forgot-password", {
       email,
     });
     return data;
@@ -62,7 +62,7 @@ const resetPassword = async (
   if (!code || !password || !passwordConfirmation) return null;
 
   try {
-    const { data } = await publicApi.post("/auth/reset-password", {
+    const data = await FetchApiPublicPost("/auth/reset-password", {
       code, // code contained in the reset link
       password,
       passwordConfirmation,

@@ -2,7 +2,7 @@
 
 import { CalThemeAtom, SessionAtom } from "@/atoms/atoms";
 import { ExtendedSession } from "@/utils/types/extendedSession";
-import { PermenantImmigrationPages } from "@/utils/types/permenantImmigrationPageTypes";
+import type { PermenantImmigrationPages } from "@/utils/types/permenantImmigrationPageTypes";
 import {
   Avatar,
   Box,
@@ -20,6 +20,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useSetAtom } from "jotai";
+import { useHydrateAtoms } from "jotai/utils";
 import { signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
@@ -30,8 +31,8 @@ import { BsMoonFill, BsSunFill } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Logo from "../../../public/brandLogo.webp";
 import LangSwitcher from "../LangSwitcher";
-import Navlinks from "./Navlinks";
 import MobileNavlinks from "./MobileNavlinks";
+import Navlinks from "./Navlinks";
 
 interface Props {
   params: {
@@ -47,15 +48,17 @@ export function Navbar({
   session,
 }: Props) {
   const { colorMode, toggleColorMode } = useColorMode();
+  useHydrateAtoms([
+    [SessionAtom, session],
+    [CalThemeAtom, colorMode],
+  ]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const setSessionAtom = useSetAtom(SessionAtom);
   const setCalTheme = useSetAtom(CalThemeAtom);
   const router = useRouter();
   const t = useTranslations("common");
   const lang = params.locale;
-
   setCalTheme(colorMode);
-  setSessionAtom(session);
 
   return (
     <>
@@ -113,18 +116,16 @@ export function Navbar({
                     />
                   </MenuButton>
                   <MenuList>
-                    <MenuItem>
-                      <Button
-                        width="full"
-                        onClick={async () => {
-                          await signOut();
-                          setSessionAtom(null);
-                          router.refresh();
-                        }}
-                        colorScheme="red"
-                      >
-                        {t("signout")}
-                      </Button>
+                    <MenuItem
+                      as={Button}
+                      onClick={async () => {
+                        await signOut();
+                        setSessionAtom(null);
+                        router.refresh();
+                      }}
+                      colorScheme="red"
+                    >
+                      {t("signout")}
                     </MenuItem>
                   </MenuList>
                 </Menu>

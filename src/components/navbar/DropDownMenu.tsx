@@ -73,7 +73,7 @@ const DropDownMenu = ({ menuData, triggerTitle }: MenuDataProps) => {
             <Stack onClick={onClose}>
               {menuData.map((item) => (
                 <Link as={NextLink} key={item.label} href={item.href}>
-                  <Box as="h6">{item.label}</Box>
+                  <Box as="h4">{item.label}</Box>
                 </Link>
               ))}
             </Stack>

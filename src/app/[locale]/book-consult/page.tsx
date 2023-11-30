@@ -1,5 +1,5 @@
 import { getBookConsultArticleAndSEO } from "@/utils/services/bookConsultService";
-import { locales } from "../../../../i18n";
+import { locales } from "../../../i18n";
 import { Metadata } from "next";
 import CalInlineEmbed from "./CalInlineEmbed";
 import { getOpenGraph, getTwitter } from "@/utils/other/utils";

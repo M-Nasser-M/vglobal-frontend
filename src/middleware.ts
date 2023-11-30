@@ -1,11 +1,12 @@
-import { NextRequestWithAuth, withAuth } from "next-auth/middleware";
+import { withAuth, type NextRequestWithAuth } from "next-auth/middleware";
+import type { NextFetchEvent, NextRequest } from "next/server";
 import createIntlMiddleware from "next-intl/middleware";
-import { NextFetchEvent, NextRequest } from "next/server";
 import { protectedRoutes } from "./protectedRoutes";
+import { locales } from "./i18n";
 
 const intlMiddleware = createIntlMiddleware({
   // A list of all locales that are supported
-  locales: ["en", "ar"],
+  locales: locales,
   // If this locale is matched, pathnames work without a prefix (e.g. `/about`)
   defaultLocale: "en",
   // If always, the locale will be set in the URL (e.g. `/en/about`)
@@ -45,9 +46,8 @@ export function middleware(request: NextRequest) {
   const routePath = request.nextUrl.pathname.split("/")[2];
   // const routeLocale = request.nextUrl.pathname.split("/")[1];
 
-  if (protectedRoutes.includes(routePath)) {
+  if (protectedRoutes.includes(routePath))
     return authMiddleware(request as NextRequestWithAuth, {} as NextFetchEvent);
-  }
 
   return response;
 }
@@ -55,5 +55,5 @@ export function middleware(request: NextRequest) {
 export const config = {
   // Skip all paths that should not be internationalized. This example skips the
   // folders "api", "_next" and all files with an extension (e.g. favicon.ico)
-  matcher: ["/((?!api|_next|.*\\..*).*)"],
+  matcher: ["/", "/(ar|en)/:path*"],
 };

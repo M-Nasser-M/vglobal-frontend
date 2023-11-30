@@ -8,7 +8,7 @@ const rootKeys = Object.keys(en);
 const rootObjectsKeys = rootKeys.map((key) => {
   return `export const ${key}Keys = [${Object.keys(en[key])
     .map((k) => `"${k}"`)
-    .join(",")}];`;
+    .join(",")}] as const;`;
 });
 
 const fileContent = rootObjectsKeys.join("\n");

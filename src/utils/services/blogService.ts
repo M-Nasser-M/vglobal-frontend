@@ -1,8 +1,8 @@
-import { SingleAndSeo } from "../types/seoSingleTypes";
-import { Blog, Blogs } from "../types/blogTypes";
-import { authApi } from "./client";
+import type { SingleAndSeo } from "../types/seoSingleTypes";
+import type { Blog, Blogs } from "../types/blogTypes";
+import { FetchApiAuthGet } from "./fetchDefaults";
+import { locales } from "../../i18n";
 import qs from "qs";
-import { locales } from "../../../i18n";
 
 export const getBlogMainSEO = async (locale: string) => {
   try {
@@ -15,13 +15,14 @@ export const getBlogMainSEO = async (locale: string) => {
       locale,
     });
 
-    const response = await authApi.get<SingleAndSeo>(
+    const response = await FetchApiAuthGet<SingleAndSeo>(
       `/blog-main?${queryString}`
     );
 
-    return response.data;
+    return response;
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
+    return null;
   }
 };
 
@@ -40,11 +41,12 @@ export const getBlogPage = async (
       },
     });
 
-    const response = await authApi.get<Blogs>(`/blogs?${queryString}`);
+    const response = await FetchApiAuthGet<Blogs>(`/blogs?${queryString}`);
 
-    return response.data;
+    return response;
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
+    return null;
   }
 };
 
@@ -59,11 +61,12 @@ export const getBlogWithID = async (id: string) => {
       },
     });
 
-    const response = await authApi.get<Blog>(`/blogs/${id}?${queryString}`);
+    const response = await FetchApiAuthGet<Blog>(`/blogs/${id}?${queryString}`);
 
-    return response.data;
+    return response;
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
+    return null;
   }
 };
 
@@ -84,10 +87,11 @@ export const getBlogsWithAllLocales = async (
       },
     });
 
-    const response = await authApi.get<Blogs>(`/blogs?${queryString}`);
+    const response = await FetchApiAuthGet<Blogs>(`/blogs?${queryString}`);
 
-    return response.data;
+    return response;
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
+    return null;
   }
 };

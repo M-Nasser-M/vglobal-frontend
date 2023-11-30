@@ -1,5 +1,6 @@
 import { extendTheme, theme as defaultTheme } from "@chakra-ui/react";
 import { Montserrat } from "next/font/google";
+import bgImage from "../../public/bg.png";
 
 const font = Montserrat({
   subsets: ["cyrillic", "latin"],
@@ -47,18 +48,21 @@ const semanticTokens = {
 const styles = {
   global: {
     body: {
-      background: "main-background",
+      backgroundColor: "main-background",
+      backgroundImage: `url(${bgImage.src})`,
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
       fontFamily: font.style.fontFamily,
       minHeight: "100vh",
       display: "flex",
       flexDirection: "column",
     },
-    h1: { fontSize: "6rem" },
-    h2: { fontSize: "3.75rem" },
-    h3: { fontSize: "3rem" },
-    h4: { fontSize: "2.125rem" },
-    h5: { fontSize: "1.5rem" },
-    h6: { fontSize: "1.25rem" },
+    h1: { fontSize: "3rem" },
+    h2: { fontSize: "2.125rem" },
+    h3: { fontSize: "1.5rem" },
+    h4: { fontSize: "1.25rem" },
+    h5: { fontSize: "1rem" },
+    h6: { fontSize: "0.75rem" },
     p: { color: "default-text" },
     span: { color: "default-text" },
   },

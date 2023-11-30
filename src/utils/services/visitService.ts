@@ -1,5 +1,5 @@
-import { ArticleAndSeo } from "../types/articleAndSeoTypes";
-import { authApi } from "./client";
+import type { ArticleAndSeo } from "../types/articleAndSeoTypes";
+import { FetchApiAuthGet } from "./fetchDefaults";
 import qs from "qs";
 
 export const getVisitArticleAndSEO = async (locale: string) => {
@@ -13,10 +13,13 @@ export const getVisitArticleAndSEO = async (locale: string) => {
       locale,
     });
 
-    const response = await authApi.get<ArticleAndSeo>(`/visit?${queryString}`);
+    const response = await FetchApiAuthGet<ArticleAndSeo>(
+      `/visit?${queryString}`
+    );
 
-    return response.data;
+    return response;
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
+    return null;
   }
 };

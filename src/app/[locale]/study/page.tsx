@@ -2,7 +2,7 @@ import { ArticleAndSeoSchema } from "@/utils/types/articleAndSeoTypes";
 import { getStudyArticleAndSEO } from "@/utils/services/studyService";
 import HtmlContentWrapper from "@/components/HtmlConntentWrapper";
 import NoContent from "@/components/NoContent";
-import { locales } from "../../../../i18n";
+import { locales } from "../../../i18n";
 import { Metadata } from "next";
 import React from "react";
 import { getOpenGraph, getTwitter } from "@/utils/other/utils";
