@@ -1,7 +1,7 @@
 import { getPermenantImmigrationPagesLocalised } from "@/utils/services/permenantImmigrationService";
 import { ExtendedSession } from "@/utils/types/extendedSession";
 import ContainerWrapper from "@/components/ContainerWrapper";
-import { options } from "@/utils/other/nextAuthOptions";
+import { options } from "@/app/api/auth/[...nextauth]/nextAuthOptions";
 import { AppWrappers } from "@/components/AppWrappers";
 import { Navbar } from "@/components/navbar/Navbar";
 import { getServerSession } from "next-auth";

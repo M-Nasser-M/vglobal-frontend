@@ -16,10 +16,8 @@ type StaticProps = {
 };
 
 export async function generateMetadata({
-  params,
+  params: { locale },
 }: StaticProps): Promise<Metadata> {
-  const lang = params.locale;
-  const locale = lang ? String(lang) : "en";
   const response = await getBlogMainSEO(locale);
   const seo = response?.data.seo;
   const twitter = seo?.metaSocial && getTwitter(seo?.metaSocial);

@@ -1,5 +1,6 @@
 "use client";
-import { SigninFormSchema, SigninFormType } from "@/utils/types/authTypes";
+import { SigninFormSchema, type SigninFormType } from "@/utils/types/authTypes";
+import type { signinformTranslations } from "../../../../messages/messagesKeys";
 import { useRouter, useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "@/components/Link";
@@ -18,7 +19,6 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import type { signinformTranslations } from "../../../../messages/messagesKeys";
 
 type Props = { translatinos: signinformTranslations };
 

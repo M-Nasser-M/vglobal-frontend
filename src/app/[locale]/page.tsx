@@ -14,9 +14,9 @@ type Props = {
   params: { locale: Locale };
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const lang = params.locale;
-  const locale = lang ? String(lang) : "en";
+export async function generateMetadata({
+  params: { locale },
+}: Props): Promise<Metadata> {
   const response = await getHomeArticleAndSEO(locale);
   const seo = response?.data.seo;
   const twitter = seo?.metaSocial && getTwitter(seo.metaSocial);
