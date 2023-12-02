@@ -1,4 +1,10 @@
-export const navlinksKeys = ["/","permenant-immigration","visit","study","blog","about-us","book-consult","assessment"] as const;
-export const signinFormKeys = ["email","password","forgotPassword","signin","signup","don'tHaveAnAccount"] as const;
-export const signupFormKeys = ["firstName","lastName","dateOfBirth","email","password","confirmPassword","signin","signup","alreadyAMember"] as const;
-export const commonKeys = ["signin","signup","signout"] as const;
+export const homeKeys = ["immigrate","register","services","study","subheader1","subheader2","visit","why"] as const;
+export type homeTranslations = Record<typeof homeKeys[number],string>
+export const navlinksKeys = ["/","about-us","assessment","blog","book-consult","permenant-immigration","study","visit"] as const;
+export type navlinksTranslations = Record<typeof navlinksKeys[number],string>
+export const commonKeys = ["email","password","signin","signout","signup","submit"] as const;
+export type commonTranslations = Record<typeof commonKeys[number],string>
+export const signupformKeys = ["alreadyAMember","confirmPassword","dateOfBirth","email","firstName","lastName","password","signin","signup"] as const;
+export type signupformTranslations = Record<typeof signupformKeys[number],string>
+export const signinformKeys = ["email","forgotPassword","noaccount","password","signin","signup"] as const;
+export type signinformTranslations = Record<typeof signinformKeys[number],string>

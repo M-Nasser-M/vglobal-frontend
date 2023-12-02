@@ -18,13 +18,14 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { useTranslations } from "next-intl";
+import type { signinformTranslations } from "../../../../messages/messagesKeys";
 
-const SigninForm = () => {
+type Props = { translatinos: signinformTranslations };
+
+const SigninForm = ({ translatinos }: Props) => {
   const searchParams = useSearchParams();
   const redirectPath = searchParams.get("callbackUrl") || "/";
   const router = useRouter();
-  const t = useTranslations("signinForm");
 
   const {
     handleSubmit,
@@ -68,7 +69,7 @@ const SigninForm = () => {
       )}
       <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={Boolean(errors.email)}>
-          <FormLabel htmlFor="email">{t("email")}</FormLabel>
+          <FormLabel htmlFor="email">{translatinos.email}</FormLabel>
           <Input
             id="email"
             type="email"
@@ -80,7 +81,7 @@ const SigninForm = () => {
           </FormErrorMessage>
         </FormControl>
         <FormControl isInvalid={Boolean(errors.password)}>
-          <FormLabel htmlFor="password">{t("password")}</FormLabel>
+          <FormLabel htmlFor="password">{translatinos.password}</FormLabel>
           <Input
             id="password"
             type="password"
@@ -104,7 +105,7 @@ const SigninForm = () => {
           type="submit"
           width="100%"
         >
-          {t("signin")}
+          {translatinos.signin}
         </Button>
         <Stack
           mt={4}
@@ -113,15 +114,15 @@ const SigninForm = () => {
           justify={"space-between"}
         >
           <Text>
-            {t("don'tHaveAnAccount")}
+            {translatinos.noaccount}
             <Link color="red.400" href="/signup">
               {" "}
-              {t("signup")}
+              {translatinos.signup}
             </Link>
           </Text>
           <Text>
             <Link color="red.400" href="/forgot-password">
-              {t("forgotPassword")}
+              {translatinos.forgotPassword}
             </Link>
           </Text>
         </Stack>

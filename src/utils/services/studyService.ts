@@ -1,8 +1,9 @@
 import type { ArticleAndSeo } from "../types/articleAndSeoTypes";
 import { FetchApiAuthGet } from "./fetchDefaults";
+import type { Locale } from "@/i18n";
 import qs from "qs";
 
-export const getStudyArticleAndSEO = async (locale: string) => {
+export const getStudyArticleAndSEO = async (locale: Locale) => {
   try {
     const queryString = qs.stringify({
       populate: {

@@ -8,13 +8,15 @@ import React from "react";
 import { Metadata } from "next";
 import { BlogSchema, BlogWithoutData } from "@/utils/types/blogTypes";
 import { getOpenGraph, getTwitter } from "@/utils/other/utils";
+import { unstable_setRequestLocale } from "next-intl/server";
+import type { Locale } from "@/i18n";
 
 type Props = {
-  params: { id: string; locale: string };
+  params: { id: string; locale: Locale };
   searchParams: { [key: string]: string | string[] | undefined };
 };
 type StaticProps = {
-  params: { id: string; locale: string };
+  params: { id: string; locale: Locale };
 };
 
 export async function generateMetadata({
@@ -67,6 +69,7 @@ export async function generateStaticParams() {
 }
 
 const Page = async ({ params }: Props) => {
+  unstable_setRequestLocale(params.locale);
   const response = await getBlogWithID(params.id);
   const validateData = BlogSchema.safeParse(response);
   const jsonLd = response?.data.seo?.structuredData;

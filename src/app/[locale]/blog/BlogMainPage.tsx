@@ -4,10 +4,11 @@ import { Box, SimpleGrid, Stack } from "@chakra-ui/react";
 import { PaginationButton } from "@/components/pagination";
 import { createQueryString } from "@/utils/other/utils";
 import { Blogs } from "@/utils/types/blogTypes";
+import type { Locale } from "@/i18n";
 import BlogCard from "./BlogCard";
 import React from "react";
 
-type Props = { blogs: Blogs; currentPage: number; params: { locale: string } };
+type Props = { blogs: Blogs; currentPage: number; params: { locale: Locale } };
 
 const BlogMainPage = ({ blogs, currentPage, params }: Props) => {
   const pageCount = blogs.meta.pagination?.pageCount || 1;

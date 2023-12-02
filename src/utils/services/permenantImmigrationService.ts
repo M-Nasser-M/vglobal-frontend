@@ -1,13 +1,13 @@
 import type { ArticleAndSeo } from "../types/articleAndSeoTypes";
 import { FetchApiAuthGet } from "./fetchDefaults";
-import { locales } from "../../i18n";
+import { locales, type Locale } from "@/i18n";
 import qs from "qs";
 import type {
   PermenantImmigrationPage,
   PermenantImmigrationPages,
 } from "../types/permenantImmigrationPageTypes";
 
-export const getPermenantImmigrationArticleAndSEO = async (locale: string) => {
+export const getPermenantImmigrationArticleAndSEO = async (locale: Locale) => {
   try {
     const queryString = qs.stringify({
       populate: {
@@ -83,7 +83,7 @@ export const getPermenantImmigrationPageWithIdAndSEO = async (id: string) => {
   }
 };
 
-export const getPermenantImmigrationPagesLocalised = async (locale: string) => {
+export const getPermenantImmigrationPagesLocalised = async (locale: Locale) => {
   try {
     const queryString = qs.stringify({
       locale,

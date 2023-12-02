@@ -2,6 +2,7 @@
 import { strapiImageLoader } from "@/utils/other/imageLoader";
 import { BlogWithoutData } from "@/utils/types/blogTypes";
 import Link from "@/components/Link";
+import type { Locale } from "@/i18n";
 import Image from "next/image";
 import React from "react";
 import {
@@ -12,7 +13,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-type Props = { blog: BlogWithoutData; params: { locale: string } };
+type Props = { blog: BlogWithoutData; params: { locale: Locale } };
 
 const BlogCard = ({ blog }: Props) => {
   return (

@@ -1,8 +1,9 @@
 import type { HomeAndSeoType } from "../types/homeTypes";
 import { FetchApiAuthGet } from "./fetchDefaults";
+import type { Locale } from "@/i18n";
 import qs from "qs";
 
-export const getHomeArticleAndSEO = async (locale: string) => {
+export const getHomeArticleAndSEO = async (locale: Locale) => {
   try {
     const queryString = qs.stringify({
       populate: {

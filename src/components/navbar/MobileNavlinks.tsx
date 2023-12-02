@@ -10,22 +10,27 @@ import {
   Box,
   VStack,
 } from "@chakra-ui/react";
-import { useTranslations } from "next-intl";
 import Link from "@/components/Link";
-import { navlinksKeys } from "../../../messages/messagesKeys";
+import {
+  type commonTranslations,
+  type navlinksTranslations,
+  navlinksKeys,
+} from "../../../messages/messagesKeys";
 
 type Props = {
   lang: string;
-  permenantImmigrationPrograms: PermenantImmigrationPages | undefined;
+  permenantImmigrationPrograms: PermenantImmigrationPages | undefined | null;
+  translations: commonTranslations & navlinksTranslations;
 };
 
-const MobileNavlinks = ({ permenantImmigrationPrograms }: Props) => {
-  const t = useTranslations("navlinks");
-
+const MobileNavlinks = ({
+  permenantImmigrationPrograms,
+  translations,
+}: Props) => {
   return navlinksKeys.map((navLink, index) => (
     <Box as={"nav"} key={index}>
       {navLink !== "permenant-immigration" && (
-        <Link href={`/${navLink}`}>{t(navLink)}</Link>
+        <Link href={`/${navLink}`}>{translations[navLink]}</Link>
       )}
 
       {navLink === "permenant-immigration" &&
@@ -35,7 +40,7 @@ const MobileNavlinks = ({ permenantImmigrationPrograms }: Props) => {
             <AccordionItem>
               <AccordionButton>
                 <Box as="span" w="full">
-                  {t(navLink)}
+                  {translations[navLink]}
                   <AccordionIcon />
                 </Box>
               </AccordionButton>

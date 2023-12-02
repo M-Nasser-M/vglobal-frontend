@@ -1,18 +1,17 @@
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import { homeKeys, homeTranslations } from "../../../messages/messagesKeys";
 import { getHomeArticleAndSEO } from "@/utils/services/homeService";
 import { getOpenGraph, getTwitter } from "@/utils/other/utils";
 import { HomeAndSeoSchema } from "@/utils/types/homeTypes";
 import NoContent from "@/components/NoContent";
 import type { Metadata } from "next";
+import type { Locale } from "@/i18n";
 import Home from "./Home";
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from "@tanstack/react-query";
-import { unstable_setRequestLocale } from "next-intl/server";
+
+export const revalidate = 3600;
 
 type Props = {
-  params: { locale: string };
+  params: { locale: Locale };
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -20,8 +19,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const locale = lang ? String(lang) : "en";
   const response = await getHomeArticleAndSEO(locale);
   const seo = response?.data.seo;
-  const twitter = seo?.metaSocial && getTwitter(seo?.metaSocial);
-  const openGraph = seo?.metaSocial && getOpenGraph(seo?.metaSocial);
+  const twitter = seo?.metaSocial && getTwitter(seo.metaSocial);
+  const openGraph = seo?.metaSocial && getOpenGraph(seo.metaSocial);
   return {
     title: seo?.metaTitle,
     description: seo?.metaDescription,
@@ -36,12 +35,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function RootPage({ params }: Props) {
   unstable_setRequestLocale(params.locale);
   const locale = params.locale;
-  const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: ["home"],
-    queryFn: () => getHomeArticleAndSEO(locale),
-  });
-  const response = queryClient.getQueryData(["home"]);
+  const t = await getTranslations("home");
+  const translations = homeKeys.reduce((obj, curr) => {
+    obj[curr] = t(curr);
+    return obj;
+  }, {} as homeTranslations);
+  const response = await getHomeArticleAndSEO(locale);
   const validateData = HomeAndSeoSchema.safeParse(response);
 
   if (validateData.success) {
@@ -51,9 +50,12 @@ export default async function RootPage({ params }: Props) {
         {jsonLd && (
           <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
         )}
-        <HydrationBoundary state={dehydrate(queryClient)}>
-          <Home params={{ locale }} />
-        </HydrationBoundary>
+
+        <Home
+          HomeAndSeo={validateData.data}
+          params={{ locale }}
+          translations={translations}
+        />
       </>
     );
   }

@@ -2,7 +2,6 @@
 import { SignupFormType, signupFormSchema } from "@/utils/types/authTypes";
 import { registerUsingEmail } from "@/utils/services/authService";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import {
@@ -14,15 +13,16 @@ import {
   FormLabel,
   Input,
 } from "@chakra-ui/react";
+import type { signupformTranslations } from "../../../../messages/messagesKeys";
 
-const SignupForm = () => {
+type Props = { translations: signupformTranslations };
+const SignupForm = ({ translations }: Props) => {
   const {
     handleSubmit,
     register,
     formState: { errors, isSubmitting },
   } = useForm<SignupFormType>({ resolver: zodResolver(signupFormSchema) });
   const router = useRouter();
-  const t = useTranslations("signupForm");
 
   const onSubmit = async (data: SignupFormType) => {
     const res = await registerUsingEmail(data);
@@ -40,7 +40,7 @@ const SignupForm = () => {
     >
       <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={Boolean(errors.firstName)}>
-          <FormLabel htmlFor="firstName">{t("firstName")}</FormLabel>
+          <FormLabel htmlFor="firstName">{translations.firstName}</FormLabel>
           <Input
             id="firstName"
             placeholder="firstName"
@@ -51,7 +51,7 @@ const SignupForm = () => {
           </FormErrorMessage>
         </FormControl>
         <FormControl isInvalid={Boolean(errors.lastName)}>
-          <FormLabel htmlFor="lastName">{t("lastName")}</FormLabel>
+          <FormLabel htmlFor="lastName">{translations.lastName}</FormLabel>
           <Input
             id="lastName"
             placeholder="lastName"
@@ -62,7 +62,9 @@ const SignupForm = () => {
           </FormErrorMessage>
         </FormControl>
         <FormControl isInvalid={Boolean(errors.dateOfBirth)}>
-          <FormLabel htmlFor="dateOfBirth">{t("dateOfBirth")}</FormLabel>
+          <FormLabel htmlFor="dateOfBirth">
+            {translations.dateOfBirth}
+          </FormLabel>
           <Input
             id="dateOfBirth"
             type="date"
@@ -77,7 +79,7 @@ const SignupForm = () => {
           </FormErrorMessage>
         </FormControl>
         <FormControl isInvalid={Boolean(errors.email)}>
-          <FormLabel htmlFor="email">{t("email")}</FormLabel>
+          <FormLabel htmlFor="email">{translations.email}</FormLabel>
           <Input
             id="email"
             type="email"
@@ -89,7 +91,7 @@ const SignupForm = () => {
           </FormErrorMessage>
         </FormControl>
         <FormControl isInvalid={Boolean(errors.password)}>
-          <FormLabel htmlFor="password">{t("password")}</FormLabel>
+          <FormLabel htmlFor="password">{translations.password}</FormLabel>
           <Input
             id="password"
             type="password"
@@ -102,7 +104,7 @@ const SignupForm = () => {
         </FormControl>
         <FormControl isInvalid={Boolean(errors.confirmPassword)}>
           <FormLabel htmlFor="confirmPassword">
-            {t("confirmPassword")}
+            {translations.confirmPassword}
           </FormLabel>
           <Input
             id="confirmPassword"
@@ -121,7 +123,7 @@ const SignupForm = () => {
           type="submit"
           width="100%"
         >
-          {t("signup")}
+          {translations.signup}
         </Button>
       </Box>
     </Container>

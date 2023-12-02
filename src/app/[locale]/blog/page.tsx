@@ -5,13 +5,14 @@ import BlogMainPage from "./BlogMainPage";
 import React from "react";
 import { BlogsSchema } from "@/utils/types/blogTypes";
 import { getOpenGraph, getTwitter } from "@/utils/other/utils";
+import type { Locale } from "@/i18n";
 
 type Props = {
-  params: { locale: string };
+  params: { locale: Locale };
   searchParams: { [key: string]: string | string[] | undefined };
 };
 type StaticProps = {
-  params: { locale: string };
+  params: { locale: Locale };
 };
 
 export async function generateMetadata({

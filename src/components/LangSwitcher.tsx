@@ -10,9 +10,9 @@ import {
 } from "@chakra-ui/react";
 import { MdOutlineLanguage } from "react-icons/md";
 import { usePathname, useRouter } from "next/navigation";
-import { locales } from "../i18n";
+import { locales, type Locale } from "@/i18n";
 
-type Props = { params: { locale: string } };
+type Props = { params: { locale: Locale } };
 
 const LangSwitcher = ({ params }: Props) => {
   const pathname = usePathname();

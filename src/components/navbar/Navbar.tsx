@@ -23,12 +23,15 @@ import {
 import { useSetAtom } from "jotai";
 import { useHydrateAtoms } from "jotai/utils";
 import { signOut } from "next-auth/react";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsMoonFill, BsSunFill } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
+import type {
+  commonTranslations,
+  navlinksTranslations,
+} from "../../../messages/messagesKeys";
 import Logo from "../../../public/brandLogo.webp";
 import LangSwitcher from "../LangSwitcher";
 import MobileNavlinks from "./MobileNavlinks";
@@ -38,26 +41,26 @@ interface Props {
   params: {
     locale: Locale;
   };
-  permenantImmigrationPrograms: PermenantImmigrationPages | undefined;
+  permenantImmigrationPrograms: PermenantImmigrationPages | undefined | null;
   session: ExtendedSession | null;
+  translations: commonTranslations & navlinksTranslations;
 }
 
 export function Navbar({
   params,
   permenantImmigrationPrograms,
   session,
+  translations,
 }: Props) {
   const { colorMode, toggleColorMode } = useColorMode();
   useHydrateAtoms([
     [SessionAtom, session],
-    [CalThemeAtom, colorMode],
     [LocaleAtom, params.locale],
   ]);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const setSessionAtom = useSetAtom(SessionAtom);
   const setCalTheme = useSetAtom(CalThemeAtom);
   const router = useRouter();
-  const t = useTranslations("common");
   const lang = params.locale;
   setCalTheme(colorMode);
 
@@ -94,6 +97,7 @@ export function Navbar({
               <Navlinks
                 permenantImmigrationPrograms={permenantImmigrationPrograms}
                 lang={lang}
+                translations={translations}
               />
             </HStack>
           </HStack>
@@ -126,13 +130,13 @@ export function Navbar({
                       }}
                       colorScheme="red"
                     >
-                      {t("signout")}
+                      {translations.signout}
                     </MenuItem>
                   </MenuList>
                 </Menu>
               ) : (
                 <Link href={`/signin`}>
-                  <Button colorScheme="red">{t("signin")}</Button>
+                  <Button colorScheme="red">{translations.signin}</Button>
                 </Link>
               )}
               <LangSwitcher params={params} />
@@ -145,6 +149,7 @@ export function Navbar({
               <MobileNavlinks
                 permenantImmigrationPrograms={permenantImmigrationPrograms}
                 lang={lang}
+                translations={translations}
               />
             </Stack>
           </Box>

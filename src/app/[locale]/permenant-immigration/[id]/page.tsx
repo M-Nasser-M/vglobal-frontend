@@ -11,18 +11,14 @@ import {
   getPermenantImmigrationPagesWithAllLocales,
 } from "@/utils/services/permenantImmigrationService";
 import { getOpenGraph, getTwitter } from "@/utils/other/utils";
+import { unstable_setRequestLocale } from "next-intl/server";
+import type { Locale } from "@/i18n";
 
 type Props = {
-  params: { id: string; locale: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-type StaticProps = {
-  params: { id: string; locale: string };
+  params: { id: string; locale: Locale };
 };
 
-export async function generateMetadata({
-  params,
-}: StaticProps): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const response = await getPermenantImmigrationPageWithIdAndSEO(params.id);
   const seo = response?.data.seo;
   const twitter = seo?.metaSocial && getTwitter(seo?.metaSocial);
@@ -70,6 +66,7 @@ export async function generateStaticParams() {
 }
 
 const Page = async ({ params }: Props) => {
+  unstable_setRequestLocale(params.locale);
   const response = await getPermenantImmigrationPageWithIdAndSEO(params.id);
   const validateData = PermenantImmigrationPageSchema.safeParse(response);
 

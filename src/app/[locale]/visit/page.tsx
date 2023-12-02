@@ -1,28 +1,22 @@
 import { ArticleAndSeoSchema } from "@/utils/types/articleAndSeoTypes";
 import { getVisitArticleAndSEO } from "@/utils/services/visitService";
 import HtmlContentWrapper from "@/components/HtmlConntentWrapper";
+import { getOpenGraph, getTwitter } from "@/utils/other/utils";
+import { unstable_setRequestLocale } from "next-intl/server";
 import NoContent from "@/components/NoContent";
-import { locales } from "../../../i18n";
+import { type Locale, locales } from "@/i18n";
 import { Metadata } from "next";
 import React from "react";
-import { getOpenGraph, getTwitter } from "@/utils/other/utils";
 
 type Props = {
-  params: { locale: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
-type StaticProps = {
-  params: { locale: string };
+  params: { locale: Locale };
 };
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export async function generateMetadata({
-  params,
-}: StaticProps): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const lang = params.locale;
   const locale = lang ? String(lang) : "en";
   const response = await getVisitArticleAndSEO(locale);
@@ -42,6 +36,7 @@ export async function generateMetadata({
 }
 
 const Page = async ({ params }: Props) => {
+  unstable_setRequestLocale(params.locale);
   const lang = params.locale;
   const response = await getVisitArticleAndSEO(lang);
   const validateData = ArticleAndSeoSchema.safeParse(response);

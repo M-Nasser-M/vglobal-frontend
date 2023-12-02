@@ -1,10 +1,10 @@
 import type { SingleAndSeo } from "../types/seoSingleTypes";
 import type { Blog, Blogs } from "../types/blogTypes";
 import { FetchApiAuthGet } from "./fetchDefaults";
-import { locales } from "../../i18n";
+import { locales, type Locale } from "@/i18n";
 import qs from "qs";
 
-export const getBlogMainSEO = async (locale: string) => {
+export const getBlogMainSEO = async (locale: Locale) => {
   try {
     const queryString = qs.stringify({
       populate: {
@@ -27,7 +27,7 @@ export const getBlogMainSEO = async (locale: string) => {
 };
 
 export const getBlogPage = async (
-  locale: string,
+  locale: Locale,
   page: number = 1,
   pageSize = 9
 ) => {

@@ -4,16 +4,22 @@ import ContainerWrapper from "@/components/ContainerWrapper";
 import { options } from "@/utils/other/nextAuthOptions";
 import { AppWrappers } from "@/components/AppWrappers";
 import { Navbar } from "@/components/navbar/Navbar";
-import { NextIntlClientProvider } from "next-intl";
 import { getServerSession } from "next-auth";
-import { locales } from "../../i18n";
+import { Locale, locales } from "../../i18n";
 import { ReactNode } from "react";
 
 import "./global.css";
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import {
+  commonKeys,
+  navlinksKeys,
+  type commonTranslations,
+  type navlinksTranslations,
+} from "../../../messages/messagesKeys";
 
 type Props = {
   children: ReactNode;
-  params: { locale: string };
+  params: { locale: Locale };
 };
 
 export function generateStaticParams() {
@@ -21,29 +27,42 @@ export function generateStaticParams() {
 }
 
 export default async function RootLayout({ children, params }: Props) {
+  unstable_setRequestLocale(params.locale);
   const locale = params.locale;
   const session = await getServerSession(options);
 
-  const messages = (await import(`../../../messages/${locale}.json`)).default;
+  const [tCommon, tNavlinks] = await Promise.all([
+    getTranslations("common"),
+    getTranslations("navlinks"),
+  ]);
+
+  const commonTranslations = commonKeys.reduce((obj, key) => {
+    obj[key] = tCommon(key);
+    return obj;
+  }, {} as commonTranslations);
+
+  const navlinksTranslations = navlinksKeys.reduce((obj, key) => {
+    obj[key] = tNavlinks(key);
+    return obj;
+  }, {} as navlinksTranslations);
+
+  const translations = { ...commonTranslations, ...navlinksTranslations };
+
   const permenantImmigrationPrograms =
     await getPermenantImmigrationPagesLocalised(locale);
+
   return (
     <html lang={locale} dir={locale == "ar" ? "rtl" : "ltr"}>
       <body>
-        <NextIntlClientProvider
-          timeZone="Africa/Cairo"
-          locale={locale}
-          messages={messages}
-        >
-          <AppWrappers params={params}>
-            <Navbar
-              session={session as ExtendedSession}
-              permenantImmigrationPrograms={permenantImmigrationPrograms}
-              params={params}
-            />
-            <ContainerWrapper>{children}</ContainerWrapper>
-          </AppWrappers>
-        </NextIntlClientProvider>
+        <AppWrappers params={params}>
+          <Navbar
+            session={session as ExtendedSession}
+            permenantImmigrationPrograms={permenantImmigrationPrograms}
+            params={params}
+            translations={translations}
+          />
+          <ContainerWrapper>{children}</ContainerWrapper>
+        </AppWrappers>
       </body>
     </html>
   );
