@@ -32,7 +32,7 @@ export async function generateMetadata({
     alternates: { canonical: seo?.canonicalURL },
     robots: seo?.metaRobots,
     keywords: seo?.keywords,
-    viewport: seo?.metaViewport,
+
     twitter: twitter,
     openGraph: openGraph,
   };

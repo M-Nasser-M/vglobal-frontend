@@ -1,16 +1,14 @@
-import React from "react";
-import SignupForm from "./SignupForm";
-import { unstable_setRequestLocale } from "next-intl/server";
-import type { Locale } from "@/i18n";
+import { type Locale } from "@/i18n";
 import { useTranslations } from "next-intl";
+import { unstable_setRequestLocale } from "next-intl/server";
 import {
   signupformKeys,
   type signupformTranslations,
 } from "../../../../messages/messagesKeys";
+import SignupForm from "./SignupForm";
 
 type Props = {
   params: { locale: Locale };
-  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 const Page = ({ params }: Props) => {

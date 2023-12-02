@@ -29,7 +29,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: { canonical: seo?.canonicalURL },
     robots: seo?.metaRobots,
     keywords: seo?.keywords,
-    viewport: seo?.metaViewport,
     twitter: twitter,
     openGraph: openGraph,
   };

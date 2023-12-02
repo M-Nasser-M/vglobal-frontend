@@ -1,20 +1,15 @@
-import { ArticleAndSeoSchema } from "@/utils/types/articleAndSeoTypes";
-import { getStudyArticleAndSEO } from "@/utils/services/studyService";
 import HtmlContentWrapper from "@/components/HtmlConntentWrapper";
 import NoContent from "@/components/NoContent";
-import { type Locale, locales } from "../../../i18n";
-import { Metadata } from "next";
-import React from "react";
 import { getOpenGraph, getTwitter } from "@/utils/other/utils";
+import { getStudyArticleAndSEO } from "@/utils/services/studyService";
+import { ArticleAndSeoSchema } from "@/utils/types/articleAndSeoTypes";
+import { Metadata } from "next";
 import { unstable_setRequestLocale } from "next-intl/server";
+import { type Locale } from "../../../i18n";
 
 type Props = {
   params: { locale: Locale };
 };
-
-export async function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
 
 export async function generateMetadata({
   params: { locale },
@@ -29,7 +24,7 @@ export async function generateMetadata({
     alternates: { canonical: seo?.canonicalURL },
     robots: seo?.metaRobots,
     keywords: seo?.keywords,
-    viewport: seo?.metaViewport,
+
     twitter: twitter,
     openGraph: openGraph,
   };

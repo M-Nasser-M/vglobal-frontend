@@ -1,18 +1,14 @@
-import { getBookConsultArticleAndSEO } from "@/utils/services/bookConsultService";
-import { type Locale, locales } from "../../../i18n";
-import { Metadata } from "next";
-import CalInlineEmbed from "./CalInlineEmbed";
 import { getOpenGraph, getTwitter } from "@/utils/other/utils";
+import { getBookConsultArticleAndSEO } from "@/utils/services/bookConsultService";
 import { Flex } from "@chakra-ui/react";
+import { Metadata } from "next";
 import { unstable_setRequestLocale } from "next-intl/server";
+import { type Locale } from "../../../i18n";
+import CalInlineEmbed from "./CalInlineEmbed";
 
 type Props = {
   params: { locale: Locale };
 };
-
-export async function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
 
 export async function generateMetadata({
   params: { locale },
@@ -27,7 +23,7 @@ export async function generateMetadata({
     alternates: { canonical: seo?.canonicalURL },
     robots: seo?.metaRobots,
     keywords: seo?.keywords,
-    viewport: seo?.metaViewport,
+
     twitter: twitter,
     openGraph: openGraph,
   };

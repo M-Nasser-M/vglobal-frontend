@@ -1,17 +1,17 @@
-import React from "react";
-import SigninForm from "./SigninForm";
-import { unstable_setRequestLocale } from "next-intl/server";
-import type { Locale } from "@/i18n";
+import { type Locale } from "@/i18n";
 import { useTranslations } from "next-intl";
+import { unstable_setRequestLocale } from "next-intl/server";
 import {
   signinformKeys,
   type signinformTranslations,
 } from "../../../../messages/messagesKeys";
+import SigninForm from "./SigninForm";
 
 type Props = {
   params: { locale: Locale };
   searchParams: { [key: string]: string | string[] | undefined };
 };
+
 const Page = ({ params }: Props) => {
   unstable_setRequestLocale(params.locale);
 

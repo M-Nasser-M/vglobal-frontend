@@ -1,11 +1,10 @@
-import { getBlogMainSEO, getBlogPage } from "@/utils/services/blogService";
-import { Metadata } from "next";
 import NoContent from "@/components/NoContent";
-import BlogMainPage from "./BlogMainPage";
-import React from "react";
-import { BlogsSchema } from "@/utils/types/blogTypes";
+import { type Locale } from "@/i18n";
 import { getOpenGraph, getTwitter } from "@/utils/other/utils";
-import type { Locale } from "@/i18n";
+import { getBlogMainSEO, getBlogPage } from "@/utils/services/blogService";
+import { BlogsSchema } from "@/utils/types/blogTypes";
+import { Metadata } from "next";
+import BlogMainPage from "./BlogMainPage";
 
 type Props = {
   params: { locale: Locale };
@@ -28,7 +27,7 @@ export async function generateMetadata({
     alternates: { canonical: seo?.canonicalURL },
     robots: seo?.metaRobots,
     keywords: seo?.keywords,
-    viewport: seo?.metaViewport,
+
     twitter: twitter,
     openGraph: openGraph,
   };

@@ -1,7 +1,6 @@
-import React from "react";
-import PasswordResetForm from "./PasswordResetForm";
+import { type Locale } from "@/i18n";
 import { unstable_setRequestLocale } from "next-intl/server";
-import type { Locale } from "@/i18n";
+import PasswordResetForm from "./PasswordResetForm";
 
 type Props = {
   params: { locale: Locale };

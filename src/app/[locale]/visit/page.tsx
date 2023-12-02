@@ -4,17 +4,13 @@ import HtmlContentWrapper from "@/components/HtmlConntentWrapper";
 import { getOpenGraph, getTwitter } from "@/utils/other/utils";
 import { unstable_setRequestLocale } from "next-intl/server";
 import NoContent from "@/components/NoContent";
-import { type Locale, locales } from "@/i18n";
+import { type Locale } from "@/i18n";
 import { Metadata } from "next";
 import React from "react";
 
 type Props = {
   params: { locale: Locale };
 };
-
-export async function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
 
 export async function generateMetadata({
   params: { locale },
@@ -29,25 +25,23 @@ export async function generateMetadata({
     alternates: { canonical: seo?.canonicalURL },
     robots: seo?.metaRobots,
     keywords: seo?.keywords,
-    viewport: seo?.metaViewport,
     twitter: twitter,
     openGraph: openGraph,
   };
 }
 
-const Page = async ({ params }: Props) => {
-  unstable_setRequestLocale(params.locale);
-  const lang = params.locale;
-  const response = await getVisitArticleAndSEO(lang);
+const Page = async ({ params: { locale } }: Props) => {
+  unstable_setRequestLocale(locale);
+  const response = await getVisitArticleAndSEO(locale);
   const validateData = ArticleAndSeoSchema.safeParse(response);
-  const jsonLd = response?.data.seo?.structuredData;
-  if (validateData.success && response) {
+  if (validateData.success) {
+    const jsonLd = validateData.data.data.seo?.structuredData;
     return (
       <>
         {jsonLd && (
           <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
         )}
-        <HtmlContentWrapper html={response.data.article!} />
+        <HtmlContentWrapper html={validateData.data.data.article!} />
       </>
     );
   }

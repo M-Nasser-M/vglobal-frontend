@@ -1,7 +1,6 @@
-import React from "react";
-import ForgotPasswordForm from "./ForgotPasswordForm";
-import type { Locale } from "@/i18n";
+import { type Locale } from "@/i18n";
 import { unstable_setRequestLocale } from "next-intl/server";
+import ForgotPasswordForm from "./ForgotPasswordForm";
 
 type Props = {
   params: { locale: Locale };
