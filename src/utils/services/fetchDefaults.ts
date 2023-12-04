@@ -7,6 +7,7 @@ export const FetchApiPublicGet = async <T>(
     headers: {
       "Content-Type": "application/json",
     },
+    cache: "no-cache",
   };
 
   const finalOptions = { ...defaultOptions, ...options };
@@ -34,6 +35,7 @@ export const FetchApiPublicPost = async <T>(
       "Content-Type": "application/json",
     },
     body: JSON.stringify(body),
+    cache: "no-cache",
   };
 
   const finalOptions = { ...defaultOptions, ...options };
@@ -60,6 +62,7 @@ export const FetchApiAuthGet = async <T>(
       "Content-Type": "application/json",
       Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
     },
+    cache: "no-cache",
   };
 
   const finalOptions = { ...defaultOptions, ...options };
@@ -88,6 +91,7 @@ export const FetchApiAuthPost = async <T>(
       Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
     },
     body,
+    cache: "no-cache",
   };
 
   const finalOptions = { ...defaultOptions, ...options };
