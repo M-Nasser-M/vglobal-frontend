@@ -1,12 +1,15 @@
 import {
   getBlogWithID,
-  getBlogsWithAllLocales,
+  // getBlogsWithAllLocales,
 } from "@/utils/services/blogService";
 import NoContent from "@/components/NoContent";
 import BlogPage from "./BlogPage";
 import React from "react";
 import { Metadata } from "next";
-import { BlogSchema, BlogWithoutData } from "@/utils/types/blogTypes";
+import {
+  BlogSchema,
+  //  BlogWithoutData
+} from "@/utils/types/blogTypes";
 import { getOpenGraph, getTwitter } from "@/utils/other/utils";
 import { unstable_setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n";
@@ -38,35 +41,35 @@ export async function generateMetadata({
   };
 }
 
-export async function generateStaticParams() {
-  const blogs = await getBlogsWithAllLocales(1, 100);
-  const ids = blogs?.data.map((blog: BlogWithoutData) => {
-    return { id: String(blog.id) };
-  });
+// export async function generateStaticParams() {
+//   const blogs = await getBlogsWithAllLocales(1, 100);
+//   const ids = blogs?.data.map((blog: BlogWithoutData) => {
+//     return { id: String(blog.id) };
+//   });
 
-  let totalIds: {
-    id: string;
-  }[] = ids ? ids : [];
+//   let totalIds: {
+//     id: string;
+//   }[] = ids ? ids : [];
 
-  if (
-    blogs &&
-    blogs.meta.pagination?.pageCount &&
-    blogs.meta.pagination?.pageCount <= 1
-  ) {
-    return totalIds;
-  }
+//   if (
+//     blogs &&
+//     blogs.meta.pagination?.pageCount &&
+//     blogs.meta.pagination?.pageCount <= 1
+//   ) {
+//     return totalIds;
+//   }
 
-  if (blogs && blogs.meta.pagination?.pageCount) {
-    for (let i = 2; i <= blogs?.meta.pagination?.pageCount; i++) {
-      const pageBlogs = await getBlogsWithAllLocales(i, 100);
-      const ids = pageBlogs?.data.map((blog: BlogWithoutData) => {
-        return { id: String(blog.id) };
-      });
-      totalIds = ids ? [...totalIds, ...ids] : totalIds;
-    }
-  }
-  return totalIds;
-}
+//   if (blogs && blogs.meta.pagination?.pageCount) {
+//     for (let i = 2; i <= blogs?.meta.pagination?.pageCount; i++) {
+//       const pageBlogs = await getBlogsWithAllLocales(i, 100);
+//       const ids = pageBlogs?.data.map((blog: BlogWithoutData) => {
+//         return { id: String(blog.id) };
+//       });
+//       totalIds = ids ? [...totalIds, ...ids] : totalIds;
+//     }
+//   }
+//   return totalIds;
+// }
 
 const Page = async ({ params }: Props) => {
   unstable_setRequestLocale(params.locale);
