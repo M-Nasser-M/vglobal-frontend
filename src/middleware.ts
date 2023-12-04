@@ -27,7 +27,7 @@ const authMiddleware = withAuth(
       authorized: ({ token }) => token != null,
     },
     pages: {
-      signIn: "/en/signin",
+      signIn: "/signin",
     },
   }
 );
@@ -53,7 +53,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Skip all paths that should not be internationalized. This example skips the
-  // folders "api", "_next" and all files with an extension (e.g. favicon.ico)
-  matcher: ["/", "/(ar|en)/:path*"],
+  matcher: ["/", "/(ar|en)/:path*", "/signin"],
 };
