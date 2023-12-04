@@ -5,7 +5,7 @@ import { options } from "@/app/api/auth/[...nextauth]/nextAuthOptions";
 import { AppWrappers } from "@/components/AppWrappers";
 import { Navbar } from "@/components/navbar/Navbar";
 import { getServerSession } from "next-auth";
-import { Locale, locales } from "../../i18n";
+import { Locale } from "../../i18n";
 import { ReactNode } from "react";
 
 import "./global.css";
@@ -21,10 +21,6 @@ type Props = {
   children: ReactNode;
   params: { locale: Locale };
 };
-
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
 
 export default async function RootLayout({ children, params }: Props) {
   unstable_setRequestLocale(params.locale);
