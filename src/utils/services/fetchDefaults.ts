@@ -1,16 +1,44 @@
+const defaultFetchOptionsGet: RequestInit = {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
+
+const defaultFetchOptionsPost = (body: object): RequestInit => {
+  return {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  };
+};
+
+const defaultFetchOptionsGetAuth: RequestInit = {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+  },
+};
+
+const defaultFetchOptionsPostAuth = (body: object): RequestInit => {
+  return {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
+    },
+    body: JSON.stringify(body),
+  };
+};
+
 export const FetchApiPublicGet = async <T>(
   url: string,
   options: RequestInit = {}
 ): Promise<T> => {
-  const defaultOptions: RequestInit = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    cache: "no-cache",
-  };
-
-  const finalOptions = { ...defaultOptions, ...options };
+  const finalOptions = { ...defaultFetchOptionsGet, ...options };
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${url}`,
@@ -26,19 +54,10 @@ export const FetchApiPublicGet = async <T>(
 
 export const FetchApiPublicPost = async <T>(
   url: string,
-  body = {},
+  body: object = {},
   options: RequestInit = {}
 ): Promise<T> => {
-  const defaultOptions: RequestInit = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-    cache: "no-cache",
-  };
-
-  const finalOptions = { ...defaultOptions, ...options };
+  const finalOptions = { ...defaultFetchOptionsPost(body), ...options };
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${url}`,
@@ -56,16 +75,7 @@ export const FetchApiAuthGet = async <T>(
   url: string,
   options: RequestInit = {}
 ): Promise<T> => {
-  const defaultOptions: RequestInit = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-    },
-    cache: "no-cache",
-  };
-
-  const finalOptions = { ...defaultOptions, ...options };
+  const finalOptions = { ...defaultFetchOptionsGetAuth, ...options };
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${url}`,
@@ -81,20 +91,10 @@ export const FetchApiAuthGet = async <T>(
 
 export const FetchApiAuthPost = async <T>(
   url: string,
-  body: BodyInit | null = null,
+  body: object = {},
   options: RequestInit = {}
 ): Promise<T> => {
-  const defaultOptions: RequestInit = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.STRAPI_API_TOKEN}`,
-    },
-    body,
-    cache: "no-cache",
-  };
-
-  const finalOptions = { ...defaultOptions, ...options };
+  const finalOptions = { ...defaultFetchOptionsPostAuth(body), ...options };
 
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${url}`,

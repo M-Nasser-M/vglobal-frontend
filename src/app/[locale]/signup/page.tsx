@@ -11,8 +11,8 @@ type Props = {
   params: { locale: Locale };
 };
 
-const Page = ({ params }: Props) => {
-  unstable_setRequestLocale(params.locale);
+const Page = ({ params: { locale } }: Props) => {
+  unstable_setRequestLocale(locale);
   const t = useTranslations("signupform");
 
   const translations = signupformKeys.reduce((obj, curr) => {

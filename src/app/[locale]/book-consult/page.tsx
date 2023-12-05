@@ -5,10 +5,12 @@ import { Metadata } from "next";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { type Locale } from "../../../i18n";
 import CalInlineEmbed from "./CalInlineEmbed";
+import { RevalidateDefaultTime } from "@/app/defaults";
 
 type Props = {
   params: { locale: Locale };
 };
+export const revalidate = RevalidateDefaultTime;
 
 export async function generateMetadata({
   params: { locale },
@@ -18,12 +20,12 @@ export async function generateMetadata({
   const twitter = seo?.metaSocial && getTwitter(seo?.metaSocial);
   const openGraph = seo?.metaSocial && getOpenGraph(seo?.metaSocial);
   return {
+    metadataBase: new URL("https://www.vglobal.ca"),
     title: seo?.metaTitle,
     description: seo?.metaDescription,
     alternates: { canonical: seo?.canonicalURL },
     robots: seo?.metaRobots,
     keywords: seo?.keywords,
-
     twitter: twitter,
     openGraph: openGraph,
   };

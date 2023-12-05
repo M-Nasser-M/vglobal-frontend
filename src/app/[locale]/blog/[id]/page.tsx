@@ -1,91 +1,68 @@
 import {
   getBlogWithID,
-  // getBlogsWithAllLocales,
+  getBlogsWithAllLocales,
 } from "@/utils/services/blogService";
 import NoContent from "@/components/NoContent";
 import BlogPage from "./BlogPage";
 import React from "react";
 import { Metadata } from "next";
-import {
-  BlogSchema,
-  //  BlogWithoutData
-} from "@/utils/types/blogTypes";
+import { BlogSchema } from "@/utils/types/blogTypes";
 import { getOpenGraph, getTwitter } from "@/utils/other/utils";
 import { unstable_setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n";
+import { RevalidateDefaultTime } from "@/app/defaults";
 
 type Props = {
   params: { id: string; locale: Locale };
   searchParams: { [key: string]: string | string[] | undefined };
 };
-type StaticProps = {
-  params: { id: string; locale: Locale };
-};
 
-export async function generateMetadata({
-  params,
-}: StaticProps): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const response = await getBlogWithID(params.id);
   const seo = response?.data.seo;
   const twitter = seo?.metaSocial && getTwitter(seo?.metaSocial);
   const openGraph = seo?.metaSocial && getOpenGraph(seo?.metaSocial);
   return {
+    metadataBase: new URL("https://www.vglobal.ca"),
     title: seo?.metaTitle,
     description: seo?.metaDescription,
     alternates: { canonical: seo?.canonicalURL },
     robots: seo?.metaRobots,
     keywords: seo?.keywords,
-
     twitter: twitter,
     openGraph: openGraph,
   };
 }
 
-// export async function generateStaticParams() {
-//   const blogs = await getBlogsWithAllLocales(1, 100);
-//   const ids = blogs?.data.map((blog: BlogWithoutData) => {
-//     return { id: String(blog.id) };
-//   });
+export async function generateStaticParams() {
+  const blogs = await getBlogsWithAllLocales(1, 100);
+  const params = blogs?.data.map((blog) => ({
+    id: String(blog.id),
+    locale: blog.locale,
+  }));
 
-//   let totalIds: {
-//     id: string;
-//   }[] = ids ? ids : [];
+  return params || [];
+}
 
-//   if (
-//     blogs &&
-//     blogs.meta.pagination?.pageCount &&
-//     blogs.meta.pagination?.pageCount <= 1
-//   ) {
-//     return totalIds;
-//   }
-
-//   if (blogs && blogs.meta.pagination?.pageCount) {
-//     for (let i = 2; i <= blogs?.meta.pagination?.pageCount; i++) {
-//       const pageBlogs = await getBlogsWithAllLocales(i, 100);
-//       const ids = pageBlogs?.data.map((blog: BlogWithoutData) => {
-//         return { id: String(blog.id) };
-//       });
-//       totalIds = ids ? [...totalIds, ...ids] : totalIds;
-//     }
-//   }
-//   return totalIds;
-// }
+export const revalidate = RevalidateDefaultTime;
 
 const Page = async ({ params }: Props) => {
   unstable_setRequestLocale(params.locale);
   const response = await getBlogWithID(params.id);
   const validateData = BlogSchema.safeParse(response);
-  const jsonLd = response?.data.seo?.structuredData;
-  if (validateData.success && response) {
+
+  if (validateData.success) {
+    const jsonLd = validateData.data.data.seo?.structuredData;
     return (
       <>
         {jsonLd && (
           <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
         )}
-        <BlogPage blog={response} />
+        <BlogPage blog={validateData.data} />
       </>
     );
   }
+
   return <NoContent />;
 };
 

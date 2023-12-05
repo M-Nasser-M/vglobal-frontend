@@ -1,15 +1,14 @@
 import { getPermenantImmigrationPagesLocalised } from "@/utils/services/permenantImmigrationService";
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import { options } from "@/app/api/auth/[...nextauth]/nextAuthOptions";
+import { LocalesParams, RevalidateDefaultTime } from "../defaults";
 import { ExtendedSession } from "@/utils/types/extendedSession";
 import ContainerWrapper from "@/components/ContainerWrapper";
-import { options } from "@/app/api/auth/[...nextauth]/nextAuthOptions";
 import { AppWrappers } from "@/components/AppWrappers";
 import { Navbar } from "@/components/navbar/Navbar";
 import { getServerSession } from "next-auth";
 import { Locale } from "../../i18n";
 import { ReactNode } from "react";
-
-import "./global.css";
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import {
   commonKeys,
   navlinksKeys,
@@ -17,14 +16,22 @@ import {
   type navlinksTranslations,
 } from "../../../messages/messagesKeys";
 
+import "./global.css";
+
 type Props = {
   children: ReactNode;
   params: { locale: Locale };
 };
 
+export const revalidate = RevalidateDefaultTime;
+
+export async function generateStaticParams() {
+  return LocalesParams();
+}
+
 export default async function RootLayout({ children, params }: Props) {
-  unstable_setRequestLocale(params.locale);
   const locale = params.locale;
+  unstable_setRequestLocale(locale);
   const session = await getServerSession(options);
 
   const [tCommon, tNavlinks] = await Promise.all([

@@ -12,8 +12,8 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
-const Page = ({ params }: Props) => {
-  unstable_setRequestLocale(params.locale);
+const Page = ({ params: { locale } }: Props) => {
+  unstable_setRequestLocale(locale);
 
   const t = useTranslations("signinform");
 
