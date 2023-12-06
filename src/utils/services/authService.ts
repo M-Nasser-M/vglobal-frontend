@@ -1,5 +1,5 @@
 import { SignupFormType } from "../types/authTypes";
-import { FetchApiPublicPost } from "./fetchDefaults";
+import { FetchApiPublicPost } from "./fetchDefaultsClient";
 import type {
   AuthApiResponseType,
   CredentialsType,

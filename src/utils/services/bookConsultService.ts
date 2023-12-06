@@ -1,5 +1,5 @@
 import type { ArticleAndSeo } from "../types/articleAndSeoTypes";
-import { FetchApiAuthGet } from "./fetchDefaults";
+import { FetchApiAuthGet } from "./fetchDefaultsServer";
 import type { Locale } from "@/i18n";
 import qs from "qs";
 

@@ -6,13 +6,10 @@ import { ArticleAndSeoSchema } from "@/utils/types/articleAndSeoTypes";
 import { Metadata } from "next";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { type Locale } from "../../../i18n";
-import { RevalidateDefaultTime } from "@/app/defaults";
 
 type Props = {
   params: { locale: Locale };
 };
-
-export const revalidate = RevalidateDefaultTime;
 
 export async function generateMetadata({
   params: { locale },

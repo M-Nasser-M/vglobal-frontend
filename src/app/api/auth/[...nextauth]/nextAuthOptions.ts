@@ -1,4 +1,4 @@
-import { FetchApiPublicGet } from "../../../../utils/services/fetchDefaults";
+import { FetchApiPublicGet } from "../../../../utils/services/fetchDefaultsClient";
 import Credentials from "next-auth/providers/credentials";
 import { authUsingEmail } from "../../../../utils/services/authService";
 import type { AdapterUser } from "next-auth/adapters";

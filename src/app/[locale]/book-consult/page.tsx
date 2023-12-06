@@ -5,12 +5,10 @@ import { Metadata } from "next";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { type Locale } from "../../../i18n";
 import CalInlineEmbed from "./CalInlineEmbed";
-import { RevalidateDefaultTime } from "@/app/defaults";
 
 type Props = {
   params: { locale: Locale };
 };
-export const revalidate = RevalidateDefaultTime;
 
 export async function generateMetadata({
   params: { locale },

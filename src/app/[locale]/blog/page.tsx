@@ -5,7 +5,6 @@ import { getBlogMainSEO, getBlogPage } from "@/utils/services/blogService";
 import { BlogsSchema } from "@/utils/types/blogTypes";
 import { Metadata } from "next";
 import BlogMainPage from "./BlogMainPage";
-import { RevalidateDefaultTime } from "@/app/defaults";
 
 type Props = {
   params: { locale: Locale };
@@ -14,8 +13,6 @@ type Props = {
 type StaticProps = {
   params: { locale: Locale };
 };
-
-export const revalidate = RevalidateDefaultTime;
 
 export async function generateMetadata({
   params: { locale },
@@ -43,6 +40,7 @@ const Page = async ({ params, searchParams }: Props) => {
   const pageNo = page && !Number.isNaN(page) ? Number(page) : 1;
 
   const response = await getBlogPage(lang, pageNo);
+
   const validateData = BlogsSchema.safeParse(response);
   const seoResponse = await getBlogMainSEO(lang);
   const jsonLd = seoResponse?.data.seo?.structuredData;

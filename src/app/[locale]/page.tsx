@@ -7,9 +7,6 @@ import NoContent from "@/components/NoContent";
 import type { Metadata } from "next";
 import type { Locale } from "@/i18n";
 import Home from "./Home";
-import { RevalidateDefaultTime } from "../defaults";
-
-export const revalidate = RevalidateDefaultTime;
 
 type Props = {
   params: { locale: Locale };

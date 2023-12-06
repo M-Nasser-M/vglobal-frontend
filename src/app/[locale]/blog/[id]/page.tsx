@@ -10,7 +10,6 @@ import { BlogSchema } from "@/utils/types/blogTypes";
 import { getOpenGraph, getTwitter } from "@/utils/other/utils";
 import { unstable_setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n";
-import { RevalidateDefaultTime } from "@/app/defaults";
 
 type Props = {
   params: { id: string; locale: Locale };
@@ -43,8 +42,6 @@ export async function generateStaticParams() {
 
   return params || [];
 }
-
-export const revalidate = RevalidateDefaultTime;
 
 const Page = async ({ params }: Props) => {
   unstable_setRequestLocale(params.locale);

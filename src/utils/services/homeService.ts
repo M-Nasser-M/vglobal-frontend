@@ -1,5 +1,5 @@
 import type { HomeAndSeoType } from "../types/homeTypes";
-import { FetchApiAuthGet } from "./fetchDefaults";
+import { FetchApiAuthGet } from "./fetchDefaultsServer";
 import type { Locale } from "@/i18n";
 import qs from "qs";
 

@@ -1,6 +1,5 @@
 "use client";
 import HtmlContentWrapper from "@/components/HtmlConntentWrapper";
-import { strapiImageLoader } from "@/utils/other/imageLoader";
 import { AspectRatio, Box, Heading } from "@chakra-ui/react";
 import { Blog } from "@/utils/types/blogTypes";
 import NextImage from "next/image";
@@ -16,11 +15,10 @@ const BlogPage = ({ blog }: Props) => {
           placeholder="blur"
           blurDataURL={blog.data.cover?.placeholder}
           loading="lazy"
-          loader={strapiImageLoader}
-          src={blog.data.cover?.url || ""}
+          src={blog.data.cover?.formats?.large?.url || ""}
           alt={blog.data.cover?.alternativeText || "blog cover image"}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 80vw, 70vw"
+          sizes="100vw"
         />
       </AspectRatio>
       <Heading width={"100%"} textAlign={"center"} mb={4} as="h1">

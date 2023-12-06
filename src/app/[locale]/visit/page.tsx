@@ -7,13 +7,10 @@ import NoContent from "@/components/NoContent";
 import { type Locale } from "@/i18n";
 import { Metadata } from "next";
 import React from "react";
-import { RevalidateDefaultTime } from "@/app/defaults";
 
 type Props = {
   params: { locale: Locale };
 };
-
-export const revalidate = RevalidateDefaultTime;
 
 export async function generateMetadata({
   params: { locale },

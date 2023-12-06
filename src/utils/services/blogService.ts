@@ -1,6 +1,6 @@
 import type { SingleAndSeo } from "../types/seoSingleTypes";
+import { FetchApiAuthGet } from "./fetchDefaultsServer";
 import type { Blog, Blogs } from "../types/blogTypes";
-import { FetchApiAuthGet } from "./fetchDefaults";
 import { locales, type Locale } from "@/i18n";
 import qs from "qs";
 

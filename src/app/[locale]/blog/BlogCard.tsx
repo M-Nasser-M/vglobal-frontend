@@ -1,5 +1,4 @@
 "use client";
-import { strapiImageLoader } from "@/utils/other/imageLoader";
 import { BlogWithoutData } from "@/utils/types/blogTypes";
 import Link from "@/components/Link";
 import type { Locale } from "@/i18n";
@@ -30,11 +29,10 @@ const BlogCard = ({ blog }: Props) => {
             placeholder="blur"
             blurDataURL={blog.cover?.placeholder}
             loading="lazy"
-            loader={strapiImageLoader}
-            src={blog.cover?.formats?.medium?.url || ""}
+            src={blog.cover?.formats?.thumbnail?.url || ""}
             alt={blog.cover?.alternativeText || "blog cover image"}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            sizes="100vw"
           />
         </Box>
         <Box p={{ base: 3, sm: 5 }}>

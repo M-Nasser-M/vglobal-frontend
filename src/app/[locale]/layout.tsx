@@ -1,12 +1,12 @@
 import { getPermenantImmigrationPagesLocalised } from "@/utils/services/permenantImmigrationService";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { options } from "@/app/api/auth/[...nextauth]/nextAuthOptions";
-import { LocalesParams, RevalidateDefaultTime } from "../defaults";
 import { ExtendedSession } from "@/utils/types/extendedSession";
 import ContainerWrapper from "@/components/ContainerWrapper";
 import { AppWrappers } from "@/components/AppWrappers";
 import { Navbar } from "@/components/navbar/Navbar";
 import { getServerSession } from "next-auth";
+import { LocalesParams } from "../defaults";
 import { Locale } from "../../i18n";
 import { ReactNode } from "react";
 import {
@@ -22,8 +22,6 @@ type Props = {
   children: ReactNode;
   params: { locale: Locale };
 };
-
-export const revalidate = RevalidateDefaultTime;
 
 export async function generateStaticParams() {
   return LocalesParams();
