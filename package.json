@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "",
+    "deploy:prod": "sst deploy --stage prod",
     "genIntlKeys": "node ./src/utils/other/generateKeysFile.js",
     "nxpull": "i18nexus pull && pnpm genIntlKeys",
     "postinstall": "node ./src/utils/other/fixCal.js"
