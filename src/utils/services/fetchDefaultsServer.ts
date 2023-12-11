@@ -7,7 +7,6 @@ const defaultFetchOptionsGetAuth: RequestInit = {
     Authorization: `Bearer ${serverENV.STRAPI_API_TOKEN}`,
   },
   next: { revalidate: 7200 },
-  cache: "force-cache",
 };
 
 const defaultFetchOptionsPostAuth = (body: object): RequestInit => {
@@ -19,7 +18,6 @@ const defaultFetchOptionsPostAuth = (body: object): RequestInit => {
     },
     body: JSON.stringify(body),
     next: { revalidate: 7200 },
-    cache: "force-cache",
   };
 };
 

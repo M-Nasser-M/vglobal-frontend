@@ -1,10 +1,11 @@
-import NoContent from "@/components/NoContent";
-import { type Locale } from "@/i18n";
-import { getOpenGraph, getTwitter } from "@/utils/other/utils";
 import { getBlogMainSEO, getBlogPage } from "@/utils/services/blogService";
+import { getOpenGraph, getTwitter } from "@/utils/other/utils";
+import { unstable_setRequestLocale } from "next-intl/server";
 import { BlogsSchema } from "@/utils/types/blogTypes";
-import { Metadata } from "next";
+import NoContent from "@/components/NoContent";
 import BlogMainPage from "./BlogMainPage";
+import { type Locale } from "@/i18n";
+import { Metadata } from "next";
 
 type Props = {
   params: { locale: Locale };
@@ -34,15 +35,15 @@ export async function generateMetadata({
 }
 
 const Page = async ({ params, searchParams }: Props) => {
-  const lang = params.locale;
+  unstable_setRequestLocale(params.locale);
   const { page } = searchParams;
 
   const pageNo = page && !Number.isNaN(page) ? Number(page) : 1;
 
-  const response = await getBlogPage(lang, pageNo);
+  const response = await getBlogPage(params.locale, pageNo);
 
   const validateData = BlogsSchema.safeParse(response);
-  const seoResponse = await getBlogMainSEO(lang);
+  const seoResponse = await getBlogMainSEO(params.locale);
   const jsonLd = seoResponse?.data.seo?.structuredData;
 
   if (validateData.success && validateData.data.data.length > 0) {
