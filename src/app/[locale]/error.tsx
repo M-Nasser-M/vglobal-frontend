@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Heading } from "@chakra-ui/react";
+import { Box, Button, Heading, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
 
 export default function Error({
@@ -16,8 +16,9 @@ export default function Error({
   }, [error]);
 
   return (
-    <Box>
-      <Heading as="h2">Something went wrong!</Heading>
+    <Box mt={20}>
+      <Heading as="h2">an Error occured!</Heading>
+      <Text>{error.message}</Text>
       <Button
         onClick={
           // Attempt to recover by trying to re-render the segment
