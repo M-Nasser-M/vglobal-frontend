@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Heading, Text } from "@chakra-ui/react";
+import { Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
 
 export default function Error({
@@ -16,7 +16,14 @@ export default function Error({
   }, [error]);
 
   return (
-    <Box mt={20}>
+    <Flex
+      direction="column"
+      gap={4}
+      w="100%"
+      justify="center"
+      alignItems="center"
+      mt={20}
+    >
       <Heading as="h2">an Error occured!</Heading>
       <Text>{error.message}</Text>
       <Button
@@ -27,6 +34,6 @@ export default function Error({
       >
         Try again
       </Button>
-    </Box>
+    </Flex>
   );
 }

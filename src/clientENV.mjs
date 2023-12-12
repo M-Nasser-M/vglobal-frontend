@@ -6,5 +6,8 @@ export const clientENV = createEnv({
     NEXT_PUBLIC_STRAPI_API_URL: z.string().url(),
     NEXT_PUBLIC_STRAPI_URL: z.string().url(),
   },
-  runtimeEnv: process.env,
+  runtimeEnv: {
+    NEXT_PUBLIC_STRAPI_API_URL: process.env.NEXT_PUBLIC_STRAPI_API_URL,
+    NEXT_PUBLIC_STRAPI_URL: process.env.NEXT_PUBLIC_STRAPI_URL,
+  },
 });

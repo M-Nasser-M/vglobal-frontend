@@ -1,7 +1,5 @@
 import { Certificate } from "aws-cdk-lib/aws-certificatemanager";
 import { HostedZone } from "aws-cdk-lib/aws-route53";
-import { clientENV } from "@/clientENV.mjs";
-import { serverENV } from "@/serverENV.mjs";
 import { NextjsSite } from "sst/constructs";
 import { SSTConfig } from "sst";
 
@@ -19,13 +17,13 @@ export default {
       const site = new NextjsSite(stack, "site", {
         runtime: "nodejs20.x",
         environment: {
-          NEXT_PUBLIC_STRAPI_API_URL: clientENV.NEXT_PUBLIC_STRAPI_API_URL,
-          NEXT_PUBLIC_STRAPI_URL: clientENV.NEXT_PUBLIC_STRAPI_URL,
-          STRAPI_API_TOKEN: serverENV.STRAPI_API_TOKEN,
-          STRAPI_API_URL: serverENV.STRAPI_API_URL,
-          STRAPI_URL: serverENV.STRAPI_URL,
-          NEXTAUTH_SECRET: serverENV.NEXTAUTH_SECRET,
-          NEXTAUTH_URL: serverENV.NEXTAUTH_URL,
+          NEXT_PUBLIC_STRAPI_API_URL: process.env.NEXT_PUBLIC_STRAPI_API_URL!,
+          NEXT_PUBLIC_STRAPI_URL: process.env.NEXT_PUBLIC_STRAPI_URL!,
+          STRAPI_API_TOKEN: process.env.STRAPI_API_TOKEN!,
+          STRAPI_API_URL: process.env.STRAPI_API_URL!,
+          STRAPI_URL: process.env.STRAPI_URL!,
+          NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET!,
+          NEXTAUTH_URL: process.env.NEXTAUTH_URL!,
         },
         customDomain: {
           domainName: "vglobal.ca",

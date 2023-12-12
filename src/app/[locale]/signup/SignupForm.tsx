@@ -1,5 +1,5 @@
 "use client";
-import { SignupFormType, signupFormSchema } from "@/utils/types/authTypes";
+import { type SignupFormType, signupFormSchema } from "@/utils/types/authTypes";
 import { registerUsingEmail } from "@/utils/services/authService";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
