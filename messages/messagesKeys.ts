@@ -6,5 +6,5 @@ export const commonKeys = ["email","password","signin","signout","signup","submi
 export type commonTranslations = Record<typeof commonKeys[number],string>
 export const signupformKeys = ["alreadyAMember","confirmPassword","dateOfBirth","email","firstName","lastName","password","signin","signup"] as const;
 export type signupformTranslations = Record<typeof signupformKeys[number],string>
-export const signinformKeys = ["email","forgotPassword","noaccount","password","signin","signup"] as const;
+export const signinformKeys = ["email","forgotPassword","noaccount","password","pleasesignin","signin","signup"] as const;
 export type signinformTranslations = Record<typeof signinformKeys[number],string>

@@ -24,7 +24,6 @@ const authUsingEmail = async (credentials: CredentialsType) => {
 
 const registerUsingEmail = async (user: SignupFormType) => {
   if (!user?.email || !user?.password) return null;
-
   try {
     const data = await FetchApiPublicPost<RegisterApiResponseType>(
       "/auth/local/register",
@@ -32,12 +31,13 @@ const registerUsingEmail = async (user: SignupFormType) => {
         username: `${user.firstName} ${user.lastName}`,
         email: user.email,
         password: user.password,
-        dateOfBirth: user.dateOfBirth.toISOString().split("T")[0],
+        dateOfBirth: user.dateOfBirth,
       }
     );
     return data;
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
+    return null;
   }
 };
 
@@ -51,6 +51,7 @@ const forgotPassword = async (email: string) => {
     return data;
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
+    return null;
   }
 };
 
@@ -70,6 +71,7 @@ const resetPassword = async (
     return data;
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
+    return null;
   }
 };
 

@@ -92,7 +92,9 @@ export function Navbar({
               display={{ base: "none", xl: "flex" }}
             >
               <Box mr={2} position={"relative"} w={"50px"} h={"50px"}>
-                <Image src={Logo} alt="logo" />
+                <Link href="/">
+                  <Image src={Logo} alt="logo" />
+                </Link>
               </Box>
               <Navlinks
                 permenantImmigrationPrograms={permenantImmigrationPrograms}

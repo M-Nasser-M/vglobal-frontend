@@ -8,13 +8,13 @@ const defaultFetchOptionsGet: RequestInit = {
   next: { revalidate: 3600 },
 };
 
-const defaultFetchOptionsPost = (body: object): RequestInit => {
+const defaultFetchOptionsPost = (req_body: object): RequestInit => {
   return {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(body),
+    body: JSON.stringify(req_body),
     next: { revalidate: 3600 },
   };
 };
@@ -43,6 +43,7 @@ export const FetchApiPublicPost = async <T>(
   options: RequestInit = {}
 ): Promise<T> => {
   const finalOptions = { ...defaultFetchOptionsPost(body), ...options };
+  console.log(finalOptions);
 
   const response = await fetch(
     `${clientENV.NEXT_PUBLIC_STRAPI_API_URL}${url}`,

@@ -8,13 +8,14 @@ import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import {
+  Alert,
+  AlertIcon,
   Box,
   Button,
   Container,
   FormControl,
   FormErrorMessage,
   FormLabel,
-  Heading,
   Input,
   Stack,
   Text,
@@ -61,11 +62,13 @@ const SigninForm = ({ translatinos }: Props) => {
       justifyContent="center"
       alignItems="center"
       maxW="container.sm"
+      marginTop={{ base: "xl", md: "lg", lg: "none" }}
     >
       {redirectPath !== "/" && (
-        <Heading color="red.500" mb="12">
-          Pls SignIn First
-        </Heading>
+        <Alert mb={4} rounded={10} status="info">
+          <AlertIcon />
+          {translatinos.pleasesignin}
+        </Alert>
       )}
       <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={Boolean(errors.email)}>

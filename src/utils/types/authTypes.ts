@@ -17,7 +17,8 @@ export const signupFormSchema = z
       .min(8, "must be at least 8 characters")
       .max(50, "max length is 50 characters")
       .refine((val) => passwordStrength(val).id >= 3, {
-        message: "Password is weak ",
+        message:
+          "Password needs to include number,capital letter, small letter,special character ",
       }),
     confirmPassword: z.string().nonempty("need to confirm password"),
     dateOfBirth: z

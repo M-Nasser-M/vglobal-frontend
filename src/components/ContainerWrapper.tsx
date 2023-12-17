@@ -6,7 +6,7 @@ type Props = { children: React.ReactNode };
 
 const ContainerWrapper = ({ children }: Props) => {
   return (
-    <Container minHeight="100vh" maxW="container.xl">
+    <Container marginTop="lg" minHeight="100vh" maxW="container.xl">
       {children}
     </Container>
   );
