@@ -73,7 +73,13 @@ const Home = ({ params: { locale }, HomeAndSeo, translations }: Props) => {
           {translations.why}
         </Text>
       </Heading>
-      <Stack mb={10} direction="row">
+      <Stack
+        align="center"
+        justify="center"
+        mb={10}
+        gap={4}
+        direction={{ base: "column", lg: "row" }}
+      >
         {HomeAndSeo.data.labelandtooltip?.map((item, index) => (
           <HStack key={index}>
             <Badge fontSize="xl" variant="outline" colorScheme="blue">
@@ -100,7 +106,7 @@ const Home = ({ params: { locale }, HomeAndSeo, translations }: Props) => {
           {translations.services}
         </Text>
       </Heading>
-      <Stack direction={{ base: "column", lg: "row" }}>
+      <Stack gap={2} direction={{ base: "column", lg: "row" }}>
         <Stack
           justifyContent="center"
           alignItems="center"

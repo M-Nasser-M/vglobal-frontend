@@ -62,7 +62,7 @@ const SigninForm = ({ translatinos }: Props) => {
       justifyContent="center"
       alignItems="center"
       maxW="container.sm"
-      marginTop={{ base: "xl", md: "lg", lg: "none" }}
+      paddingTop="20"
     >
       {redirectPath !== "/" && (
         <Alert mb={4} rounded={10} status="info">

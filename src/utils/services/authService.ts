@@ -28,7 +28,7 @@ const registerUsingEmail = async (user: SignupFormType) => {
     const data = await FetchApiPublicPost<RegisterApiResponseType>(
       "/auth/local/register",
       {
-        username: `${user.firstName} ${user.lastName}`,
+        username: `${user.firstName} ${user.lastName} ${user.email}`,
         email: user.email,
         password: user.password,
         dateOfBirth: user.dateOfBirth,

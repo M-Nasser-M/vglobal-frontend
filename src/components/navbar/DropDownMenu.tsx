@@ -2,7 +2,6 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-  Portal,
   PopoverArrow,
   PopoverBody,
   IconButton,
@@ -60,25 +59,19 @@ const DropDownMenu = ({ menuData, triggerTitle }: MenuDataProps) => {
           />
         </Box>
       </PopoverTrigger>
-      <Portal>
-        <PopoverContent
-          mt="2"
-          bg="navbar-background"
-          px="4"
-          width="fit-content"
-        >
-          <PopoverArrow />
-          <PopoverBody>
-            <Stack onClick={onClose}>
-              {menuData.map((item) => (
-                <Link key={item.label} href={item.href}>
-                  <Box as="h4">{item.label}</Box>
-                </Link>
-              ))}
-            </Stack>
-          </PopoverBody>
-        </PopoverContent>
-      </Portal>
+
+      <PopoverContent mt="2" bg="navbar-background" px="4" width="fit-content">
+        <PopoverArrow />
+        <PopoverBody>
+          <Stack onClick={onClose}>
+            {menuData.map((item) => (
+              <Link key={item.label} href={item.href}>
+                <Box as="h4">{item.label}</Box>
+              </Link>
+            ))}
+          </Stack>
+        </PopoverBody>
+      </PopoverContent>
     </Popover>
   );
 };

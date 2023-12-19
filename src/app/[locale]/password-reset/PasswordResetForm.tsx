@@ -51,6 +51,7 @@ const PasswordResetForm = () => {
       justifyContent="center"
       alignItems="center"
       maxW="container.sm"
+      paddingTop="20"
     >
       <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
         <FormControl hidden isInvalid={Boolean(errors.code)}>
