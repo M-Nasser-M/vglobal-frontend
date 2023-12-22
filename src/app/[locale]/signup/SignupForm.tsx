@@ -48,22 +48,14 @@ const SignupForm = ({ translations }: Props) => {
       <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={Boolean(errors.firstName)}>
           <FormLabel htmlFor="firstName">{translations.firstName}</FormLabel>
-          <Input
-            id="firstName"
-            placeholder="firstName"
-            {...register("firstName")}
-          />
+          <Input id="firstName" {...register("firstName")} />
           <FormErrorMessage>
             {errors.firstName && errors.firstName.message}
           </FormErrorMessage>
         </FormControl>
         <FormControl isInvalid={Boolean(errors.lastName)}>
           <FormLabel htmlFor="lastName">{translations.lastName}</FormLabel>
-          <Input
-            id="lastName"
-            placeholder="lastName"
-            {...register("lastName")}
-          />
+          <Input id="lastName" {...register("lastName")} />
           <FormErrorMessage>
             {errors.lastName && errors.lastName.message}
           </FormErrorMessage>
@@ -87,24 +79,14 @@ const SignupForm = ({ translations }: Props) => {
         </FormControl>
         <FormControl isInvalid={Boolean(errors.email)}>
           <FormLabel htmlFor="email">{translations.email}</FormLabel>
-          <Input
-            id="email"
-            type="email"
-            placeholder="example@domain.com"
-            {...register("email")}
-          />
+          <Input id="email" type="email" {...register("email")} />
           <FormErrorMessage>
             {errors.email && errors.email.message}
           </FormErrorMessage>
         </FormControl>
         <FormControl isInvalid={Boolean(errors.password)}>
           <FormLabel htmlFor="password">{translations.password}</FormLabel>
-          <Input
-            id="password"
-            type="password"
-            placeholder="********"
-            {...register("password")}
-          />
+          <Input id="password" type="password" {...register("password")} />
           <FormErrorMessage>
             {errors.password && errors.password.message}
           </FormErrorMessage>
@@ -116,7 +98,6 @@ const SignupForm = ({ translations }: Props) => {
           <Input
             id="confirmPassword"
             type="password"
-            placeholder="********"
             {...register("confirmPassword")}
           />
           <FormErrorMessage>
