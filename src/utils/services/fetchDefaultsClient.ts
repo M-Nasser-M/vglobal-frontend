@@ -43,7 +43,6 @@ export const FetchApiPublicPost = async <T>(
   options: RequestInit = {}
 ): Promise<T> => {
   const finalOptions = { ...defaultFetchOptionsPost(body), ...options };
-  console.log(finalOptions);
 
   const response = await fetch(
     `${clientENV.NEXT_PUBLIC_STRAPI_API_URL}${url}`,

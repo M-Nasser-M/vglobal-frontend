@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import type { signupformTranslations } from "../../../../messages/messagesKeys";
 import { atom, useAtom } from "jotai";
+
 const emailExistErrorAtom = atom<boolean>(false);
 
 type Props = { translations: signupformTranslations };
@@ -29,7 +30,8 @@ const SignupForm = ({ translations }: Props) => {
 
   const onSubmit = async (data: SignupFormType) => {
     const res = await registerUsingEmail(data);
-    if (!res) setEmailExistError(true);
+
+    if (res === null) setEmailExistError(true);
     if (res?.user) router.push("/signin");
   };
 
@@ -121,10 +123,11 @@ const SignupForm = ({ translations }: Props) => {
             {errors.confirmPassword && errors.confirmPassword.message}
           </FormErrorMessage>
         </FormControl>
-        <FormErrorMessage>
-          {errors.root && errors.root.message}
-          {emailExistError && "Email Already Exists"}
-        </FormErrorMessage>
+        <FormControl isInvalid={emailExistError}>
+          <FormErrorMessage>
+            {emailExistError && "Email Already Exists"}
+          </FormErrorMessage>
+        </FormControl>
         <Button
           colorScheme="red"
           mt={4}
