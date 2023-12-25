@@ -33,7 +33,7 @@ export const getBlogPage = async (
 ) => {
   try {
     const queryString = qs.stringify({
-      populate: { cover: true },
+      populate: ["cover"],
       locale,
       pagination: {
         page,
@@ -84,6 +84,31 @@ export const getBlogsWithAllLocales = async (
       pagination: {
         page,
         pageSize,
+      },
+    });
+
+    const response = await FetchApiAuthGet<Blogs>(`/blogs?${queryString}`);
+
+    return response;
+  } catch (error: unknown) {
+    if (error instanceof Error) console.error(error.message);
+    return null;
+  }
+};
+
+export const getBlogWithSlug = async (slug: string) => {
+  try {
+    const queryString = qs.stringify({
+      populate: {
+        seo: {
+          populate: { metaImage: true, metaSocial: { populate: "image" } },
+        },
+        cover: true,
+      },
+      filters: {
+        slug: {
+          $eq: slug,
+        },
       },
     });
 

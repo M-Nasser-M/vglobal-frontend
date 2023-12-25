@@ -10,8 +10,6 @@ import Link from "@/components/Link";
 import { Box } from "@chakra-ui/react";
 import DropDownMenu from "./DropDownMenu";
 
-import React from "react";
-
 type Props = {
   lang: string;
   permenantImmigrationPrograms: PermenantImmigrationPages | undefined | null;

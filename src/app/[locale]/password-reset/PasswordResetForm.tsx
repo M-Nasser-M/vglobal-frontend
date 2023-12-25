@@ -3,7 +3,7 @@ import { resetPassword } from "@/utils/services/authService";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { redirect, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
-import React from "react";
+
 import {
   PasswordResetFormSchema,
   PasswordResetFormType,

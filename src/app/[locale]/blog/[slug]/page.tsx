@@ -1,24 +1,24 @@
 import {
-  getBlogWithID,
+  getBlogWithSlug,
   getBlogsWithAllLocales,
 } from "@/utils/services/blogService";
 import NoContent from "@/components/NoContent";
 import BlogPage from "./BlogPage";
-import React from "react";
+
 import { Metadata } from "next";
-import { BlogSchema } from "@/utils/types/blogTypes";
+import { BlogsSchema } from "@/utils/types/blogTypes";
 import { getOpenGraph, getTwitter } from "@/utils/other/utils";
 import { unstable_setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n";
 
 type Props = {
-  params: { id: string; locale: Locale };
+  params: { slug: string; locale: Locale };
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const response = await getBlogWithID(params.id);
-  const seo = response?.data.seo;
+  const response = await getBlogWithSlug(params.slug);
+  const seo = response?.data[0].seo;
   const twitter = seo?.metaSocial && getTwitter(seo?.metaSocial);
   const openGraph = seo?.metaSocial && getOpenGraph(seo?.metaSocial);
   return {
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export async function generateStaticParams() {
   const blogs = await getBlogsWithAllLocales(1, 100);
   const params = blogs?.data.map((blog) => ({
-    id: String(blog.id),
+    slug: blog.slug,
     locale: blog.locale,
   }));
 
@@ -45,17 +45,18 @@ export async function generateStaticParams() {
 
 const Page = async ({ params }: Props) => {
   unstable_setRequestLocale(params.locale);
-  const response = await getBlogWithID(params.id);
-  const validateData = BlogSchema.safeParse(response);
+  const response = await getBlogWithSlug(params.slug);
+
+  const validateData = BlogsSchema.safeParse(response);
 
   if (validateData.success) {
-    const jsonLd = validateData.data.data.seo?.structuredData;
+    const jsonLd = validateData.data.data[0].seo?.structuredData;
     return (
       <>
         {jsonLd && (
           <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
         )}
-        <BlogPage blog={validateData.data} />
+        <BlogPage blog={validateData.data.data[0]} />
       </>
     );
   }

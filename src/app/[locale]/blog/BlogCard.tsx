@@ -3,7 +3,7 @@ import { BlogWithoutData } from "@/utils/types/blogTypes";
 import Link from "@/components/Link";
 import type { Locale } from "@/i18n";
 import Image from "next/image";
-import React from "react";
+
 import {
   Box,
   Heading,
@@ -37,7 +37,7 @@ const BlogCard = ({ blog }: Props) => {
         </Box>
         <Box p={{ base: 3, sm: 5 }}>
           <Box mb={6}>
-            <Link href={`/blog/${blog.id}`}>
+            <Link href={`/blog/${blog.slug}`}>
               <Heading
                 fontSize={{ base: "lg", sm: "2xl" }}
                 fontWeight="bold"

@@ -53,5 +53,11 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/(ar|en)/:path*", "/signin"],
+  matcher: [
+    "/",
+    "/(ar|en)/:path*",
+    "/signin",
+    "/password-reset",
+    "/email-confirmed",
+  ],
 };

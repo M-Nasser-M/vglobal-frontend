@@ -3,7 +3,7 @@
 import { forgotPassword } from "@/utils/services/authService";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import React from "react";
+
 import {
   ForgotPasswordFormSchema,
   ForgotPasswordFormType,

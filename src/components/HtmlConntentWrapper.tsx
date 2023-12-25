@@ -1,11 +1,15 @@
+import { Box } from "@chakra-ui/react";
+
 type Props = { html: string };
 
 const HtmlContentWrapper = ({ html }: Props) => {
   return (
-    <article
-      style={{ marginTop: "5rem", marginBottom: "1rem" }}
+    <Box
+      as="article"
+      mt={24}
+      p={2}
       dangerouslySetInnerHTML={{ __html: html }}
-    ></article>
+    ></Box>
   );
 };
 

@@ -5,7 +5,7 @@ import { unstable_setRequestLocale } from "next-intl/server";
 import NoContent from "@/components/NoContent";
 import type { Locale } from "@/i18n";
 import { Metadata } from "next";
-import React from "react";
+
 import {
   getPermenantImmigrationPageWithIdAndSEO,
   getPermenantImmigrationPagesWithAllLocales,

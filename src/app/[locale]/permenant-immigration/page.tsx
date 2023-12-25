@@ -1,6 +1,5 @@
 import { unstable_setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n";
-import React from "react";
 
 type Props = { params: { locale: Locale } };
 

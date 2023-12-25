@@ -6,10 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "@/components/Link";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
-  Alert,
-  AlertIcon,
   Box,
   Button,
   Container,
@@ -19,6 +17,7 @@ import {
   Input,
   Stack,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 
 type Props = { translatinos: signinformTranslations };
@@ -27,6 +26,18 @@ const SigninForm = ({ translatinos }: Props) => {
   const searchParams = useSearchParams();
   const redirectPath = searchParams.get("callbackUrl") || "/";
   const router = useRouter();
+  const toast = useToast();
+
+  useEffect(() => {
+    if (redirectPath !== "/") {
+      toast({
+        title: translatinos.pleasesignin,
+        status: "info",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+  }, [redirectPath, toast, translatinos.pleasesignin]);
 
   const {
     handleSubmit,
@@ -42,14 +53,18 @@ const SigninForm = ({ translatinos }: Props) => {
         password: data.password,
         redirect: false,
       });
+      toast({
+        title: translatinos.loginsuccess,
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
       router.push(redirectPath);
       router.refresh();
       if (res?.error) {
         setCredentialsError(true);
       }
     } catch (error) {
-      console.error(error);
-
       if (error instanceof Error) console.error(error.message);
     }
   };
@@ -64,33 +79,17 @@ const SigninForm = ({ translatinos }: Props) => {
       maxW="container.sm"
       paddingTop="20"
     >
-      {redirectPath !== "/" && (
-        <Alert mb={4} rounded={10} status="info">
-          <AlertIcon />
-          {translatinos.pleasesignin}
-        </Alert>
-      )}
       <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={Boolean(errors.email)}>
           <FormLabel htmlFor="email">{translatinos.email}</FormLabel>
-          <Input
-            id="email"
-            type="email"
-            placeholder="example@domain.com"
-            {...register("email")}
-          />
+          <Input id="email" type="email" {...register("email")} />
           <FormErrorMessage>
             {errors.email && errors.email.message}
           </FormErrorMessage>
         </FormControl>
         <FormControl isInvalid={Boolean(errors.password)}>
           <FormLabel htmlFor="password">{translatinos.password}</FormLabel>
-          <Input
-            id="password"
-            type="password"
-            placeholder="********"
-            {...register("password")}
-          />
+          <Input id="password" type="password" {...register("password")} />
           <FormErrorMessage>
             {errors.password && errors.password.message}
           </FormErrorMessage>
@@ -98,7 +97,7 @@ const SigninForm = ({ translatinos }: Props) => {
         <FormControl isInvalid={Boolean(errors.root || credentialsError)}>
           <FormErrorMessage>
             {errors.root && errors.root.message}
-            {credentialsError && "Invalid credentials"}
+            {credentialsError && "Invalid credentials or email not confirmed"}
           </FormErrorMessage>
         </FormControl>
         <Button
@@ -119,7 +118,6 @@ const SigninForm = ({ translatinos }: Props) => {
           <Text>
             {translatinos.noaccount}
             <Link color="red.400" href="/signup">
-              {" "}
               {translatinos.signup}
             </Link>
           </Text>

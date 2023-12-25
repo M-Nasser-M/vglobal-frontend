@@ -11,6 +11,7 @@ export const DatumSchema = z.object({
   createdAt: z.coerce.date(),
   updatedAt: z.coerce.date(),
   publishedAt: z.coerce.date(),
+  slug: z.string(),
   locale: z.string(),
   seo: z.union([z.null(), SeoSchema]).optional(),
   cover: z.union([z.null(), ImageSchema]).optional(),
@@ -30,4 +31,4 @@ export const BlogSchema = z.object({
 
 export type Blog = z.infer<typeof BlogSchema>;
 
-export type BlogWithoutData = z.infer<typeof DatumSchema>;
+export type BlogData = z.infer<typeof DatumSchema>;

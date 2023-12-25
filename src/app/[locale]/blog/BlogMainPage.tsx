@@ -6,7 +6,6 @@ import { createQueryString } from "@/utils/other/utils";
 import { Blogs } from "@/utils/types/blogTypes";
 import type { Locale } from "@/i18n";
 import BlogCard from "./BlogCard";
-import React from "react";
 
 type Props = { blogs: Blogs; currentPage: number; params: { locale: Locale } };
 
