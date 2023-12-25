@@ -1,5 +1,5 @@
 "use client";
-import { BlogWithoutData } from "@/utils/types/blogTypes";
+
 import Link from "@/components/Link";
 import type { Locale } from "@/i18n";
 import Image from "next/image";
@@ -11,8 +11,9 @@ import {
   Tooltip,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { BlogData } from "@/utils/types/blogTypes";
 
-type Props = { blog: BlogWithoutData; params: { locale: Locale } };
+type Props = { blog: BlogData; params: { locale: Locale } };
 
 const BlogCard = ({ blog }: Props) => {
   return (
