@@ -65,3 +65,11 @@ export const PasswordResetFormSchema = z
   });
 
 export type PasswordResetFormType = z.infer<typeof PasswordResetFormSchema>;
+
+export const ResendConfirmationMailFormSchema = z.object({
+  email: z.string().email("not a valid email").nonempty("email is required"),
+});
+
+export type ResendConfirmationMailFormType = z.infer<
+  typeof ResendConfirmationMailFormSchema
+>;

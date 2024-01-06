@@ -2,7 +2,7 @@
 import { useGetLocalFromPathname } from "@/utils/hooks/useGetLocalFromPathname";
 import { Link as ChakraLink, type LinkProps } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 type Props = {
   children: ReactNode;

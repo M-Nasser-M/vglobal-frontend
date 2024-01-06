@@ -16,6 +16,7 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 
 const PasswordResetForm = () => {
@@ -27,6 +28,8 @@ const PasswordResetForm = () => {
     resolver: zodResolver(PasswordResetFormSchema),
   });
 
+  const toast = useToast();
+
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
 
@@ -37,9 +40,21 @@ const PasswordResetForm = () => {
         data.password,
         data.confirmPassword
       );
+      toast({
+        title: "Password Reset Succesfully",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
       if (res) redirect("/signin");
     } catch (error) {
       if (error instanceof Error) console.error(error.message);
+      toast({
+        title: "Error Resetting Password",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
     }
   };
 

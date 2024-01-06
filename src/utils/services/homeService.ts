@@ -1,5 +1,5 @@
 import type { HomeAndSeoType } from "../types/homeTypes";
-import { FetchApiAuthGet } from "./fetchDefaultsServer";
+import { serverApiAuth } from "./fetchApiServer";
 import type { Locale } from "@/i18n";
 import qs from "qs";
 
@@ -15,7 +15,7 @@ export const getHomeArticleAndSEO = async (locale: Locale) => {
       locale,
     });
 
-    const response = await FetchApiAuthGet<HomeAndSeoType>(
+    const response = await serverApiAuth.get<HomeAndSeoType>(
       `/home?${queryString}`
     );
 

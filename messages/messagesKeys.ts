@@ -1,10 +1,12 @@
 export const homeKeys = ["immigrate","register","services","study","subheader1","subheader2","visit","why"] as const;
 export type homeTranslations = Record<typeof homeKeys[number],string>
+export const footerKeys = ["contact-us","privacy-policy"] as const;
+export type footerTranslations = Record<typeof footerKeys[number],string>
 export const navlinksKeys = ["/","about-us","assessment","blog","book-consult","permenant-immigration","study","visit"] as const;
 export type navlinksTranslations = Record<typeof navlinksKeys[number],string>
 export const commonKeys = ["email","emailconfirmed","password","redirect","signin","signout","signup","submit"] as const;
 export type commonTranslations = Record<typeof commonKeys[number],string>
 export const signupformKeys = ["alreadyAMember","confirmPassword","dateOfBirth","email","firstName","lastName","password","signin","signup"] as const;
 export type signupformTranslations = Record<typeof signupformKeys[number],string>
-export const signinformKeys = ["email","forgotPassword","loginsuccess","noaccount","password","pleasesignin","signin","signup"] as const;
+export const signinformKeys = ["credentialserror","email","forgotPassword","loginsuccess","noaccount","password","pleasesignin","resendmail","signin","signup"] as const;
 export type signinformTranslations = Record<typeof signinformKeys[number],string>

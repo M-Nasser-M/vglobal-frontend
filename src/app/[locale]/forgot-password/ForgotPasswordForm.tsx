@@ -16,6 +16,7 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 
 const ForgotPasswordForm = () => {
@@ -27,11 +28,27 @@ const ForgotPasswordForm = () => {
     resolver: zodResolver(ForgotPasswordFormSchema),
   });
 
+  const toast = useToast();
+
   const onSubmit = async (data: ForgotPasswordFormType) => {
     try {
       await forgotPassword(data.email);
+
+      toast({
+        title: "Check your Email For Reset Link",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
     } catch (error) {
       if (error instanceof Error) console.error(error.message);
+
+      toast({
+        title: "An Error Occcured Please Try Again later",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
     }
   };
   return (
@@ -47,12 +64,7 @@ const ForgotPasswordForm = () => {
       <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
         <FormControl>
           <FormLabel htmlFor="email">Email</FormLabel>
-          <Input
-            id="email"
-            type="email"
-            placeholder="example@domain.com"
-            {...register("email")}
-          />
+          <Input id="email" type="email" {...register("email")} />
           <FormErrorMessage>
             {errors.email && errors.email.message}
           </FormErrorMessage>

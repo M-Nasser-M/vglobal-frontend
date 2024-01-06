@@ -53,16 +53,21 @@ const SigninForm = ({ translatinos }: Props) => {
         password: data.password,
         redirect: false,
       });
-      toast({
-        title: translatinos.loginsuccess,
-        status: "success",
-        duration: 9000,
-        isClosable: true,
-      });
-      router.push(redirectPath);
-      router.refresh();
-      if (res?.error) {
+
+      if (res?.error || !res) {
         setCredentialsError(true);
+        return;
+      }
+
+      if (res) {
+        toast({
+          title: translatinos.loginsuccess,
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+        });
+        router.push(redirectPath);
+        router.refresh();
       }
     } catch (error) {
       if (error instanceof Error) console.error(error.message);
@@ -97,7 +102,14 @@ const SigninForm = ({ translatinos }: Props) => {
         <FormControl isInvalid={Boolean(errors.root || credentialsError)}>
           <FormErrorMessage>
             {errors.root && errors.root.message}
-            {credentialsError && "Invalid credentials or email not confirmed"}
+            {credentialsError && (
+              <Stack w="100%" direction="row" justify="space-between">
+                <Text color="inherit">{translatinos.credentialserror}</Text>
+                <Link href="/resend-confirmation-mail">
+                  {translatinos.resendmail}
+                </Link>
+              </Stack>
+            )}
           </FormErrorMessage>
         </FormControl>
         <Button

@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { useColorModeValue, Button } from "@chakra-ui/react";
 
 interface PaginationButtonProps {

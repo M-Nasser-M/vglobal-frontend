@@ -12,6 +12,7 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 import type { signupformTranslations } from "../../../../messages/messagesKeys";
 import { atom, useAtom } from "jotai";
@@ -20,6 +21,7 @@ const emailExistErrorAtom = atom<boolean>(false);
 
 type Props = { translations: signupformTranslations };
 const SignupForm = ({ translations }: Props) => {
+  const toast = useToast();
   const [emailExistError, setEmailExistError] = useAtom(emailExistErrorAtom);
   const {
     handleSubmit,
@@ -32,7 +34,16 @@ const SignupForm = ({ translations }: Props) => {
     const res = await registerUsingEmail(data);
 
     if (res === null) setEmailExistError(true);
-    if (res?.user) router.push("/signin");
+    if (res?.user) {
+      toast({
+        title: "Confirm Email",
+        description: "Please Check your email to activate your account",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+      router.push("/signin");
+    }
   };
 
   return (

@@ -1,5 +1,5 @@
 import type { ArticleAndSeo } from "../types/articleAndSeoTypes";
-import { FetchApiAuthGet } from "./fetchDefaultsServer";
+import { serverApiAuth } from "./fetchApiServer";
 import type { Locale } from "@/i18n";
 import qs from "qs";
 
@@ -14,7 +14,7 @@ export const getAboutUsArticleAndSEO = async (locale: Locale) => {
       locale,
     });
 
-    const response = await FetchApiAuthGet<ArticleAndSeo>(
+    const response = await serverApiAuth.get<ArticleAndSeo>(
       `/about-us?${queryString}`
     );
 

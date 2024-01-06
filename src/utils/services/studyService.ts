@@ -1,7 +1,7 @@
 import type { ArticleAndSeo } from "../types/articleAndSeoTypes";
-import { FetchApiAuthGet } from "./fetchDefaultsServer";
 import type { Locale } from "@/i18n";
 import qs from "qs";
+import { serverApiAuth } from "./fetchApiServer";
 
 export const getStudyArticleAndSEO = async (locale: Locale) => {
   try {
@@ -14,7 +14,7 @@ export const getStudyArticleAndSEO = async (locale: Locale) => {
       locale,
     });
 
-    const response = await FetchApiAuthGet<ArticleAndSeo>(
+    const response = await serverApiAuth.get<ArticleAndSeo>(
       `/study?${queryString}`
     );
 

@@ -7,6 +7,7 @@ const HtmlContentWrapper = ({ html }: Props) => {
     <Box
       as="article"
       mt={24}
+      mb={8}
       p={2}
       dangerouslySetInnerHTML={{ __html: html }}
     ></Box>

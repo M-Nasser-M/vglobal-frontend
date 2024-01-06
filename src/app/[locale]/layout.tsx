@@ -14,9 +14,12 @@ import {
   navlinksKeys,
   type commonTranslations,
   type navlinksTranslations,
+  footerKeys,
+  type footerTranslations,
 } from "../../../messages/messagesKeys";
 
 import "./global.css";
+import Footer from "@/components/Footer";
 
 type Props = {
   children: ReactNode;
@@ -32,9 +35,10 @@ export default async function RootLayout({ children, params }: Props) {
   unstable_setRequestLocale(locale);
   const session = await getServerSession(options);
 
-  const [tCommon, tNavlinks] = await Promise.all([
+  const [tCommon, tNavlinks, tFooter] = await Promise.all([
     getTranslations("common"),
     getTranslations("navlinks"),
+    getTranslations("footer"),
   ]);
 
   const commonTranslations = commonKeys.reduce((obj, key) => {
@@ -48,7 +52,10 @@ export default async function RootLayout({ children, params }: Props) {
   }, {} as navlinksTranslations);
 
   const translations = { ...commonTranslations, ...navlinksTranslations };
-
+  const footerTranslations = footerKeys.reduce((obj, key) => {
+    obj[key] = tFooter(key);
+    return obj;
+  }, {} as footerTranslations);
   const permenantImmigrationPrograms =
     await getPermenantImmigrationPagesLocalised(locale);
 
@@ -63,6 +70,7 @@ export default async function RootLayout({ children, params }: Props) {
             translations={translations}
           />
           <ContainerWrapper>{children}</ContainerWrapper>
+          <Footer translations={footerTranslations} />
         </AppWrappers>
       </body>
     </html>

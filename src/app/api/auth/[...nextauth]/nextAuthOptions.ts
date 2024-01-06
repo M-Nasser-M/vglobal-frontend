@@ -1,9 +1,9 @@
-import { FetchApiPublicGet } from "@/utils/services/fetchDefaultsClient";
 import { authUsingEmail } from "@/utils/services/authService";
 import Credentials from "next-auth/providers/credentials";
 import type { AdapterUser } from "next-auth/adapters";
 import type { AuthOptions, User } from "next-auth";
 import type { JWT } from "next-auth/jwt";
+import { serverApi } from "@/utils/services/fetchApiServer";
 
 export const options: AuthOptions = {
   providers: [
@@ -16,9 +16,12 @@ export const options: AuthOptions = {
       async authorize(credentials) {
         try {
           const data = await authUsingEmail(credentials);
+
           if (data) {
             if (!data.user.confirmed)
               throw new Error("User Email not Confirmed");
+
+            if (data.user.blocked) throw new Error("User Is Blocked");
 
             const userToken = {
               ...data.user,
@@ -64,7 +67,7 @@ export const options: AuthOptions = {
       }
       if (isSignIn) {
         try {
-          const response = await FetchApiPublicGet<{
+          const response = await serverApi.get<{
             jwt: JWT;
             user: User | AdapterUser;
           }>(

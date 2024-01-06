@@ -2,13 +2,22 @@
 
 import {
   type commonTranslations,
-  navlinksKeys,
   type navlinksTranslations,
 } from "../../../messages/messagesKeys";
 import { PermenantImmigrationPages } from "@/utils/types/permenantImmigrationPageTypes";
 import Link from "@/components/Link";
 import { Box } from "@chakra-ui/react";
 import DropDownMenu from "./DropDownMenu";
+
+const navlinksKeys = [
+  "permenant-immigration",
+  "study",
+  "visit",
+  "assessment",
+  "book-consult",
+  "about-us",
+  "blog",
+] as const;
 
 type Props = {
   lang: string;
@@ -21,6 +30,7 @@ const Navlinks = ({ permenantImmigrationPrograms, translations }: Props) => {
     label: item.title,
     href: `/permenant-immigration/${item.id}`,
   }));
+
   return navlinksKeys.map((navLink, index) => (
     <Box as={"nav"} key={index}>
       {navLink !== "permenant-immigration" && (

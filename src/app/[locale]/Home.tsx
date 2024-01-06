@@ -11,15 +11,20 @@ import {
   Badge,
   Box,
   Button,
+  Card,
+  CardBody,
   HStack,
   Heading,
   Icon,
   Stack,
   Text,
   Tooltip,
+  useColorModeValue,
+  useDisclosure,
 } from "@chakra-ui/react";
 import type { homeTranslations } from "../../../messages/messagesKeys";
 import type { Locale } from "@/i18n";
+import Link from "@/components/Link";
 
 type Props = {
   params: { locale: Locale };
@@ -86,17 +91,7 @@ const Home = ({ params: { locale }, HomeAndSeo, translations }: Props) => {
               <Text color="default-text" as="span">
                 {item.label}
               </Text>
-              <Tooltip label={item.tooltip} aria-label="A tooltip">
-                <Box as="span">
-                  <Icon
-                    ml={1}
-                    color="default-text"
-                    display="inline-block"
-                    aria-label="A tooltip"
-                    as={BsInfoCircleFill}
-                  />
-                </Box>
-              </Tooltip>
+              {TooltipWithClick(item)}
             </Badge>
           </HStack>
         ))}
@@ -106,58 +101,139 @@ const Home = ({ params: { locale }, HomeAndSeo, translations }: Props) => {
           {translations.services}
         </Text>
       </Heading>
-      <Stack gap={2} direction={{ base: "column", lg: "row" }}>
-        <Stack
-          justifyContent="center"
-          alignItems="center"
-          direction="column"
-          spacing={4}
+      <Stack gap={4} direction={{ base: "column", lg: "row" }}>
+        <Card
+          width={{ base: "full", md: "33%" }}
+          bgColor={useColorModeValue("InfoBackground", "navbar-background")}
         >
-          <Image src={immigrate} alt="Immigrate" width={200} height={200} />
-          <Heading color="blue.500" mb={4} fontWeight={600} lineHeight={"110%"}>
-            <Text fontSize={{ base: "xl", sm: "2xl", md: "4xl" }} as={"span"}>
-              {translations.immigrate}
-            </Text>
-          </Heading>
-          <Text fontSize={{ base: "md", sm: "lg" }}>
-            {HomeAndSeo.data.immigrate}
-          </Text>
-        </Stack>
-        <Stack
-          justifyContent="center"
-          alignItems="center"
-          direction="column"
-          spacing={4}
+          <CardBody>
+            <Stack
+              justifyContent="center"
+              alignItems="center"
+              direction="column"
+              spacing={4}
+            >
+              <Image src={immigrate} alt="Immigrate" width={200} height={200} />
+              <Heading
+                color="blue.500"
+                mb={4}
+                fontWeight={600}
+                lineHeight={"110%"}
+              >
+                <Link href="permenant-immigration">
+                  <Text
+                    fontSize={{ base: "xl", sm: "2xl", md: "4xl" }}
+                    as={"span"}
+                  >
+                    {translations.immigrate}
+                  </Text>
+                </Link>
+              </Heading>
+              <Text fontSize={{ base: "md", sm: "lg" }}>
+                {HomeAndSeo.data.immigrate}
+              </Text>
+            </Stack>
+          </CardBody>
+        </Card>
+        <Card
+          width={{ base: "full", md: "33%" }}
+          bgColor={useColorModeValue("InfoBackground", "navbar-background")}
         >
-          <Image src={visit} alt="visit" width={200} height={200} />
-          <Heading color="blue.500" mb={4} fontWeight={600} lineHeight={"110%"}>
-            <Text fontSize={{ base: "xl", sm: "2xl", md: "4xl" }} as={"span"}>
-              {translations.visit}
-            </Text>
-          </Heading>
-          <Text fontSize={{ base: "md", sm: "lg" }}>
-            {HomeAndSeo.data.visit}
-          </Text>
-        </Stack>
-        <Stack
-          justifyContent="center"
-          alignItems="center"
-          direction="column"
-          spacing={4}
+          <CardBody>
+            <Stack
+              justifyContent="center"
+              alignItems="center"
+              direction="column"
+              spacing={4}
+            >
+              <Image src={visit} alt="visit" width={200} height={200} />
+              <Heading
+                color="blue.500"
+                mb={4}
+                fontWeight={600}
+                lineHeight={"110%"}
+              >
+                <Link href="visit">
+                  <Text
+                    fontSize={{ base: "xl", sm: "2xl", md: "4xl" }}
+                    as={"span"}
+                  >
+                    {translations.visit}
+                  </Text>
+                </Link>
+              </Heading>
+              <Text fontSize={{ base: "md", sm: "lg" }}>
+                {HomeAndSeo.data.visit}
+              </Text>
+            </Stack>
+          </CardBody>
+        </Card>
+        <Card
+          width={{ base: "full", md: "33%" }}
+          bgColor={useColorModeValue("InfoBackground", "navbar-background")}
         >
-          <Image src={study} alt="study" width={200} height={200} />
-          <Heading color="blue.500" mb={4} fontWeight={600} lineHeight={"110%"}>
-            <Text fontSize={{ base: "xl", sm: "2xl", md: "4xl" }} as={"span"}>
-              {translations.study}
-            </Text>
-          </Heading>
-          <Text fontSize={{ base: "md", sm: "lg" }}>
-            {HomeAndSeo.data.study}
-          </Text>
-        </Stack>
+          <CardBody>
+            <Stack
+              justifyContent="center"
+              alignItems="center"
+              direction="column"
+              spacing={4}
+            >
+              <Image src={study} alt="study" width={200} height={200} />
+              <Heading
+                color="blue.500"
+                mb={4}
+                fontWeight={600}
+                lineHeight={"110%"}
+              >
+                <Link href="study">
+                  <Text
+                    fontSize={{ base: "xl", sm: "2xl", md: "4xl" }}
+                    as={"span"}
+                  >
+                    {translations.study}
+                  </Text>
+                </Link>
+              </Heading>
+              <Text fontSize={{ base: "md", sm: "lg" }}>
+                {HomeAndSeo.data.study}
+              </Text>
+            </Stack>
+          </CardBody>
+        </Card>
       </Stack>
     </Stack>
   );
 };
 
 export default Home;
+
+function TooltipWithClick(item: {
+  label: string | null;
+  tooltip: string | null;
+}) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  return (
+    <Tooltip
+      label={item.tooltip}
+      onClose={onClose}
+      isOpen={isOpen}
+      aria-label="A tooltip"
+    >
+      <Box
+        onMouseEnter={onOpen}
+        onMouseLeave={onClose}
+        onClick={onOpen}
+        as="span"
+      >
+        <Icon
+          ml={1}
+          color="default-text"
+          display="inline-block"
+          aria-label="A tooltip"
+          as={BsInfoCircleFill}
+        />
+      </Box>
+    </Tooltip>
+  );
+}

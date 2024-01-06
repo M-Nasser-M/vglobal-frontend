@@ -1,5 +1,5 @@
 import type { ArticleAndSeo } from "../types/articleAndSeoTypes";
-import { FetchApiAuthGet } from "./fetchDefaultsServer";
+import { serverApiAuth } from "./fetchApiServer";
 import { locales, type Locale } from "@/i18n";
 import qs from "qs";
 import type {
@@ -18,7 +18,7 @@ export const getPermenantImmigrationArticleAndSEO = async (locale: Locale) => {
       locale,
     });
 
-    const response = await FetchApiAuthGet<ArticleAndSeo>(
+    const response = await serverApiAuth.get<ArticleAndSeo>(
       `/permenant-immigration?${queryString}`
     );
 
@@ -51,7 +51,7 @@ export const getPermenantImmigrationPagesWithAllLocales = async (
       },
     });
 
-    const response = await FetchApiAuthGet<PermenantImmigrationPages>(
+    const response = await serverApiAuth.get<PermenantImmigrationPages>(
       `/permenant-immigration-pages?${queryString}`
     );
 
@@ -72,7 +72,7 @@ export const getPermenantImmigrationPageWithIdAndSEO = async (id: string) => {
       },
     });
 
-    const response = await FetchApiAuthGet<PermenantImmigrationPage>(
+    const response = await serverApiAuth.get<PermenantImmigrationPage>(
       `/permenant-immigration-pages/${id}?${queryString}`
     );
 
@@ -89,7 +89,7 @@ export const getPermenantImmigrationPagesLocalised = async (locale: Locale) => {
       locale,
     });
 
-    const response = await FetchApiAuthGet<PermenantImmigrationPages>(
+    const response = await serverApiAuth.get<PermenantImmigrationPages>(
       `/permenant-immigration-pages?${queryString}`
     );
 

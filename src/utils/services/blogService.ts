@@ -1,8 +1,8 @@
 import type { SingleAndSeo } from "../types/seoSingleTypes";
-import { FetchApiAuthGet } from "./fetchDefaultsServer";
 import type { Blog, Blogs } from "../types/blogTypes";
 import { locales, type Locale } from "@/i18n";
 import qs from "qs";
+import { serverApiAuth } from "./fetchApiServer";
 
 export const getBlogMainSEO = async (locale: Locale) => {
   try {
@@ -15,7 +15,7 @@ export const getBlogMainSEO = async (locale: Locale) => {
       locale,
     });
 
-    const response = await FetchApiAuthGet<SingleAndSeo>(
+    const response = await serverApiAuth.get<SingleAndSeo>(
       `/blog-main?${queryString}`
     );
 
@@ -41,7 +41,7 @@ export const getBlogPage = async (
       },
     });
 
-    const response = await FetchApiAuthGet<Blogs>(`/blogs?${queryString}`);
+    const response = await serverApiAuth.get<Blogs>(`/blogs?${queryString}`);
 
     return response;
   } catch (error: unknown) {
@@ -61,7 +61,9 @@ export const getBlogWithID = async (id: string) => {
       },
     });
 
-    const response = await FetchApiAuthGet<Blog>(`/blogs/${id}?${queryString}`);
+    const response = await serverApiAuth.get<Blog>(
+      `/blogs/${id}?${queryString}`
+    );
 
     return response;
   } catch (error: unknown) {
@@ -87,7 +89,7 @@ export const getBlogsWithAllLocales = async (
       },
     });
 
-    const response = await FetchApiAuthGet<Blogs>(`/blogs?${queryString}`);
+    const response = await serverApiAuth.get<Blogs>(`/blogs?${queryString}`);
 
     return response;
   } catch (error: unknown) {
@@ -112,7 +114,7 @@ export const getBlogWithSlug = async (slug: string) => {
       },
     });
 
-    const response = await FetchApiAuthGet<Blogs>(`/blogs?${queryString}`);
+    const response = await serverApiAuth.get<Blogs>(`/blogs?${queryString}`);
 
     return response;
   } catch (error: unknown) {

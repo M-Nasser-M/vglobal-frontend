@@ -14,8 +14,17 @@ import Link from "@/components/Link";
 import {
   type commonTranslations,
   type navlinksTranslations,
-  navlinksKeys,
 } from "../../../messages/messagesKeys";
+
+const navlinksKeys = [
+  "permenant-immigration",
+  "study",
+  "visit",
+  "assessment",
+  "book-consult",
+  "about-us",
+  "blog",
+] as const;
 
 type Props = {
   lang: string;
