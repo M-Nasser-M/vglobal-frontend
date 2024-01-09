@@ -30,16 +30,20 @@ type Props = {
   lang: string;
   permenantImmigrationPrograms: PermenantImmigrationPages | undefined | null;
   translations: commonTranslations & navlinksTranslations;
+  onClose: () => void;
 };
 
 const MobileNavlinks = ({
   permenantImmigrationPrograms,
   translations,
+  onClose,
 }: Props) => {
   return navlinksKeys.map((navLink, index) => (
     <Box as={"nav"} key={index}>
       {navLink !== "permenant-immigration" && (
-        <Link href={`/${navLink}`}>{translations[navLink]}</Link>
+        <Link onClick={onClose} href={`/${navLink}`}>
+          {translations[navLink]}
+        </Link>
       )}
 
       {navLink === "permenant-immigration" &&
@@ -61,6 +65,7 @@ const MobileNavlinks = ({
                       key={item.id}
                       pl="2"
                       href={`/permenant-immigration/${item.id}`}
+                      onClick={onClose}
                     >
                       {item.title}
                     </Link>

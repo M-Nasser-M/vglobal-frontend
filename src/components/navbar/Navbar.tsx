@@ -152,6 +152,7 @@ export function Navbar({
                 permenantImmigrationPrograms={permenantImmigrationPrograms}
                 lang={lang}
                 translations={translations}
+                onClose={onClose}
               />
             </Stack>
           </Box>

@@ -1,4 +1,12 @@
 "use client";
+import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
+import Logo from "/public/brandLogo.png";
+import Link from "@/components/Link";
+import Image from "next/image";
+import {
+  type footerTranslations,
+  footerKeys,
+} from "../../messages/messagesKeys";
 import {
   Stack,
   HStack,
@@ -8,15 +16,6 @@ import {
   Link as ChakraLink,
   Box,
 } from "@chakra-ui/react";
-// Here we have used react-icons package for the icons
-import { FaFacebook, FaInstagram, FaLinkedin } from "react-icons/fa";
-import {
-  type footerTranslations,
-  footerKeys,
-} from "../../messages/messagesKeys";
-import Logo from "/public/brandLogo.png";
-import Link from "@/components/Link";
-import Image from "next/image";
 
 const accounts = [
   {
@@ -94,15 +93,15 @@ const Footer = ({ translations }: Props) => {
         pt={{ base: 4, md: 0 }}
         alignItems="center"
       >
-        {accounts.map((sc, index) => (
+        {accounts.map((acc, index) => (
           <IconButton
             key={index}
             as={ChakraLink}
             isExternal
-            href={sc.url}
-            aria-label={sc.label}
-            colorScheme={sc.type}
-            icon={sc.icon}
+            href={acc.url}
+            aria-label={acc.label}
+            colorScheme={acc.type}
+            icon={acc.icon}
             rounded="md"
           />
         ))}

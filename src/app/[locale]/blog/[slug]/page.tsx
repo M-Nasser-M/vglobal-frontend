@@ -39,7 +39,6 @@ export async function generateStaticParams() {
     slug: blog.slug,
     locale: blog.locale,
   }));
-
   return params || [];
 }
 
