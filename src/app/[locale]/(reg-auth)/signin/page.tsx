@@ -4,7 +4,7 @@ import { unstable_setRequestLocale } from "next-intl/server";
 import {
   signinformKeys,
   type signinformTranslations,
-} from "../../../../messages/messagesKeys";
+} from "../../../../../messages/messagesKeys";
 import SigninForm from "./SigninForm";
 
 type Props = {

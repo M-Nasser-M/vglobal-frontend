@@ -3,7 +3,7 @@ import EmailConfirmed from "./EmailConfirmed";
 import {
   commonKeys,
   commonTranslations,
-} from "../../../../messages/messagesKeys";
+} from "../../../../../messages/messagesKeys";
 import type { Locale } from "@/i18n";
 import { unstable_setRequestLocale } from "next-intl/server";
 

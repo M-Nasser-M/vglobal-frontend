@@ -44,7 +44,6 @@ export function middleware(request: NextRequest) {
   response.headers.set("x-default-locale", defaultLocale);
 
   const routePath = request.nextUrl.pathname.split("/")[2];
-  // const routeLocale = request.nextUrl.pathname.split("/")[1];
 
   if (protectedRoutes.includes(routePath))
     return authMiddleware(request as NextRequestWithAuth, {} as NextFetchEvent);

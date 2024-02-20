@@ -1,5 +1,8 @@
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
-import { homeKeys, homeTranslations } from "../../../messages/messagesKeys";
+import {
+  homeKeys,
+  type homeTranslations,
+} from "../../../messages/messagesKeys";
 import { getHomeArticleAndSEO } from "@/utils/services/homeService";
 import { getOpenGraph, getTwitter } from "@/utils/other/utils";
 import { HomeAndSeoSchema } from "@/utils/types/homeTypes";

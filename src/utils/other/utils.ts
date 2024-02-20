@@ -1,7 +1,7 @@
-import { ReadonlyURLSearchParams } from "next/navigation";
-import { MetaSocial } from "../types/seoTypes";
-import { Twitter } from "next/dist/lib/metadata/types/twitter-types";
-import { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
+import type { ReadonlyURLSearchParams } from "next/navigation";
+import type { MetaSocial } from "../types/seoTypes";
+import type { Twitter } from "next/dist/lib/metadata/types/twitter-types";
+import type { OpenGraph } from "next/dist/lib/metadata/types/opengraph-types";
 
 export const createQueryString = (
   name: string,

@@ -1,6 +1,6 @@
 "use client";
 import { SigninFormSchema, type SigninFormType } from "@/utils/types/authTypes";
-import type { signinformTranslations } from "../../../../messages/messagesKeys";
+import type { signinformTranslations } from "../../../../../messages/messagesKeys";
 import { useRouter, useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "@/components/Link";

@@ -1,5 +1,5 @@
 "use client";
-import type { commonTranslations } from "../../../../messages/messagesKeys";
+import type { commonTranslations } from "../../../../../messages/messagesKeys";
 import { Flex, Heading, Icon } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { IoMdCheckmarkCircle } from "react-icons/io";

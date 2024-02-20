@@ -14,7 +14,7 @@ import {
   Input,
   useToast,
 } from "@chakra-ui/react";
-import type { signupformTranslations } from "../../../../messages/messagesKeys";
+import type { signupformTranslations } from "../../../../../messages/messagesKeys";
 import { atom, useAtom } from "jotai";
 
 const emailExistErrorAtom = atom<boolean>(false);
