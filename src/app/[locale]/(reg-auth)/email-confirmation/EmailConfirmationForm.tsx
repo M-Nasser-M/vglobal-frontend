@@ -19,7 +19,6 @@ import {
 } from "@chakra-ui/react";
 import { clientENV } from "@/clientENV.mjs";
 import { clientApi } from "@/utils/services/fetchApiClient";
-import { redirect } from "next/navigation";
 
 const EmailConfirmationCode = () => {
   const {
@@ -34,11 +33,10 @@ const EmailConfirmationCode = () => {
 
   const onSubmit = async (data: ConfirmationCodeFormType) => {
     try {
-      //
-
-      clientApi.get(
-        `${clientENV.NEXT_PUBLIC_STRAPI_URL}?confirmation=${data.code}`
+      const res = await clientApi.get(
+        `${clientENV.NEXT_PUBLIC_STRAPI_API_URL}/auth/email-confirmation?confirmation=${data.code}`
       );
+      console.log(res);
 
       toast({
         title: "Email succesfully confirmed",
@@ -46,7 +44,6 @@ const EmailConfirmationCode = () => {
         duration: 9000,
         isClosable: true,
       });
-      redirect("/");
     } catch (error) {
       if (error instanceof Error) console.error(error.message);
 
