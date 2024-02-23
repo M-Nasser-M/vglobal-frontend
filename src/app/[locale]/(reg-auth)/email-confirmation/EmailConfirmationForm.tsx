@@ -18,9 +18,10 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { clientENV } from "@/clientENV.mjs";
-import { clientApi } from "@/utils/services/fetchApiClient";
+import { useRouter } from "next/navigation";
 
 const EmailConfirmationCode = () => {
+  const router = useRouter();
   const {
     handleSubmit,
     register,
@@ -33,10 +34,9 @@ const EmailConfirmationCode = () => {
 
   const onSubmit = async (data: ConfirmationCodeFormType) => {
     try {
-      const res = await clientApi.get(
+      router.push(
         `${clientENV.NEXT_PUBLIC_STRAPI_API_URL}/auth/email-confirmation?confirmation=${data.code}`
       );
-      console.log(res);
 
       toast({
         title: "Email succesfully confirmed",
