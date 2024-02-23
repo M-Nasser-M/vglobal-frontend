@@ -58,5 +58,6 @@ export const config = {
     "/signin",
     "/password-reset",
     "/email-confirmed",
+    "/email-confirmation",
   ],
 };
