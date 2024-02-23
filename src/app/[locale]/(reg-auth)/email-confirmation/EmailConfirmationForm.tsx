@@ -1,7 +1,10 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { clientENV } from "@/clientENV.mjs";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import Link from "@/components/Link";
 
 import {
   ConfirmationCodeFormSchema,
@@ -15,12 +18,15 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  Stack,
+  Text,
   useToast,
 } from "@chakra-ui/react";
-import { clientENV } from "@/clientENV.mjs";
-import { useRouter } from "next/navigation";
+import type { signinformTranslations } from "../../../../../messages/messagesKeys";
 
-const EmailConfirmationCode = () => {
+type Props = { translations: signinformTranslations };
+
+const EmailConfirmationCode = ({ translations }: Props) => {
   const router = useRouter();
   const {
     handleSubmit,
@@ -37,13 +43,6 @@ const EmailConfirmationCode = () => {
       router.push(
         `${clientENV.NEXT_PUBLIC_STRAPI_API_URL}/auth/email-confirmation?confirmation=${data.code}`
       );
-
-      toast({
-        title: "Email succesfully confirmed",
-        status: "success",
-        duration: 9000,
-        isClosable: true,
-      });
     } catch (error) {
       if (error instanceof Error) console.error(error.message);
 
@@ -73,6 +72,13 @@ const EmailConfirmationCode = () => {
             {errors.code && errors.code.message}
           </FormErrorMessage>
         </FormControl>
+
+        <Stack w="100%" direction="row" justify="space-between">
+          <Text color="inherit">{translations.credentialserror}</Text>
+          <Link href="/resend-confirmation-mail">
+            {translations.resendmail}
+          </Link>
+        </Stack>
 
         <Button
           colorScheme="red"

@@ -20,9 +20,9 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
-type Props = { translatinos: signinformTranslations };
+type Props = { translations: signinformTranslations };
 
-const SigninForm = ({ translatinos }: Props) => {
+const SigninForm = ({ translations }: Props) => {
   const searchParams = useSearchParams();
   const redirectPath = searchParams.get("callbackUrl") || "/";
   const router = useRouter();
@@ -31,13 +31,13 @@ const SigninForm = ({ translatinos }: Props) => {
   useEffect(() => {
     if (redirectPath !== "/") {
       toast({
-        title: translatinos.pleasesignin,
+        title: translations.pleasesignin,
         status: "info",
         duration: 9000,
         isClosable: true,
       });
     }
-  }, [redirectPath, toast, translatinos.pleasesignin]);
+  }, [redirectPath, toast, translations.pleasesignin]);
 
   const {
     handleSubmit,
@@ -61,7 +61,7 @@ const SigninForm = ({ translatinos }: Props) => {
 
       if (res) {
         toast({
-          title: translatinos.loginsuccess,
+          title: translations.loginsuccess,
           status: "success",
           duration: 9000,
           isClosable: true,
@@ -86,14 +86,14 @@ const SigninForm = ({ translatinos }: Props) => {
     >
       <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
         <FormControl isInvalid={Boolean(errors.email)}>
-          <FormLabel htmlFor="email">{translatinos.email}</FormLabel>
+          <FormLabel htmlFor="email">{translations.email}</FormLabel>
           <Input id="email" type="email" {...register("email")} />
           <FormErrorMessage>
             {errors.email && errors.email.message}
           </FormErrorMessage>
         </FormControl>
         <FormControl isInvalid={Boolean(errors.password)}>
-          <FormLabel htmlFor="password">{translatinos.password}</FormLabel>
+          <FormLabel htmlFor="password">{translations.password}</FormLabel>
           <Input id="password" type="password" {...register("password")} />
           <FormErrorMessage>
             {errors.password && errors.password.message}
@@ -104,9 +104,9 @@ const SigninForm = ({ translatinos }: Props) => {
             {errors.root && errors.root.message}
             {credentialsError && (
               <Stack w="100%" direction="row" justify="space-between">
-                <Text color="inherit">{translatinos.credentialserror}</Text>
+                <Text color="inherit">{translations.credentialserror}</Text>
                 <Link href="/resend-confirmation-mail">
-                  {translatinos.resendmail}
+                  {translations.resendmail}
                 </Link>
               </Stack>
             )}
@@ -119,7 +119,7 @@ const SigninForm = ({ translatinos }: Props) => {
           type="submit"
           width="100%"
         >
-          {translatinos.signin}
+          {translations.signin}
         </Button>
         <Stack
           mt={4}
@@ -128,14 +128,14 @@ const SigninForm = ({ translatinos }: Props) => {
           justify={"space-between"}
         >
           <Text>
-            {translatinos.noaccount}
+            {translations.noaccount}
             <Link color="red.400" href="/signup">
-              {translatinos.signup}
+              {translations.signup}
             </Link>
           </Text>
           <Text>
             <Link color="red.400" href="/forgot-password">
-              {translatinos.forgotPassword}
+              {translations.forgotPassword}
             </Link>
           </Text>
         </Stack>

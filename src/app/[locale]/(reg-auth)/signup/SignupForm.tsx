@@ -42,7 +42,7 @@ const SignupForm = ({ translations }: Props) => {
         duration: 9000,
         isClosable: true,
       });
-      router.push("/signin");
+      router.push("/email-confirmation");
     }
   };
 

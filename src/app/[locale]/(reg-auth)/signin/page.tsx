@@ -22,7 +22,7 @@ const Page = ({ params: { locale } }: Props) => {
     return obj;
   }, {} as signinformTranslations);
 
-  return <SigninForm translatinos={translations} />;
+  return <SigninForm translations={translations} />;
 };
 
 export default Page;

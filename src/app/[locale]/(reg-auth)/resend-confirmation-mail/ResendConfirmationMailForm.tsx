@@ -18,8 +18,10 @@ import {
   Input,
   useToast,
 } from "@chakra-ui/react";
+import { useRouter } from "next/navigation";
 
 const ResendConfirmationMailForm = () => {
+  const router = useRouter();
   const {
     handleSubmit,
     register,
@@ -36,10 +38,15 @@ const ResendConfirmationMailForm = () => {
 
       toast({
         title: "Check your Email For New Link",
+        description: "will redirect in 3 seconds",
         status: "success",
         duration: 9000,
         isClosable: true,
       });
+      setTimeout(() => {
+        router.push("/email-confirmation");
+        router.refresh();
+      }, 3000);
     } catch (error) {
       if (error instanceof Error) console.error(error.message);
 
