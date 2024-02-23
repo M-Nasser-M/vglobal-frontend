@@ -52,7 +52,7 @@ const Footer = ({ translations }: Props) => {
       alignItems="center"
       direction={{ base: "column", md: "row" }}
     >
-      <Link href="https://vglobal.ca">
+      <Link href="/">
         <Image src={Logo} width={40} alt="Vglobal Logo" />
       </Link>
 

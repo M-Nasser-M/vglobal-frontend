@@ -17,6 +17,7 @@ import {
 } from "../../../messages/messagesKeys";
 
 const navlinksKeys = [
+  "/",
   "permenant-immigration",
   "study",
   "visit",

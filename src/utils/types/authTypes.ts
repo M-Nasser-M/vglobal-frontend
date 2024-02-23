@@ -73,3 +73,11 @@ export const ResendConfirmationMailFormSchema = z.object({
 export type ResendConfirmationMailFormType = z.infer<
   typeof ResendConfirmationMailFormSchema
 >;
+
+export const ConfirmationCodeFormSchema = z.object({
+  code: z.string().min(1, "Confirmation Code is Required"),
+});
+
+export type ConfirmationCodeFormType = z.infer<
+  typeof ConfirmationCodeFormSchema
+>;

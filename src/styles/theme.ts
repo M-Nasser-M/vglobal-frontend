@@ -1,6 +1,5 @@
 import { extendTheme, theme as defaultTheme } from "@chakra-ui/react";
 import { Montserrat } from "next/font/google";
-import bgImage from "../../public/bg.png";
 
 const font = Montserrat({
   subsets: ["cyrillic", "latin"],
@@ -49,9 +48,6 @@ const styles = {
   global: {
     body: {
       backgroundColor: "main-background",
-      backgroundImage: `url(${bgImage.src})`,
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
       fontFamily: font.style.fontFamily,
       minHeight: "100vh",
       display: "flex",
