@@ -1,7 +1,7 @@
 "use client";
 import { resetPassword } from "@/utils/services/authService";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { redirect, useSearchParams } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 import {
@@ -29,9 +29,6 @@ const PasswordResetForm = () => {
   });
 
   const toast = useToast();
-
-  const searchParams = useSearchParams();
-  const code = searchParams.get("code");
 
   const onSubmit = async (data: PasswordResetFormType) => {
     try {
@@ -69,15 +66,9 @@ const PasswordResetForm = () => {
       paddingTop="20"
     >
       <Box as="form" width="100%" onSubmit={handleSubmit(onSubmit)}>
-        <FormControl hidden isInvalid={Boolean(errors.code)}>
+        <FormControl isInvalid={Boolean(errors.code)}>
           <FormLabel htmlFor="code">Code</FormLabel>
-          <Input
-            id="code"
-            isReadOnly
-            value={code || ""}
-            placeholder="code"
-            {...register("code")}
-          />
+          <Input id="code" placeholder="code" {...register("code")} />
           <FormErrorMessage>
             {errors.code && errors.code.message}
           </FormErrorMessage>
